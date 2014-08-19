@@ -1,4 +1,4 @@
-vanilla-js-responsive-menu
+Vanilla JS Responsive Menu
 ==========================
 
 A vanilla JS responsive menu plugin
@@ -30,7 +30,7 @@ The container that wraps the menu
 
 default: document.getElementsByTagName('nav')[0],
 
-initiade class
+initiated_class
 --------------
 
 The class to attach to the wrapper when menu is initiated
