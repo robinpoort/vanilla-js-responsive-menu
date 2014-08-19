@@ -37,7 +37,7 @@ The class to attach to the wrapper when menu is initiated
 
 default: 'initiated',
 
-before element
+before_element
 --------------
 
 The element where the toggle button will be put before
