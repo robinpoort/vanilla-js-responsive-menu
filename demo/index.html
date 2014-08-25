@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS Responsive Menu</title>
+    <link rel="stylesheet" href="../css/responsivemenu.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+<div class="site">
+    <div class="navigation_container">
+        <ul class="navigation" role="menu">
+            <li class="navigation__item" role="menuitem">
+                <a class="navigation__link" href="#">Item 1</a>
+                <a class="navigation__link" href="#">Item 2</a>
+                <a class="navigation__link" href="#">Item 3</a>
+                <a class="navigation__link" href="#">Item 4</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="../dependencies/apollo.js"></script>
+<script src="../vanilla.js.responsive.menu.js"></script>
+<script type="text/javascript">
+    responsivemenu.init({
+        wrapper: document.getElementsByClassName('navigation_container')[0],
+        toggleclass: 'button--hamburger',
+        togglecontent: 'menu <span class="lines"></span>',
+        sticky: 1
+    });
+</script>
+</body>
+</html>

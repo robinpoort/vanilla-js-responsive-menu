@@ -29,12 +29,10 @@
     var exports = {}; // Object for public APIs
     var supports = !!document.querySelector && !!root.addEventListener; // Feature test
     var settings; // Plugin settings
-    var menu; // The actual menu item
 
     // Default settings
     var defaults = {
         wrapper: document.getElementsByTagName('nav')[0],
-        menu: '',
         initiated_class: 'initiated',
         before_element: '',
         toggletype: 'button',
@@ -124,15 +122,8 @@
     // Initialize
     function initialize(settings) {
 
-        // Define what the actual menu object is
-        if ( settings.menu == '' ) {
-            menu = settings.wrapper.getElementsByTagName('ul')[0];
-        } else {
-            menu = settings.menu;
-        }
-
         // Add a class when JS is initiated
-        apollo.addClass(menu, settings.initiated_class);
+        apollo.addClass(settings.wrapper, settings.initiated_class);
 
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
@@ -146,7 +137,7 @@
         togglebutton.style.display = "none";
 
         // Creating subtoggles
-        var parents = menu.getElementsByTagName('li');
+        var parents = settings.wrapper.getElementsByTagName('li');
         forEach(parents, function(value, prop) {
             var child = parents[prop].getElementsByTagName('ul')[0];
             if ( child != undefined ) {
@@ -169,7 +160,7 @@
             var viewportwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
             // If screen is small and if the menu is not already opened
-            if ( viewportwidth < settings.width && !apollo.hasClass(menu, 'opened') ) {
+            if ( viewportwidth <= settings.width && !apollo.hasClass(settings.wrapper, 'opened') && !apollo.hasClass(settings.wrapper, 'closed') ) {
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, 'close');
@@ -181,15 +172,15 @@
                 });
 
                 // Hide the menu
-                apollo.removeClass(menu, 'opened');
-                apollo.addClass(menu, 'closed');
+                apollo.removeClass(settings.wrapper, 'opened');
+                apollo.addClass(settings.wrapper, 'closed');
 
                 // Make the menu absolute positioned
                 if ( settings.absolute == 1 ) {
                     apollo.addClass(settings.wrapper, 'absolutemenu');
                 }
 
-            } else if ( viewportwidth >= settings.width ) {
+            } else if ( viewportwidth > settings.width ) {
 
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, 'close');
@@ -201,7 +192,7 @@
                 });
 
                 // Show the menu and remove all classes
-                apollo.removeClass(menu, ['opened', 'closed']);
+                apollo.removeClass(settings.wrapper, ['opened', 'closed']);
 
                 // Undo absolute positioning
                 if ( settings.absolute == 1 && apollo.hasClass(settings.wrapper, 'absolutemenu') ) {
@@ -238,7 +229,7 @@
                     }
 
                     // Add padding only if menu is closed or when value is stored
-                    if ( !apollo.hasClass(menu, 'opened') && !apollo.hasClass(document.body, 'sticky-initiated') ) {
+                    if ( !apollo.hasClass(settings.wrapper, 'opened') && !apollo.hasClass(document.body, 'sticky-initiated') ) {
 
                         // Calculate the height
                         var paddingtop = menuheight.toString() + 'px';
@@ -264,13 +255,13 @@
         togglebutton.onclick = function() {
 
             // Add classes accordingly
-            if ( apollo.hasClass(menu, 'closed') ) {
-                apollo.removeClass(menu, 'closed');
-                apollo.addClass(menu, 'opened');
+            if ( apollo.hasClass(settings.wrapper, 'closed') ) {
+                apollo.removeClass(settings.wrapper, 'closed');
+                apollo.addClass(settings.wrapper, 'opened');
                 apollo.addClass(togglebutton, 'close');
-            } else if ( apollo.hasClass(menu, 'opened') ) {
-                apollo.removeClass(menu, 'opened');
-                apollo.addClass(menu, 'closed');
+            } else if ( apollo.hasClass(settings.wrapper, 'opened') ) {
+                apollo.removeClass(settings.wrapper, 'opened');
+                apollo.addClass(settings.wrapper, 'closed');
                 apollo.removeClass(togglebutton, 'close');
             }
 

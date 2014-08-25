@@ -1,0 +1,109 @@
+// Accessible hide
+.accessible-hide {
+  position: absolute !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  width: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+// Sticky
+.sticky {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+// Overflow
+.bodyoverflowhidden {
+  position: relative;
+  overflow: hidden;
+}
+
+.menuoverflowauto {
+  max-height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+// Absolute menu
+.absolutemenu ul {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 99;
+}
+
+/* Toggle button */
+.closed {
+  ul {
+    display: none;
+  }
+}
+
+/* The menu itself */
+.navigation_container {
+
+  /* Hide the subtoggles initally */
+  .subtoggle {
+    display: none;
+  }
+
+  li {
+    position: relative;
+
+    &.parent:after {
+      content: " U+25BC";
+    }
+
+    /* initially hide all li>ul so we get a small list when JS is disables */
+    ul {
+      display: none;
+    }
+
+    /* And show them on active items */
+    &.active > ul {
+      display: block;
+    }
+  }
+
+  // Show li>ul on small screens when JS is enabled
+  &.initiated {
+    li ul {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width:600px) {
+
+    /* Hide again when JS is enabled but screen is big */
+    &.initiated li ul,
+    li ul,
+    li.active ul {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 9;
+
+      &.parent:after {
+        content: " U+25BA";
+      }
+
+      ul {
+        top: 0;
+        left: 100%;
+      }
+    }
+
+    /* And show on hover */
+    li:hover > ul {
+      display: block !important;
+    }
+  }
+}
