@@ -35,6 +35,11 @@ The basic markup:
 </div>
 ```
 
+Note: three things are important here:
+1. make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS file
+2. Add a "closed" class to you first <ul>. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
+3. Use an unordered list as your menu
+
 Place following on the bottom of your document:
 
 ```
@@ -118,7 +123,7 @@ default: 0,
 
 The class to add to elements that need to be hidden. Hiding happens with CSS
 
-default: 'accessible-hide',
+default: 'closed',
 
 ###width
 
