@@ -1,12 +1,7 @@
 Vanilla JS Responsive Menu
 ==========================
 
-A vanilla JS responsive menu plugin
-
-Todo
-====
-
-Split the JS into 2 or more files to be used as "plugins". For example not every site has submenus or a sticky / absolute menu.
+A vanilla JS responsive menu plugin. Accessible friendly, compressed 4kb
 
 Use
 ===
