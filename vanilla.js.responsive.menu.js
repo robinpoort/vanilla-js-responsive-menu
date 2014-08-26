@@ -124,8 +124,6 @@
     // Initialize
     function initialize(settings) {
 
-        console.log(settings.wrapper);
-
         // Define what the actual menu object is
         if ( settings.menu == '' ) {
             menu = settings.wrapper.getElementsByTagName('ul')[0];
