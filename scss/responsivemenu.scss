@@ -39,11 +39,10 @@
   z-index: 99;
 }
 
-/* Toggle button */
-.closed {
-  ul {
-    display: none;
-  }
+/* Extend the accessible hide class to the closed class */
+/* Only when JS is enabled since we add the closed class in the markup */
+.js-enabled .closed {
+  @extend .accessible-hide;
 }
 
 /* The menu itself */
