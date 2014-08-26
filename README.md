@@ -1,7 +1,14 @@
 Vanilla JS Responsive Menu
 ==========================
 
-A vanilla JS responsive menu plugin. Accessible friendly, compressed 4kb
+A vanilla JS responsive menu plugin.
+
+Features
+========
+
+* Accessible friendly
+* compressed 4kb
+* IE9+ (If the script does not run you get the regular menu)
 
 Use
 ===
