@@ -1,4 +1,4 @@
-.accessible-hide, .js-enabled .closed {
+.js-enabled .closed {
   position: absolute !important;
   overflow: hidden !important;
   clip: rect(0 0 0 0) !important;
@@ -23,52 +23,39 @@
   width: 100%;
   overflow: auto; }
 
-.absolutemenu ul {
+.absolutemenu {
   position: absolute !important;
   top: 100% !important;
   left: 0 !important;
   right: 0 !important;
   z-index: 99; }
 
-/* Extend the accessible hide class to the closed class */
+/* Extend the accessible hide class to the closed class class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* The menu itself */
-.navigation_container {
-  /* Hide the subtoggles initally */ }
-  .navigation_container .subtoggle {
+.navigation_container li {
+  position: relative;
+  /* initially hide all li>ul so we get a small list when JS is disabled */
+  /* And show them on active/current items */ }
+  .navigation_container li ul {
     display: none; }
-  .navigation_container li {
-    position: relative;
-    /* initially hide all li>ul so we get a small list when JS is disables */
-    /* And show them on active items */ }
-    .navigation_container li.parent:after {
-      content: " U+25BC"; }
-    .navigation_container li ul {
-      display: none; }
-    .navigation_container li.active > ul {
-      display: block; }
-  .navigation_container.initiated li ul {
+  .navigation_container li.active > ul, .navigation_container li.current > ul {
     display: block; }
-  @media screen and (min-width: 600px) {
-    .navigation_container {
-      /* Hide again when JS is enabled but screen is big */
-      /* And show on hover */ }
-      .navigation_container.initiated li ul,
-      .navigation_container li ul,
-      .navigation_container li.active ul {
-        display: none;
-        position: absolute;
-        left: 0;
-        top: 100%;
-        z-index: 9; }
-        .navigation_container.initiated li ul.parent:after,
-        .navigation_container li ul.parent:after,
-        .navigation_container li.active ul.parent:after {
-          content: " U+25BA"; }
-        .navigation_container.initiated li ul ul,
-        .navigation_container li ul ul,
-        .navigation_container li.active ul ul {
-          top: 0;
-          left: 100%; }
-      .navigation_container li:hover > ul {
-        display: block !important; } }
+.navigation_container.initiated li ul {
+  display: block; }
+@media screen and (min-width: 600px) {
+  .navigation_container {
+    /* Hide li>ul when JS is enabled and screen is big */
+    /* And show on hover */ }
+    .navigation_container li.parent > a:after {
+      content: " \25bc"; }
+    .navigation_container.initiated li ul,
+    .navigation_container li ul,
+    .navigation_container li.active ul {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 9; }
+    .navigation_container li:hover > ul {
+      display: block; } }

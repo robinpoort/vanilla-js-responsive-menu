@@ -21,18 +21,16 @@ Use
 To make sure that menu items don't show for a split second on mobile sized screens add the following:
 
 ```
-<body id="page" class="no-js">
-<script type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.getElementById("page");var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
+<body class="no-js">
+<script type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
 ```
 
 The basic markup:
 
 ```
 <div class="navigation_container">
-    <ul class="navigation closed" role="menu">
-        <li class="navigation__item" role="menuitem">
-            <a class="navigation__link" href="#">Item 1</a>
-        </li>
+    <ul class="closed">
+        <li><a href="#">Item</a></li>
     </ul>
 </div>
 ```
@@ -42,8 +40,7 @@ Place following on the bottom of your document:
 ```
 <script type="text/javascript">
     responsivemenu.init({
-        wrapper: document.getElementsByClassName('navigation_container')[0],
-        before_element: document.getElementsByClassName('logo_container')[0]
+        wrapper: document.querySelector('.navigation_container')
     });
 </script>
 ```
