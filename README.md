@@ -11,6 +11,27 @@ Split the JS into 2 or more files to be used as "plugins". For example not every
 Use
 ===
 
+To make sure that menu items don't show for a split second on mobile sized screens add the following:
+
+```
+<body id="page" class="no-js">
+<script type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.getElementById("page");var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
+```
+
+The basic markup:
+
+```
+<div class="navigation_container">
+    <ul class="navigation" role="menu">
+        <li class="navigation__item" role="menuitem">
+            <a class="navigation__link" href="#">Item 1</a>
+        </li>
+    </ul>
+</div>
+```
+
+Place following on the bottom of your document:
+
 ```
 <script type="text/javascript">
     responsivemenu.init({
