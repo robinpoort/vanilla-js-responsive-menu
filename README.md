@@ -48,92 +48,79 @@ Place following on the bottom of your document:
 Options
 =======
 
-wrapper
----
+###wrapper
 
 The container that wraps the menu
 
 default: document.getElementsByTagName('nav')[0],
 
-initiated_class
---------------
+###initiated_class
 
 The class to attach to the wrapper when menu is initiated
 
 default: 'initiated',
 
-before_element
---------------
+###before_element
 
 The element where the toggle button will be put before
 
 default: '',
 
-toggletype
-----------
+###toggletype
 
 HTML element of the main toggle button
 
 default: 'button',
 
-toggleclass
------------
+###toggleclass
 
 The class of the main toggle button
 
 default: 'togglebutton',
 
-togglecontent
--------------
+###togglecontent
 
 The value / text / html on the main toggle button
 
 default: 'menu',
 
-subtoggletype
--------------
+###subtoggletype
 
 HTML element of the sub toggle buttons
 
 default: 'button',
 
-subtoggleclass
------------
+###subtoggleclass
 
 The class of the sub toggle buttons
 
 default: 'subtoggle',
 
-subtogglecontent
--------------
+###subtogglecontent
 
 The value / text / html on the sub toggle buttons
 
 default: '+',
 
-sticky
-------
+###sticky
 
 Use a sticky menu?
 
 default: 0,
 
-absolute
---------
+###absolute
 
 Make the toggling menu absolute positioned
 
 default: 0,
 
-hideclass
----------
+###hideclass
 
 The class to add to elements that need to be hidden. Hiding happens with CSS
 
 default: 'accessible-hide',
 
-width
------
+###width
 
 The window width when menu has to become a full menu. You might need to change CSS as well when changing this value
 
