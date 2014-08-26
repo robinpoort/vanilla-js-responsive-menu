@@ -3,6 +3,11 @@ Vanilla JS Responsive Menu
 
 A vanilla JS responsive menu plugin.
 
+Dependencies
+------------
+Apollo JS | https://github.com/toddmotto/apollo
+Load apollo first
+
 Features
 ========
 
