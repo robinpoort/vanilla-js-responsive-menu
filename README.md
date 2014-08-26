@@ -24,7 +24,7 @@ The basic markup:
 
 ```
 <div class="navigation_container">
-    <ul class="navigation" role="menu">
+    <ul class="navigation closed" role="menu">
         <li class="navigation__item" role="menuitem">
             <a class="navigation__link" href="#">Item 1</a>
         </li>
@@ -38,7 +38,7 @@ Place following on the bottom of your document:
 <script type="text/javascript">
     responsivemenu.init({
         wrapper: document.getElementsByClassName('navigation_container')[0],
-        before_element: document.getElementsByClassName('logo_container')[0],
+        before_element: document.getElementsByClassName('logo_container')[0]
     });
 </script>
 ```
