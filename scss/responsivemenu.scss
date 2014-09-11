@@ -9,83 +9,83 @@
 
 $screenwidth: 600px !default;
 
-  // Accessible hide
-  %accessible-hide {
-    position: absolute !important;
-    overflow: hidden !important;
-    clip: rect(0 0 0 0) !important;
-    height: 1px !important;
-    width: 1px !important;
-    margin: -1px !important;
-    padding: 0 !important;
-    border: 0 !important;
-  }
+// Accessible hide
+%accessible-hide {
+  position: absolute !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  width: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
 
-  // Sticky
-  .sticky {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
+// Sticky
+.sticky {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
 
-  // Overflow
-  .bodyoverflowhidden {
+// Overflow
+.bodyoverflowhidden {
+  position: relative;
+  overflow: hidden;
+}
+
+.menuoverflowauto {
+  max-height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+// Absolute menu
+.absolutemenu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 99;
+}
+
+/* Extend the accessible hide class to the closed class class */
+/* Only when JS is enabled since we add the closed class in the markup */
+.js-enabled:not(.no-responsive-menu) {
+  .closed {
+    @extend %accessible-hide;
+  }
+}
+
+/* The menu itself */
+.navigation_container {
+
+  li {
     position: relative;
-    overflow: hidden;
-  }
 
-  .menuoverflowauto {
-    max-height: 100%;
-    width: 100%;
-    overflow: auto;
-  }
-
-  // Absolute menu
-  .absolutemenu {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 99;
-  }
-
-  /* Extend the accessible hide class to the closed class class */
-  /* Only when JS is enabled since we add the closed class in the markup */
-  .js-enabled {
-    .closed {
-      @extend %accessible-hide;
-    }
-  }
-
-  /* The menu itself */
-  .navigation_container {
-
-    li {
-      position: relative;
-
-      /* initially hide all li>ul so we get a small list when JS is disabled */
-      ul {
-        display: none;
-      }
-
-      /* And show them on active/current items */
-      &.active,
-      &.current {
-        & > ul {
-          display: block;
-        }
-      }
+    /* initially hide all li>ul so we get a small list when JS is disabled */
+    ul {
+      display: none;
     }
 
-    // Show li>ul on small screens when JS is enabled
-    &.initiated {
-      li ul {
+    /* And show them on active/current items */
+    &.active,
+    &.current {
+      & > ul {
         display: block;
       }
     }
+  }
 
-    @media screen and (min-width:$screenwidth) {
+  // Show li>ul on small screens when JS is enabled
+  &.initiated {
+    li ul {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: $screenwidth) {
 
     // Add styling for parents to show it has children
     li.parent > a:after {

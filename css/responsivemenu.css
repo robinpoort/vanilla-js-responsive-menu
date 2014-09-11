@@ -1,4 +1,4 @@
-.js-enabled .closed {
+.js-enabled:not(.no-responsive-menu) .closed {
   position: absolute !important;
   overflow: hidden !important;
   clip: rect(0 0 0 0) !important;
@@ -59,3 +59,5 @@
       z-index: 9; }
     .navigation_container li:hover > ul {
       display: block; } }
+
+/*# sourceMappingURL=responsivemenu.css.map */

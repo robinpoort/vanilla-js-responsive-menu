@@ -307,7 +307,10 @@
      */
     exports.init = function ( options ) {
         // feature test
-        if ( !supports ) return;
+        if ( !supports ) {
+            document.body.className += ' no-responsive-menu';
+            return;
+        }
         settings = extend( defaults, options || {} ); // Merge user options with defaults
         initialize(settings);
     };
