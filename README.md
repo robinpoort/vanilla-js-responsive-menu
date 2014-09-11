@@ -38,7 +38,7 @@ Basic markup:
 *Note:* three things are important here:
 
 1.  make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS (or SCSS) file
-2.  Add a "closed" class to the 'menu' setting element (see below). Default is the first '''<ul>'''. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
+2.  Add a "closed" class to the 'menu' setting element (see below). Default is the first <tt><ul></tt>. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
 3.  Use an unordered list as your menu
 
 Place following on the bottom of your document:
@@ -62,9 +62,9 @@ default: document.getElementsByTagName('nav')[0],
 
 ###menu
 
-The hiding container. Either your '''<ul>''' or some surrounding element
+The hiding container. Either your <tt><ul></tt> or some surrounding element
 
-default: First found '''<ul>''' within the wrapper
+default: First found <tt><ul></tt> within the wrapper
 
 ###initiated_class
 
