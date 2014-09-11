@@ -25,7 +25,7 @@ To make sure that menu items don't show for a split second on mobile sized scree
 <script type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
 ```
 
-The basic markup:
+Basic markup:
 
 ```
 <div class="navigation_container">
@@ -35,10 +35,10 @@ The basic markup:
 </div>
 ```
 
-Note: three things are important here:
+*Note:* three things are important here:
 
-1.  make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS file
-2.  Add a "closed" class to you first ul. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
+1.  make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS (or SCSS) file
+2.  Add a "closed" class to the 'menu' setting element (see below). Default is the first <ul>. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
 3.  Use an unordered list as your menu
 
 Place following on the bottom of your document:
@@ -60,6 +60,12 @@ The container that wraps the menu
 
 default: document.getElementsByTagName('nav')[0],
 
+###menu
+
+The hiding container. Either your <ul> or some surrounding element
+
+default: First found <ul> within the wrapper
+
 ###initiated_class
 
 The class to attach to the wrapper when menu is initiated
@@ -70,7 +76,7 @@ default: 'initiated',
 
 The element where the toggle button will be put before
 
-default: '',
+default: The first child of the wrapper element
 
 ###toggletype
 
