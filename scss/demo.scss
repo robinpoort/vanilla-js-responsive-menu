@@ -1,3 +1,92 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.5em;
+}
+
+.togglebutton,
 .subtoggle {
+  margin: 10px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  outline: none;
+  background: #fff;
+  color: #0072B3;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.subtoggle {
+  margin: 5px;
   float: right;
+}
+
+.navigation_container {
+  background: #0072B3;
+  color: #fff;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul:before,
+  ul:after {
+    display: table;
+    content: " ";
+  }
+
+  ul:after {
+    clear: both;
+  }
+
+  li {
+    padding: 0;
+
+    @media screen and (min-width: 600px) {
+      float: left;
+    }
+
+    &:hover a {
+      background: darken(#0072B3, 10%);
+    }
+  }
+
+  a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+
+    &:after {
+      font-size: 12px;
+      vertical-align: middle;
+      line-height: 24px;
+      text-decoration: none;
+    }
+  }
+
+  li ul {
+    @media screen and (min-width: 600px) {
+      background: darken(#0072B3, 10%);
+      padding: 10px;
+      width: 150px;
+      border-top: none;
+    }
+
+    li {
+      float: none;
+
+      &:hover a {
+        text-decoration: none;
+        background: white;
+        color: #0072B3;
+      }
+    }
+  }
 }
