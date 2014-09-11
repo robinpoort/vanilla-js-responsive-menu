@@ -132,7 +132,7 @@
         }
 
         // Add a class when JS is initiated
-        apollo.addClass(menu, settings.initiated_class);
+        apollo.addClass(settings.wrapper, settings.initiated_class);
 
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
