@@ -124,11 +124,22 @@
     // Initialize
     function initialize(settings) {
 
+        //var focusedElement = document.activeElement;
+
         // Define what the actual menu object is
         if ( settings.menu == '' ) {
             menu = settings.wrapper.getElementsByTagName('ul')[0];
         } else {
             menu = settings.menu;
+        }
+
+        // Accessible focus menu
+        var menulinks = menu.getElementsByTagName('a');
+        for (var i = 0; i < menulinks.length; i++) {
+            menulinks[i].onfocus = function() {
+                this.parentNode.style.overflow = 'visible';
+                this.parentNode.previousElementSibling.style.overflow = 'hidden';
+            }
         }
 
         // Add a class when JS is initiated

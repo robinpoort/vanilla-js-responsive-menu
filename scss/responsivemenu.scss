@@ -48,6 +48,11 @@
   }
 }
 
+/* hide the buttons when closed so they wont show up in tabindex */
+button.closed {
+  display: none;
+}
+
 /* The menu itself */
 .navigation_container {
 
@@ -78,9 +83,12 @@
   ul.closed, // For JS disabled/broken browsers
   ul.fullmenu { // For all the other ones
 
+    li {
+      overflow: hidden;
+    }
+
     /* Hide li ul when JS is enabled and screen is big */
     li ul {
-      display: none;
       position: absolute;
       left: 0;
       top: 100%;
@@ -94,8 +102,9 @@
     }
 
     /* And show on hover */
-    li:hover > ul {
-      display: block;
+    li:hover,
+    li:focus {
+      overflow: visible;
     }
   }
 }

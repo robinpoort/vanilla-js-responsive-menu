@@ -33,6 +33,10 @@
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* And we want the menu to be open when JS is disabled/broken */
+/* hide the buttons when closed so they wont show up in tabindex */
+button.closed {
+  display: none; }
+
 /* The menu itself */
 .navigation_container li {
   position: relative;
@@ -48,9 +52,11 @@
 .navigation_container ul.fullmenu {
   /* Hide li ul when JS is enabled and screen is big */
   /* And show on hover */ }
+  .navigation_container ul.closed li,
+  .navigation_container ul.fullmenu li {
+    overflow: hidden; }
   .navigation_container ul.closed li ul,
   .navigation_container ul.fullmenu li ul {
-    display: none;
     position: absolute;
     left: 0;
     top: 100%;
@@ -60,8 +66,10 @@
     .navigation_container ul.fullmenu li ul li ul {
       left: 100%;
       top: 0; }
-  .navigation_container ul.closed li:hover > ul,
-  .navigation_container ul.fullmenu li:hover > ul {
-    display: block; }
+  .navigation_container ul.closed li:hover,
+  .navigation_container ul.closed li:focus,
+  .navigation_container ul.fullmenu li:hover,
+  .navigation_container ul.fullmenu li:focus {
+    overflow: visible; }
 
 /*# sourceMappingURL=responsivemenu.css.map */

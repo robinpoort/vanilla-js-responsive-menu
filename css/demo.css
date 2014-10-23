@@ -2,9 +2,6 @@ body {
   font-family: sans-serif;
   line-height: 1.5em; }
 
-h1:hover {
-  text-decoration: underline; }
-
 .togglebutton,
 .subtoggle {
   margin: 10px;
