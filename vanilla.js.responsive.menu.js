@@ -121,10 +121,19 @@
         return settings;
     };
 
+    function getParents(element, tag) {
+        var nodes = [];
+        while (element.parentNode) {
+            element = element.parentNode;
+            if (element.tagName == tag) {
+                nodes.push(element);
+            }
+        }
+        return nodes
+    }
+
     // Initialize
     function initialize(settings) {
-
-        //var focusedElement = document.activeElement;
 
         // Define what the actual menu object is
         if ( settings.menu == '' ) {
@@ -137,8 +146,19 @@
         var menulinks = menu.getElementsByTagName('a');
         for (var i = 0; i < menulinks.length; i++) {
             menulinks[i].onfocus = function() {
-                this.parentNode.style.overflow = 'visible';
-                this.parentNode.previousElementSibling.style.overflow = 'hidden';
+                var siblings = this.parentNode.parentNode.querySelectorAll('li');
+                if (siblings) {
+                    for (var i = 0; i < siblings.length; i++) {
+                        siblings[i].style.overflow = 'hidden';
+                    }
+                }
+
+                var parent = getParents(this, "LI");
+                if (parent) {
+                    for (var i = 0; i < parent.length; i++) {
+                        parent[i].style.overflow = 'visible';
+                    }
+                }
             }
         }
 
