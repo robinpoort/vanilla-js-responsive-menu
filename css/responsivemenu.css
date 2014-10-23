@@ -30,8 +30,9 @@
   right: 0 !important;
   z-index: 99; }
 
-/* Extend the accessible hide class to the closed class class */
+/* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
+/* And we want the menu to be open when JS is disabled/broken */
 /* The menu itself */
 .navigation_container li {
   position: relative;
@@ -45,10 +46,8 @@
   display: block; }
 @media screen and (min-width: 600px) {
   .navigation_container {
-    /* Hide li>ul when JS is enabled and screen is big */
+    /* Hide li ul when JS is enabled and screen is big */
     /* And show on hover */ }
-    .navigation_container li.parent > a:after {
-      content: " \25bc"; }
     .navigation_container.initiated li ul,
     .navigation_container li ul,
     .navigation_container li.active ul {
@@ -56,7 +55,13 @@
       position: absolute;
       left: 0;
       top: 100%;
-      z-index: 9; }
+      z-index: 9;
+      /* Position li>li>ul */ }
+      .navigation_container.initiated li ul li ul,
+      .navigation_container li ul li ul,
+      .navigation_container li.active ul li ul {
+        left: 100%;
+        top: 0; }
     .navigation_container li:hover > ul {
       display: block; } }
 

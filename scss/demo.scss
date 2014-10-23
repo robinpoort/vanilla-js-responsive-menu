@@ -45,6 +45,20 @@ body {
     clear: both;
   }
 
+  @media screen and (min-width: 600px) {
+    // Add styling for parents to show it has children
+    li.parent {
+      // First level
+      & > a:after {
+        content: " \25bc";
+      }
+      // Other levels
+      li.parent > a:after {
+        content: " \25b6";
+      }
+    }
+  }
+
   li {
     padding: 0;
 
@@ -71,6 +85,13 @@ body {
     }
   }
 
+  .active a,
+  .active a:hover {
+    background: #fff;
+    color: #333;
+    cursor: default;
+  }
+
   li ul {
     @media screen and (min-width: 600px) {
       background: darken(#0072B3, 10%);
@@ -82,7 +103,7 @@ body {
     li {
       float: none;
 
-      &:hover a {
+      &:hover > a {
         text-decoration: none;
         background: white;
         color: #0072B3;

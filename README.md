@@ -13,7 +13,7 @@ Features
 
 * Accessible friendly
 * compressed 4kb
-* IE9+ (If the script does not run you get the regular menu)
+* Regular menu on older browsers / when JS is disable/broken
 
 Use
 ===
@@ -40,6 +40,10 @@ Basic markup:
 1.  make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS (or SCSS) file
 2.  Add a "closed" class to the 'menu' setting element (see below). Default is the first `<ul>`. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
 3.  Use an unordered list as your menu
+
+*Tips:*
+1.  Add an "active" or "current" class to the active <li> element to make sure the sub-items show correctly when JS disabled/broken
+2.  Add a "parent" class to the parent <li> to show that an item has children (you still need to style that)
 
 Place following on the bottom of your document:
 

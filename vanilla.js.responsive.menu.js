@@ -162,11 +162,11 @@
         // Adding classes
         function classes() {
 
-            // Check current viewport width
-            var viewportwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            // Check current wrapper width
+            var windowwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-            // If screen is small and if the menu is not already opened
-            if ( viewportwidth < settings.width && !apollo.hasClass(menu, 'opened') ) {
+            // If wrapper is small and if the menu is not already opened
+            if ( windowwidth < settings.width && !apollo.hasClass(menu, 'opened') ) {
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, 'closed');
@@ -177,7 +177,7 @@
                 });
 
                 // Hide the menu
-                apollo.removeClass(menu, 'opened');
+                apollo.removeClass(menu, ['opened', 'fullmenu']);
                 apollo.addClass(menu, 'closed');
 
                 // Make the menu absolute positioned
@@ -185,7 +185,7 @@
                     apollo.addClass(menu, 'absolutemenu');
                 }
 
-            } else if ( viewportwidth >= settings.width ) {
+            } else if ( windowwidth >= settings.width ) {
 
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, 'closed');
@@ -197,6 +197,7 @@
 
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, ['opened', 'closed']);
+                apollo.addClass(menu, ['fullmenu']);
 
                 // Undo absolute positioning
                 if ( settings.absolute == 1 && apollo.hasClass(menu, 'absolutemenu') ) {

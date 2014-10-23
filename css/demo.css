@@ -34,6 +34,11 @@ body {
     content: " "; }
   .navigation_container ul:after {
     clear: both; }
+  @media screen and (min-width: 600px) {
+    .navigation_container li.parent > a:after {
+      content: " \25bc"; }
+    .navigation_container li.parent li.parent > a:after {
+      content: " \25b6"; } }
   .navigation_container li {
     padding: 0; }
     @media screen and (min-width: 600px) {
@@ -51,6 +56,11 @@ body {
       vertical-align: middle;
       line-height: 24px;
       text-decoration: none; }
+  .navigation_container .active a,
+  .navigation_container .active a:hover {
+    background: #fff;
+    color: #333;
+    cursor: default; }
   @media screen and (min-width: 600px) {
     .navigation_container li ul {
       background: #005280;
@@ -59,7 +69,7 @@ body {
       border-top: none; } }
   .navigation_container li ul li {
     float: none; }
-    .navigation_container li ul li:hover a {
+    .navigation_container li ul li:hover > a {
       text-decoration: none;
       background: white;
       color: #0072B3; }

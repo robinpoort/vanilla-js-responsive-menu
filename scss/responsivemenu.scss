@@ -50,8 +50,9 @@ $screenwidth: 600px !default;
   z-index: 99;
 }
 
-/* Extend the accessible hide class to the closed class class */
+/* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
+/* And we want the menu to be open when JS is disabled/broken */
 .js-enabled:not(.no-responsive-menu) {
   .closed {
     @extend %accessible-hide;
@@ -78,7 +79,7 @@ $screenwidth: 600px !default;
     }
   }
 
-  // Show li>ul on small screens when JS is enabled
+  // Show li ul on small screens when JS is enabled
   &.initiated {
     li ul {
       display: block;
@@ -87,12 +88,7 @@ $screenwidth: 600px !default;
 
   @media screen and (min-width: $screenwidth) {
 
-    // Add styling for parents to show it has children
-    li.parent > a:after {
-      content: " \25bc";
-    }
-
-    /* Hide li>ul when JS is enabled and screen is big */
+    /* Hide li ul when JS is enabled and screen is big */
     &.initiated li ul,
     li ul,
     li.active ul {
@@ -101,6 +97,12 @@ $screenwidth: 600px !default;
       left: 0;
       top: 100%;
       z-index: 9;
+
+      /* Position li>li>ul */
+      li ul {
+        left: 100%;
+        top: 0;
+      }
     }
 
     /* And show on hover */
