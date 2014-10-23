@@ -3,6 +3,10 @@ body {
   line-height: 1.5em;
 }
 
+h1:hover {
+  text-decoration: underline;
+}
+
 .togglebutton,
 .subtoggle {
   margin: 10px;
@@ -30,6 +34,7 @@ body {
   color: #fff;
 
   ul {
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -45,7 +50,9 @@ body {
     clear: both;
   }
 
-  @media screen and (min-width: 600px) {
+  ul.closed, // For JS disabled/broken browsers
+  ul.fullmenu { // For all the other ones
+
     // Add styling for parents to show it has children
     li.parent {
       // First level
@@ -61,14 +68,15 @@ body {
 
   li {
     padding: 0;
-
-    @media screen and (min-width: 600px) {
-      float: left;
-    }
+    float: left;
 
     &:hover a {
       background: darken(#0072B3, 10%);
     }
+  }
+
+  .opened li {
+    float: none;
   }
 
   a {
@@ -92,21 +100,23 @@ body {
     cursor: default;
   }
 
-  li ul {
-    @media screen and (min-width: 600px) {
+  ul.closed, // For JS disabled/broken browsers
+  ul.fullmenu { // For all the other ones
+
+    li ul {
       background: darken(#0072B3, 10%);
       padding: 10px;
       width: 150px;
       border-top: none;
-    }
 
-    li {
-      float: none;
+      li {
+        float: none;
 
-      &:hover > a {
-        text-decoration: none;
-        background: white;
-        color: #0072B3;
+        &:hover > a {
+          text-decoration: none;
+          background: white;
+          color: #0072B3;
+        }
       }
     }
   }

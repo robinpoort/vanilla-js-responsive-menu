@@ -2,6 +2,9 @@ body {
   font-family: sans-serif;
   line-height: 1.5em; }
 
+h1:hover {
+  text-decoration: underline; }
+
 .togglebutton,
 .subtoggle {
   margin: 10px;
@@ -25,6 +28,7 @@ body {
   background: #0072B3;
   color: #fff; }
   .navigation_container ul {
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none; }
@@ -34,18 +38,19 @@ body {
     content: " "; }
   .navigation_container ul:after {
     clear: both; }
-  @media screen and (min-width: 600px) {
-    .navigation_container li.parent > a:after {
-      content: " \25bc"; }
-    .navigation_container li.parent li.parent > a:after {
-      content: " \25b6"; } }
+  .navigation_container ul.closed li.parent > a:after,
+  .navigation_container ul.fullmenu li.parent > a:after {
+    content: " \25bc"; }
+  .navigation_container ul.closed li.parent li.parent > a:after,
+  .navigation_container ul.fullmenu li.parent li.parent > a:after {
+    content: " \25b6"; }
   .navigation_container li {
-    padding: 0; }
-    @media screen and (min-width: 600px) {
-      .navigation_container li {
-        float: left; } }
+    padding: 0;
+    float: left; }
     .navigation_container li:hover a {
       background: #005280; }
+  .navigation_container .opened li {
+    float: none; }
   .navigation_container a {
     display: block;
     color: #fff;
@@ -61,17 +66,19 @@ body {
     background: #fff;
     color: #333;
     cursor: default; }
-  @media screen and (min-width: 600px) {
-    .navigation_container li ul {
-      background: #005280;
-      padding: 10px;
-      width: 150px;
-      border-top: none; } }
-  .navigation_container li ul li {
-    float: none; }
-    .navigation_container li ul li:hover > a {
-      text-decoration: none;
-      background: white;
-      color: #0072B3; }
+  .navigation_container ul.closed li ul,
+  .navigation_container ul.fullmenu li ul {
+    background: #005280;
+    padding: 10px;
+    width: 150px;
+    border-top: none; }
+    .navigation_container ul.closed li ul li,
+    .navigation_container ul.fullmenu li ul li {
+      float: none; }
+      .navigation_container ul.closed li ul li:hover > a,
+      .navigation_container ul.fullmenu li ul li:hover > a {
+        text-decoration: none;
+        background: white;
+        color: #0072B3; }
 
 /*# sourceMappingURL=demo.css.map */

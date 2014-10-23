@@ -15,20 +15,20 @@
   right: 0 !important; }
 
 .bodyoverflowhidden {
-  position: relative;
-  overflow: hidden; }
+  position: relative !important;
+  overflow: hidden !important; }
 
 .menuoverflowauto {
-  max-height: 100%;
-  width: 100%;
-  overflow: auto; }
+  max-height: 100% !important;
+  width: 100% !important;
+  overflow: auto !important; }
 
 .absolutemenu {
   position: absolute !important;
   top: 100% !important;
   left: 0 !important;
   right: 0 !important;
-  z-index: 99; }
+  z-index: 9; }
 
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
@@ -44,25 +44,24 @@
     display: block; }
 .navigation_container.initiated li ul {
   display: block; }
-@media screen and (min-width: 600px) {
-  .navigation_container {
-    /* Hide li ul when JS is enabled and screen is big */
-    /* And show on hover */ }
-    .navigation_container.initiated li ul,
-    .navigation_container li ul,
-    .navigation_container li.active ul {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      z-index: 9;
-      /* Position li>li>ul */ }
-      .navigation_container.initiated li ul li ul,
-      .navigation_container li ul li ul,
-      .navigation_container li.active ul li ul {
-        left: 100%;
-        top: 0; }
-    .navigation_container li:hover > ul {
-      display: block; } }
+.navigation_container ul.closed,
+.navigation_container ul.fullmenu {
+  /* Hide li ul when JS is enabled and screen is big */
+  /* And show on hover */ }
+  .navigation_container ul.closed li ul,
+  .navigation_container ul.fullmenu li ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 9;
+    /* Position li>li>ul */ }
+    .navigation_container ul.closed li ul li ul,
+    .navigation_container ul.fullmenu li ul li ul {
+      left: 100%;
+      top: 0; }
+  .navigation_container ul.closed li:hover > ul,
+  .navigation_container ul.fullmenu li:hover > ul {
+    display: block; }
 
 /*# sourceMappingURL=responsivemenu.css.map */
