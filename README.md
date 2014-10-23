@@ -42,6 +42,7 @@ Basic markup:
 3.  Use an unordered list as your menu
 
 *Tips:*
+
 1.  Add an "active" or "current" class to the active `<li>` element to make sure the sub-items show correctly when JS disabled/broken
 2.  Add a "parent" class to the parent `<li>` to show that an item has children (you still need to style that)
 
