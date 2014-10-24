@@ -30,6 +30,9 @@
   right: 0 !important;
   z-index: 9; }
 
+.focused {
+  overflow: visible !important; }
+
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* And we want the menu to be open when JS is disabled/broken */

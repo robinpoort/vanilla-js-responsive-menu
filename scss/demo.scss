@@ -18,6 +18,10 @@ body {
   &:hover {
     text-decoration: underline;
   }
+
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .subtoggle {
@@ -49,16 +53,16 @@ body {
   ul.closed, // For JS disabled/broken browsers
   ul.fullmenu { // For all the other ones
 
-    // Add styling for parents to show it has children
+    // First level
     li.parent {
-      // First level
       & > a:after {
         content: " \25bc";
       }
-      // Other levels
-      li.parent > a:after {
-        content: " \25b6";
-      }
+    }
+
+    // Other levels
+    ul li.parent > a:after {
+      content: " \25b6";
     }
   }
 
@@ -66,7 +70,10 @@ body {
     padding: 0;
     float: left;
 
-    &:hover a {
+    &.focused,
+    &:hover a,
+    a:hover,
+    a:focus {
       background: darken(#0072B3, 10%);
     }
   }
@@ -90,7 +97,8 @@ body {
   }
 
   .active a,
-  .active a:hover {
+  .active a:hover,
+  .active a:focus {
     background: #fff;
     color: #333;
     cursor: default;
@@ -108,7 +116,10 @@ body {
       li {
         float: none;
 
-        &:hover > a {
+        &.focused > a,
+        &:hover > a,
+        a:hover,
+        a:focus {
           text-decoration: none;
           background: white;
           color: #0072B3;

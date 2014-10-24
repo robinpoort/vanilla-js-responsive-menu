@@ -121,9 +121,9 @@
         return settings;
     };
 
-    function getParents(element, tag) {
+    function getParents(element, tag, stop) {
         var nodes = [];
-        while (element.parentNode) {
+        while (element.parentNode && element.parentNode != stop) {
             element = element.parentNode;
             if (element.tagName == tag) {
                 nodes.push(element);
@@ -140,26 +140,6 @@
             menu = settings.wrapper.getElementsByTagName('ul')[0];
         } else {
             menu = settings.menu;
-        }
-
-        // Accessible focus menu
-        var menulinks = menu.getElementsByTagName('a');
-        for (var i = 0; i < menulinks.length; i++) {
-            menulinks[i].onfocus = function() {
-                var siblings = this.parentNode.parentNode.querySelectorAll('li');
-                if (siblings) {
-                    for (var i = 0; i < siblings.length; i++) {
-                        siblings[i].style.overflow = 'hidden';
-                    }
-                }
-
-                var parent = getParents(this, "LI");
-                if (parent) {
-                    for (var i = 0; i < parent.length; i++) {
-                        parent[i].style.overflow = 'visible';
-                    }
-                }
-            }
         }
 
         // Add a class when JS is initiated
@@ -189,6 +169,15 @@
                 subtoggle_element.setAttribute('aria-pressed', 'false');
             }
         });
+
+        // Adding parent classes
+        var parents = menu.getElementsByTagName('li');
+        for (var i = 0; i < parents.length; i++) {
+            var isparent = parents[i].getElementsByTagName('ul')[0];
+            if (isparent) {
+                apollo.addClass(isparent.parentNode, 'parent');
+            }
+        }
 
         // Adding classes
         function classes() {
@@ -286,6 +275,27 @@
             classes();
             stickyMenu();
         }, true);
+
+        // Accessible focus menu
+        var menulinks = menu.getElementsByTagName('a');
+        for (var i = 0; i < menulinks.length; i++) {
+            menulinks[i].onfocus = function() {
+                // Remove the class
+                var siblings = this.parentNode.parentNode.querySelectorAll('li');
+                if (siblings) {
+                    for (var i = 0; i < siblings.length; i++) {
+                        apollo.removeClass(siblings[i], 'focused');
+                    }
+                }
+                // Add the class
+                var parent = getParents(this, "LI", menu);
+                if (parent) {
+                    for (var i = 0; i < parent.length; i++) {
+                        apollo.addClass(parent[i], 'focused');
+                    }
+                }
+            }
+        }
 
         // Clicking the toggle button
         togglebutton.onclick = function() {
