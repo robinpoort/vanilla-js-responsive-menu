@@ -35,7 +35,7 @@ Basic markup:
 
 ```
 <div class="navigation_container">
-    <ul class="closed">
+    <ul class="rm-closed">
         <li><a href="#">Item</a></li>
     </ul>
 </div>
@@ -44,7 +44,7 @@ Basic markup:
 *Note:* three things are important here:
 
 1.  make sure you have a wrapper around the menu with the "navigation_container" class. When changed also change this in the CSS (or SCSS) file
-2.  Add a "closed" class to the 'menu' setting element (see below). Default is the first `<ul>`. This is the same class as the "hideclass" option (see below) so if you change that also change in CSS file
+2.  Add a `rm-closed` class to the `menu` setting element (see below). Default is the first `<ul>`. This is the same class as the `hideclass` option (see below) so if you change that also change in CSS file
 3.  Use an unordered list as your menu
 
 *Tips:*
@@ -81,7 +81,7 @@ default: First found `<ul>` within the wrapper
 
 The class to attach to the wrapper when menu is initiated
 
-default: 'initiated',
+default: 'rm-initiated',
 
 ###before_element
 
@@ -99,7 +99,7 @@ default: 'button',
 
 The class of the main toggle button
 
-default: 'togglebutton',
+default: 'rm-togglebutton',
 
 ###togglecontent
 
@@ -117,7 +117,7 @@ default: 'button',
 
 The class of the sub toggle buttons
 
-default: 'subtoggle',
+default: 'rm-subtoggle',
 
 ###subtogglecontent
 
@@ -141,10 +141,14 @@ default: 0,
 
 The class to add to elements that need to be hidden. Hiding happens with CSS
 
-default: 'closed',
+default: 'rm-closed',
 
 ###width
 
 The window width when menu has to become a full menu. You might need to change CSS as well when changing this value
 
 default: 600
+
+###todo: add all settings
+
+For now see the JS file for all the settings.
