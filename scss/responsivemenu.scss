@@ -39,11 +39,6 @@
   z-index: 9;
 }
 
-// Focus items
-.rm-focused {
-  overflow: visible;
-}
-
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* And we want the menu to be open when JS is disabled/broken */
@@ -80,27 +75,31 @@ button.rm-closed {
 
   // Show li ul on small screens when JS is enabled
   &.rm-initiated {
-    li ul {
+    ul {
       display: block;
+
+      .rm-focused {
+        overflow: visible;
+      }
     }
   }
 
-  ul.rm-closed, // For JS disabled/broken browsers
-  ul.rm-fullmenu { // For all the other ones
+  .rm-closed, // For JS disabled/broken browsers
+  .rm-fullmenu { // For all the other ones
 
     li {
       overflow: hidden;
     }
 
     /* Hide li ul when JS is enabled and screen is big */
-    li ul {
+    ul {
       position: absolute;
       left: 0;
       top: 100%;
       z-index: 9;
 
       /* Position li>li>ul */
-      li ul {
+      ul {
         left: 100%;
         top: 0;
       }

@@ -30,9 +30,6 @@
   right: 0;
   z-index: 9; }
 
-.rm-focused {
-  overflow: visible; }
-
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* And we want the menu to be open when JS is disabled/broken */
@@ -49,30 +46,32 @@ button.rm-closed {
     display: none; }
   .navigation_container li.active > ul, .navigation_container li.current > ul {
     display: block; }
-.navigation_container.rm-initiated li ul {
+.navigation_container.rm-initiated ul {
   display: block; }
-.navigation_container ul.rm-closed,
-.navigation_container ul.rm-fullmenu {
+  .navigation_container.rm-initiated ul .rm-focused {
+    overflow: visible; }
+.navigation_container .rm-closed,
+.navigation_container .rm-fullmenu {
   /* Hide li ul when JS is enabled and screen is big */
   /* And show on hover */ }
-  .navigation_container ul.rm-closed li,
-  .navigation_container ul.rm-fullmenu li {
+  .navigation_container .rm-closed li,
+  .navigation_container .rm-fullmenu li {
     overflow: hidden; }
-  .navigation_container ul.rm-closed li ul,
-  .navigation_container ul.rm-fullmenu li ul {
+  .navigation_container .rm-closed ul,
+  .navigation_container .rm-fullmenu ul {
     position: absolute;
     left: 0;
     top: 100%;
     z-index: 9;
     /* Position li>li>ul */ }
-    .navigation_container ul.rm-closed li ul li ul,
-    .navigation_container ul.rm-fullmenu li ul li ul {
+    .navigation_container .rm-closed ul ul,
+    .navigation_container .rm-fullmenu ul ul {
       left: 100%;
       top: 0; }
-  .navigation_container ul.rm-closed li:hover,
-  .navigation_container ul.rm-closed li:focus,
-  .navigation_container ul.rm-fullmenu li:hover,
-  .navigation_container ul.rm-fullmenu li:focus {
+  .navigation_container .rm-closed li:hover,
+  .navigation_container .rm-closed li:focus,
+  .navigation_container .rm-fullmenu li:hover,
+  .navigation_container .rm-fullmenu li:focus {
     overflow: visible; }
 
 /*# sourceMappingURL=responsivemenu.css.map */
