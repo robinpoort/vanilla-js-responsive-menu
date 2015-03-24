@@ -1,9 +1,19 @@
 body {
+  background: #eee;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
-  line-height: 1.5em; }
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #333; }
 
-.togglebutton,
-.subtoggle {
+.site {
+  margin: 0 auto;
+  padding: 24px;
+  max-width: 960px; }
+
+.rm-togglebutton,
+.rm-subtoggle {
   margin: 10px;
   padding: 5px 10px;
   border: 1px solid black;
@@ -13,14 +23,14 @@ body {
   border-radius: 5px;
   font-size: 1em;
   cursor: pointer; }
-  .togglebutton:hover,
-  .subtoggle:hover {
+  .rm-togglebutton:hover,
+  .rm-subtoggle:hover {
     text-decoration: underline; }
-  .togglebutton:focus,
-  .subtoggle:focus {
+  .rm-togglebutton:focus,
+  .rm-subtoggle:focus {
     text-decoration: underline; }
 
-.subtoggle {
+.rm-subtoggle {
   margin: 5px;
   float: right; }
 
@@ -29,7 +39,8 @@ body {
   color: #fff; }
   .navigation_container ul {
     width: 100%;
-    margin: 0;
+    max-width: 960px;
+    margin: 0 auto;
     padding: 0;
     list-style: none; }
   .navigation_container ul:before,
@@ -38,11 +49,11 @@ body {
     content: " "; }
   .navigation_container ul:after {
     clear: both; }
-  .navigation_container ul.closed li.parent > a:after,
-  .navigation_container ul.fullmenu li.parent > a:after {
+  .navigation_container ul.rm-closed li.rm-parent > a:after,
+  .navigation_container ul.rm-fullmenu li.rm-parent > a:after {
     content: " \25bc"; }
-  .navigation_container ul.closed ul li.parent > a:after,
-  .navigation_container ul.fullmenu ul li.parent > a:after {
+  .navigation_container ul.rm-closed ul li.parent > a:after,
+  .navigation_container ul.rm-fullmenu ul li.parent > a:after {
     content: " \25b6"; }
   .navigation_container li {
     padding: 0;
@@ -51,7 +62,7 @@ body {
     .navigation_container li a:hover,
     .navigation_container li a:focus {
       background: #005280; }
-  .navigation_container .opened li {
+  .navigation_container .rm-opened li {
     float: none; }
   .navigation_container a {
     display: block;
@@ -69,22 +80,22 @@ body {
     background: #fff;
     color: #333;
     cursor: default; }
-  .navigation_container ul.closed li ul,
-  .navigation_container ul.fullmenu li ul {
+  .navigation_container ul.rm-closed li ul,
+  .navigation_container ul.rm-fullmenu li ul {
     background: #005280;
     padding: 10px;
     width: 150px;
     border-top: none; }
-    .navigation_container ul.closed li ul li,
-    .navigation_container ul.fullmenu li ul li {
+    .navigation_container ul.rm-closed li ul li,
+    .navigation_container ul.rm-fullmenu li ul li {
       float: none; }
-      .navigation_container ul.closed li ul li.focused > a, .navigation_container ul.closed li ul li:hover > a,
-      .navigation_container ul.closed li ul li a:hover,
-      .navigation_container ul.closed li ul li a:focus,
-      .navigation_container ul.fullmenu li ul li.focused > a,
-      .navigation_container ul.fullmenu li ul li:hover > a,
-      .navigation_container ul.fullmenu li ul li a:hover,
-      .navigation_container ul.fullmenu li ul li a:focus {
+      .navigation_container ul.rm-closed li ul li.focused > a, .navigation_container ul.rm-closed li ul li:hover > a,
+      .navigation_container ul.rm-closed li ul li a:hover,
+      .navigation_container ul.rm-closed li ul li a:focus,
+      .navigation_container ul.rm-fullmenu li ul li.focused > a,
+      .navigation_container ul.rm-fullmenu li ul li:hover > a,
+      .navigation_container ul.rm-fullmenu li ul li a:hover,
+      .navigation_container ul.rm-fullmenu li ul li a:focus {
         text-decoration: none;
         background: white;
         color: #0072B3; }

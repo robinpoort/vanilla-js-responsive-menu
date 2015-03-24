@@ -1,43 +1,43 @@
-.js-enabled:not(.no-responsive-menu) .closed {
-  position: absolute !important;
-  overflow: hidden !important;
-  clip: rect(0 0 0 0) !important;
-  height: 1px !important;
-  width: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  border: 0 !important; }
+.js-enabled:not(.rm-no-responsive-menu) .rm-closed {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
 
-.sticky {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important; }
+.rm-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; }
 
-.bodyoverflowhidden {
-  position: relative !important;
-  overflow: hidden !important; }
+.rm-bodyoverflowhidden {
+  position: relative;
+  overflow: hidden; }
 
-.menuoverflowauto {
-  max-height: 100% !important;
-  width: 100% !important;
-  overflow: auto !important; }
+.rm-menuoverflowauto {
+  max-height: 100%;
+  width: 100%;
+  overflow: auto; }
 
-.absolutemenu {
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  right: 0 !important;
+.rm-absolutemenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   z-index: 9; }
 
-.focused {
-  overflow: visible !important; }
+.rm-focused {
+  overflow: visible; }
 
 /* Extend the accessible hide class to the closed class */
 /* Only when JS is enabled since we add the closed class in the markup */
 /* And we want the menu to be open when JS is disabled/broken */
 /* hide the buttons when closed so they wont show up in tabindex */
-button.closed {
+button.rm-closed {
   display: none; }
 
 /* The menu itself */
@@ -49,30 +49,30 @@ button.closed {
     display: none; }
   .navigation_container li.active > ul, .navigation_container li.current > ul {
     display: block; }
-.navigation_container.initiated li ul {
+.navigation_container.rm-initiated li ul {
   display: block; }
-.navigation_container ul.closed,
-.navigation_container ul.fullmenu {
+.navigation_container ul.rm-closed,
+.navigation_container ul.rm-fullmenu {
   /* Hide li ul when JS is enabled and screen is big */
   /* And show on hover */ }
-  .navigation_container ul.closed li,
-  .navigation_container ul.fullmenu li {
+  .navigation_container ul.rm-closed li,
+  .navigation_container ul.rm-fullmenu li {
     overflow: hidden; }
-  .navigation_container ul.closed li ul,
-  .navigation_container ul.fullmenu li ul {
+  .navigation_container ul.rm-closed li ul,
+  .navigation_container ul.rm-fullmenu li ul {
     position: absolute;
     left: 0;
     top: 100%;
     z-index: 9;
     /* Position li>li>ul */ }
-    .navigation_container ul.closed li ul li ul,
-    .navigation_container ul.fullmenu li ul li ul {
+    .navigation_container ul.rm-closed li ul li ul,
+    .navigation_container ul.rm-fullmenu li ul li ul {
       left: 100%;
       top: 0; }
-  .navigation_container ul.closed li:hover,
-  .navigation_container ul.closed li:focus,
-  .navigation_container ul.fullmenu li:hover,
-  .navigation_container ul.fullmenu li:focus {
+  .navigation_container ul.rm-closed li:hover,
+  .navigation_container ul.rm-closed li:focus,
+  .navigation_container ul.rm-fullmenu li:hover,
+  .navigation_container ul.rm-fullmenu li:focus {
     overflow: visible; }
 
 /*# sourceMappingURL=responsivemenu.css.map */

@@ -35,18 +35,29 @@
     var defaults = {
         wrapper: document.getElementsByTagName('nav')[0],
         menu: '',
-        initiated_class: 'initiated',
+        initiated_class: 'rm-initiated',
         before_element: '',
         toggletype: 'button',
-        toggleclass: 'togglebutton',
+        toggleclass: 'rm-togglebutton',
+        toggleclosedclass: 'rm-togglebutton--closed',
         togglecontent: 'menu',
         subtoggletype: 'button',
-        subtoggleclass: 'subtoggle',
+        subtoggleclass: 'rm-subtoggle',
         subtogglecontent: '+',
         sticky: 0,
         absolute: 0,
-        hideclass: 'closed',
-        width: 600
+        hideclass: 'rm-closed',
+        openclass: 'rm-opened',
+        focusedclass: 'rm-focused',
+        width: 600,
+        parentclass: 'rm-parent',
+        fullmenuclass: 'rm-fullmenu',
+        absolutemenuclass: 'rm-absolutemenu',
+        bodyoverflowhiddenclass: 'rm-bodyoverflowhidden',
+        menuoverflowautoclass: 'rm-menuoverflowauto',
+        stickyclass: 'rm-sticky',
+        stickyinitiatedclass: 'rm-sticky-initiated',
+        noresponsivemenuclass: 'rm-no-responsive-menu'
     };
 
     // Methods
@@ -175,7 +186,7 @@
         for (var i = 0; i < parents.length; i++) {
             var isparent = parents[i].getElementsByTagName('ul')[0];
             if (isparent) {
-                apollo.addClass(isparent.parentNode, 'parent');
+                apollo.addClass(isparent.parentNode, settings.parentclass);
             }
         }
 
@@ -186,10 +197,10 @@
             var windowwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
             // If wrapper is small and if the menu is not already opened
-            if ( windowwidth < settings.width && !apollo.hasClass(menu, 'opened') ) {
+            if ( windowwidth < settings.width && !apollo.hasClass(menu, settings.openclass) ) {
 
                 // Show the toggle button(s)
-                apollo.removeClass(togglebutton, 'closed');
+                apollo.removeClass(togglebutton, settings.hideclass);
                 var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
                 forEach(subtoggles, function(value, prop) {
                     apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
@@ -197,18 +208,18 @@
                 });
 
                 // Hide the menu
-                apollo.removeClass(menu, ['opened', 'fullmenu']);
-                apollo.addClass(menu, 'closed');
+                apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
+                apollo.addClass(menu, settings.hideclass);
 
                 // Make the menu absolute positioned
                 if ( settings.absolute == 1 ) {
-                    apollo.addClass(menu, 'absolutemenu');
+                    apollo.addClass(menu, settings.absolutemenuclass);
                 }
 
             } else if ( windowwidth >= settings.width ) {
 
                 // Hide the toggle button(s)
-                apollo.addClass(togglebutton, 'closed');
+                apollo.addClass(togglebutton, settings.hideclass);
                 var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
                 forEach(subtoggles, function(value, prop) {
                     apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
@@ -216,12 +227,12 @@
                 });
 
                 // Show the menu and remove all classes
-                apollo.removeClass(menu, ['opened', 'closed']);
-                apollo.addClass(menu, ['fullmenu']);
+                apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
+                apollo.addClass(menu, settings.fullmenuclass);
 
                 // Undo absolute positioning
-                if ( settings.absolute == 1 && apollo.hasClass(menu, 'absolutemenu') ) {
-                    apollo.removeClass(menu, 'absolutemenu');
+                if ( settings.absolute == 1 && apollo.hasClass(menu, settings.absolutemenuclass) ) {
+                    apollo.removeClass(menu, settings.absolutemenuclass);
                 }
             }
         }
@@ -236,32 +247,32 @@
                 var viewportheight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
                 // Add the overflow class but only if there is space
-                if ( viewportheight <= menuheight && !apollo.hasClass(document.body, 'bodyoverflowhidden') ) {
+                if ( viewportheight <= menuheight && !apollo.hasClass(document.body, settings.bodyoverflowhiddenclass) ) {
 
-                    apollo.addClass(document.body, 'bodyoverflowhidden');
-                    apollo.addClass(settings.wrapper, 'menuoverflowauto');
+                    apollo.addClass(document.body, settings.bodyoverflowhiddenclass);
+                    apollo.addClass(settings.wrapper, settings.menuoverflowautoclass);
 
                 } else if ( viewportheight > menuheight ) {
 
-                    if ( apollo.hasClass(document.body, 'bodyoverflowhidden') ) {
-                        apollo.removeClass(document.body, 'bodyoverflowhidden');
-                        apollo.removeClass(settings.wrapper, 'menuoverflowauto');
+                    if ( apollo.hasClass(document.body, settings.bodyoverflowhiddenclass) ) {
+                        apollo.removeClass(document.body, settings.bodyoverflowhiddenclass);
+                        apollo.removeClass(settings.wrapper, settings.menuoverflowautoclass);
                     }
 
                     // Make sticky
-                    if ( !apollo.hasClass(settings.wrapper, 'sticky') ) {
-                        apollo.addClass(settings.wrapper, 'sticky');
+                    if ( !apollo.hasClass(settings.wrapper, settings.stickyclass) ) {
+                        apollo.addClass(settings.wrapper, settings.stickyclass);
                     }
 
                     // Add padding only if menu is closed or when value is stored
-                    if ( !apollo.hasClass(menu, 'opened') && !apollo.hasClass(document.body, 'sticky-initiated') ) {
+                    if ( !apollo.hasClass(menu, settings.openclass) && !apollo.hasClass(document.body, settings.stickyinitiatedclass) ) {
 
                         // Calculate the height
                         var paddingtop = menuheight.toString() + 'px';
 
                         // Set the padding on the body
                         document.body.setAttribute('style', 'padding-top:' + paddingtop);
-                        apollo.addClass(document.body, 'sticky-initiated');
+                        apollo.addClass(document.body, settings.stickyinitiatedclass);
                     }
                 }
             }
@@ -284,14 +295,14 @@
                 var siblings = this.parentNode.parentNode.querySelectorAll('li');
                 if (siblings) {
                     for (var i = 0; i < siblings.length; i++) {
-                        apollo.removeClass(siblings[i], 'focused');
+                        apollo.removeClass(siblings[i], settings.focusedclass);
                     }
                 }
                 // Add the class
                 var parent = getParents(this, "LI", menu);
                 if (parent) {
                     for (var i = 0; i < parent.length; i++) {
-                        apollo.addClass(parent[i], 'focused');
+                        apollo.addClass(parent[i], settings.focusedclass);
                     }
                 }
             }
@@ -301,14 +312,14 @@
         togglebutton.onclick = function() {
 
             // Add classes accordingly
-            if ( apollo.hasClass(menu, 'closed') ) {
-                apollo.removeClass(menu, 'closed');
-                apollo.addClass(menu, 'opened');
-                apollo.addClass(togglebutton, 'togglebutton--closed');
-            } else if ( apollo.hasClass(menu, 'opened') ) {
-                apollo.removeClass(menu, 'opened');
-                apollo.addClass(menu, 'closed');
-                apollo.removeClass(togglebutton, 'togglebutton--closed');
+            if ( apollo.hasClass(menu, settings.hideclass) ) {
+                apollo.removeClass(menu, settings.hideclass);
+                apollo.addClass(menu, settings.openclass);
+                apollo.addClass(togglebutton, settings.toggleclosedclass);
+            } else if ( apollo.hasClass(menu, settings.openclass) ) {
+                apollo.removeClass(menu, settings.openclass);
+                apollo.addClass(menu, settings.hideclass);
+                apollo.removeClass(togglebutton, settings.toggleclosedclass);
             }
 
             // Check if the menu still fits
@@ -330,10 +341,10 @@
                 // Add classes accordingly
                 if ( apollo.hasClass(submenu, settings.hideclass) ) {
                     apollo.removeClass(submenu, settings.hideclass);
-                    apollo.addClass(subtoggle, 'subtogglebutton--closed');
+                    apollo.addClass(subtoggle, settings.toggleclosedclass);
                 } else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
                     apollo.addClass(submenu, settings.hideclass);
-                    apollo.removeClass(subtoggle, 'subtogglebutton--closed');
+                    apollo.removeClass(subtoggle, settings.toggleclosedclass);
                 }
 
                 // Check if the menu still fits
@@ -350,7 +361,7 @@
     exports.init = function ( options ) {
         // feature test
         if ( !supports ) {
-            document.body.className += ' no-responsive-menu';
+            document.body.className += ' ' + settings.noresponsivemenuclass;
             return;
         }
         settings = extend( defaults, options || {} ); // Merge user options with defaults
