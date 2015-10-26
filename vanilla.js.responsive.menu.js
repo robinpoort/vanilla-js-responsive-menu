@@ -290,22 +290,28 @@
         // Accessible focus menu
         var menulinks = menu.getElementsByTagName('a');
         for (var i = 0; i < menulinks.length; i++) {
+            menulinks[i].onblur = function() {
+                var focusedItems = document.getElementsByClassName('rm-focused');
+                for (var f = 0; f < focusedItems.length; f++) {
+                    apollo.removeClass(focusedItems[f], settings.focusedclass);
+                }
+            };
             menulinks[i].onfocus = function() {
                 // Remove the class
                 var siblings = this.parentNode.parentNode.querySelectorAll('li');
-                if (siblings) {
-                    for (var i = 0; i < siblings.length; i++) {
-                        apollo.removeClass(siblings[i], settings.focusedclass);
+                if (siblings.length) {
+                    for (var f = 0; f < siblings.length; f++) {
+                        apollo.removeClass(siblings[f], settings.focusedclass);
                     }
                 }
                 // Add the class
                 var parent = getParents(this, "LI", menu);
-                if (parent) {
-                    for (var i = 0; i < parent.length; i++) {
-                        apollo.addClass(parent[i], settings.focusedclass);
+                if (parent.length) {
+                    for (var f = 0; f < parent.length; f++) {
+                        apollo.addClass(parent[f], settings.focusedclass);
                     }
                 }
-            }
+            };
         }
 
         // Clicking the toggle button
@@ -326,7 +332,7 @@
             stickyMenu();
 
             return false;
-        }
+        };
 
         // Clicking the sub toggles button
         var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
