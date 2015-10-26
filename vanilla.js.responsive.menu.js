@@ -165,6 +165,7 @@
         togglebutton.innerHTML = settings.togglecontent;
         togglebutton.setAttribute('aria-hidden', 'true');
         togglebutton.setAttribute('aria-pressed', 'false');
+        togglebutton.setAttribute('type', 'button');
 
         // Creating subtoggles
         var parents = menu.getElementsByTagName('li');
@@ -178,6 +179,7 @@
                 subtoggle_element.innerHTML = settings.subtogglecontent;
                 subtoggle_element.setAttribute('aria-hidden', 'true');
                 subtoggle_element.setAttribute('aria-pressed', 'false');
+                subtoggle_element.setAttribute('type', 'button');
             }
         });
 
