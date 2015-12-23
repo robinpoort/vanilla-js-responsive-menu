@@ -62,8 +62,8 @@ body {
     clear: both;
   }
 
-  ul.rm-closed, // For JS disabled/broken browsers
-  ul.rm-fullmenu { // For all the other ones
+  .rm-closed, // For JS disabled/broken browsers
+  .rm-fullmenu { // For all the other ones
 
     // First level
     li.rm-parent {
@@ -73,14 +73,17 @@ body {
     }
 
     // Other levels
-    ul li.parent > a:after {
+    li.parent > a:after {
       content: " \25b6";
     }
   }
 
   li {
     padding: 0;
-    float: left;
+
+    @media (min-width: 600px) {
+      float: left;
+    }
 
     &.focused,
     &:hover a,
@@ -116,14 +119,17 @@ body {
     cursor: default;
   }
 
-  ul.rm-closed, // For JS disabled/broken browsers
-  ul.rm-fullmenu { // For all the other ones
+  .rm-closed, // For JS disabled/broken browsers
+  .rm-fullmenu { // For all the other ones
 
-    li ul {
-      background: darken(#0072B3, 10%);
-      padding: 10px;
-      width: 150px;
-      border-top: none;
+    li {
+
+      ul {
+        background: darken(#0072B3, 10%);
+        padding: 10px;
+        width: 150px;
+        border-top: none;
+      }
 
       li {
         float: none;

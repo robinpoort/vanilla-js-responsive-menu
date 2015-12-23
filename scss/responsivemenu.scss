@@ -59,12 +59,7 @@ button.rm-closed {
   li {
     position: relative;
 
-    /* initially hide all li>ul so we get a small list when JS is disabled */
-    ul {
-      display: none;
-    }
-
-    /* And show them on active/current items */
+    // And show them on active/current items
     &.active,
     &.current {
       & > ul {
@@ -84,31 +79,33 @@ button.rm-closed {
     }
   }
 
-  .rm-closed, // For JS disabled/broken browsers
-  .rm-fullmenu { // For all the other ones
+  @media (min-width:600px) {
+    .rm-closed, // For JS disabled/broken browsers
+    .rm-fullmenu { // For all the other ones
 
-    li {
-      overflow: hidden;
-    }
-
-    /* Hide li ul when JS is enabled and screen is big */
-    ul {
-      position: absolute;
-      left: 0;
-      top: 100%;
-      z-index: 9;
-
-      /* Position li>li>ul */
-      ul {
-        left: 100%;
-        top: 0;
+      li {
+          overflow: hidden;
       }
-    }
 
-    /* And show on hover */
-    li:hover,
-    li:focus {
-      overflow: visible;
+      // Hide li ul when JS is enabled and screen is big
+      ul {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 9;
+
+        // Position li>li>ul
+        ul {
+          left: 100%;
+          top: 0;
+        }
+      }
+
+      // And show on hover
+      li:hover,
+      li:focus {
+        overflow: visible;
+      }
     }
   }
 }

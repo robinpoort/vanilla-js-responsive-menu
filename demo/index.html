@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla JS Responsive Menu</title>
     <link rel="stylesheet" href="../css/responsivemenu.css">
@@ -10,111 +10,56 @@
 </head>
 <body class="no-js">
 <script type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
+<div class="navigation_container">
+    <ul class="navigation rm-closed">
+        <li class="active">
+            <a class="test" href="#">Home</a>
+        </li>
+        <li>
+            <a href="test">Item 2</a>
+        </li>
+        <li>
+            <a href="test">Item 3</a>
+            <ul>
+                <li>
+                    <a href="test">Test</a>
+                </li>
+                <li>
+                    <a href="test">A long one</a>
+                </li>
+                <li>
+                    <a href="test">Test</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Item 4</a>
+            <ul>
+                <li>
+                    <a href="test">Test</a>
+                </li>
+                <li>
+                    <a href="test">A long one</a>
+                    <ul>
+                        <li>
+                            <a href="test">Test1</a>
+                        </li>
+                        <li>
+                            <a href="test">Test2</a>
+                        </li>
+                        <li>
+                            <a href="test">Test3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="test">Test</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
 <div class="site">
-    <div class="navigation_container">
-        <ul class="navigation rm-closed">
-            <li class="active">
-                <a class="test" href="#">Home</a>
-            </li>
-            <li>
-                <a href="test">Item 2</a>
-            </li>
-            <li>
-                <a href="test">Item 3</a>
-                <ul>
-                    <li>
-                        <a href="test">Test</a>
-                    </li>
-                    <li>
-                        <a href="test">A long one</a>
-                        <ul>
-                            <li>
-                                <a href="test">Test1</a>
-                            </li>
-                            <li>
-                                <a href="test">Test2</a>
-                                <ul>
-                                    <li>
-                                        <a href="test">Test1</a>
-                                    </li>
-                                    <li>
-                                        <a href="test">Test2</a>
-                                    </li>
-                                    <li>
-                                        <a href="test">Test3</a>
-                                        <ul>
-                                            <li>
-                                                <a href="test">Test1</a>
-                                            </li>
-                                            <li>
-                                                <a href="test">Test2</a>
-                                            </li>
-                                            <li>
-                                                <a href="test">Test3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="test">Test3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="test">Test</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Item 4</a>
-                <ul>
-                    <li>
-                        <a href="test">Test</a>
-                    </li>
-                    <li>
-                        <a href="test">A long one</a>
-                        <ul>
-                            <li>
-                                <a href="test">Test1</a>
-                            </li>
-                            <li>
-                                <a href="test">Test2</a>
-                                <ul>
-                                    <li>
-                                        <a href="test">Test1</a>
-                                    </li>
-                                    <li>
-                                        <a href="test">Test2</a>
-                                    </li>
-                                    <li>
-                                        <a href="test">Test3</a>
-                                        <ul>
-                                            <li>
-                                                <a href="test">Test1</a>
-                                            </li>
-                                            <li>
-                                                <a href="test">Test2</a>
-                                            </li>
-                                            <li>
-                                                <a href="test">Test3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="test">Test3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="test">Test</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
     <h1>Bunch of content</h1>
     <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
     <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus.</p>
@@ -141,7 +86,7 @@
     responsivemenu.init({
         wrapper: document.querySelector('.navigation_container'),
         togglecontent: 'menu',
-        sticky: 1
+        sticky: 0
     });
 </script>
 </body>

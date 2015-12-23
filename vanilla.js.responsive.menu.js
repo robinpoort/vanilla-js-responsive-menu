@@ -33,7 +33,6 @@
 
     // Default settings
     var defaults = {
-        wrapper: document.getElementsByTagName('nav')[0],
         menu: '',
         initiated_class: 'rm-initiated',
         before_element: '',
@@ -167,29 +166,18 @@
         togglebutton.setAttribute('aria-pressed', 'false');
         togglebutton.setAttribute('type', 'button');
 
-        // Creating subtoggles
-        var parents = menu.getElementsByTagName('li');
-        forEach(parents, function(value, prop) {
-            var child = parents[prop].getElementsByTagName('ul')[0];
-            if ( child != undefined ) {
-                var subtoggle_element = document.createElement(settings.subtoggletype);
-                apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
-                var parent = child.parentNode;
-                parent.insertBefore(subtoggle_element, parent.firstChild);
-                subtoggle_element.innerHTML = settings.subtogglecontent;
-                subtoggle_element.setAttribute('aria-hidden', 'true');
-                subtoggle_element.setAttribute('aria-pressed', 'false');
-                subtoggle_element.setAttribute('type', 'button');
-            }
-        });
-
-        // Adding parent classes
-        var parents = menu.getElementsByTagName('li');
+        // Subtoggles and parent classes
+        var parents = menu.querySelectorAll('li ul');
         for (var i = 0; i < parents.length; i++) {
-            var isparent = parents[i].getElementsByTagName('ul')[0];
-            if (isparent) {
-                apollo.addClass(isparent.parentNode, settings.parentclass);
-            }
+            var subtoggle_element = document.createElement(settings.subtoggletype);
+            apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
+            var parent = parents[i].parentNode;
+            parent.insertBefore(subtoggle_element, parent.firstChild);
+            subtoggle_element.innerHTML = settings.subtogglecontent;
+            subtoggle_element.setAttribute('aria-hidden', 'true');
+            subtoggle_element.setAttribute('aria-pressed', 'false');
+            subtoggle_element.setAttribute('type', 'button');
+            apollo.addClass(parents[i].parentNode, settings.parentclass);
         }
 
         // Adding classes
@@ -204,10 +192,12 @@
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, settings.hideclass);
                 var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                forEach(subtoggles, function(value, prop) {
-                    apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                    apollo.removeClass(subtoggles[prop], settings.hideclass);
-                });
+                if ( subtoggles.length ) {
+                    forEach(subtoggles, function (value, prop) {
+                        apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                        apollo.removeClass(subtoggles[prop], settings.hideclass);
+                    });
+                }
 
                 // Hide the menu
                 apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
@@ -223,10 +213,12 @@
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
                 var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                forEach(subtoggles, function(value, prop) {
-                    apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                    apollo.addClass(subtoggles[prop], settings.hideclass);
-                });
+                if ( subtoggles.length ) {
+                    forEach(subtoggles, function(value, prop) {
+                        apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                        apollo.addClass(subtoggles[prop], settings.hideclass);
+                    });
+                }
 
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
@@ -338,27 +330,32 @@
 
         // Clicking the sub toggles button
         var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-        forEach(subtoggles, function(value, prop) {
 
-            var subtoggle = subtoggles[prop];
-            var submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
+        // Return if subtoggle is not found
+        if (subtoggles.length) {
 
-            // Click buttons and show submenu
-            subtoggle.onclick = function() {
+            forEach(subtoggles, function(value, prop) {
 
-                // Add classes accordingly
-                if ( apollo.hasClass(submenu, settings.hideclass) ) {
-                    apollo.removeClass(submenu, settings.hideclass);
-                    apollo.addClass(subtoggle, settings.toggleclosedclass);
-                } else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
-                    apollo.addClass(submenu, settings.hideclass);
-                    apollo.removeClass(subtoggle, settings.toggleclosedclass);
+                var subtoggle = subtoggles[prop];
+                var submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
+
+                // Click buttons and show submenu
+                subtoggle.onclick = function() {
+
+                    // Add classes accordingly
+                    if ( apollo.hasClass(submenu, settings.hideclass) ) {
+                        apollo.removeClass(submenu, settings.hideclass);
+                        apollo.addClass(subtoggle, settings.toggleclosedclass);
+                    } else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
+                        apollo.addClass(submenu, settings.hideclass);
+                        apollo.removeClass(subtoggle, settings.toggleclosedclass);
+                    }
+
+                    // Check if the menu still fits
+                    stickyMenu();
                 }
-
-                // Check if the menu still fits
-                stickyMenu();
-            }
-        });
+            });
+        }
     }
 
     /**

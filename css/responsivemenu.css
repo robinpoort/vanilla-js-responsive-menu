@@ -39,21 +39,14 @@ button.rm-closed {
 
 /* The menu itself */
 .navigation_container li {
-  position: relative;
-  /* initially hide all li>ul so we get a small list when JS is disabled */
-  /* And show them on active/current items */ }
-  .navigation_container li ul {
-    display: none; }
+  position: relative; }
   .navigation_container li.active > ul, .navigation_container li.current > ul {
     display: block; }
 .navigation_container.rm-initiated ul {
   display: block; }
   .navigation_container.rm-initiated ul .rm-focused {
     overflow: visible; }
-.navigation_container .rm-closed,
-.navigation_container .rm-fullmenu {
-  /* Hide li ul when JS is enabled and screen is big */
-  /* And show on hover */ }
+@media (min-width: 600px) {
   .navigation_container .rm-closed li,
   .navigation_container .rm-fullmenu li {
     overflow: hidden; }
@@ -62,8 +55,7 @@ button.rm-closed {
     position: absolute;
     left: 0;
     top: 100%;
-    z-index: 9;
-    /* Position li>li>ul */ }
+    z-index: 9; }
     .navigation_container .rm-closed ul ul,
     .navigation_container .rm-fullmenu ul ul {
       left: 100%;
@@ -72,6 +64,6 @@ button.rm-closed {
   .navigation_container .rm-closed li:focus,
   .navigation_container .rm-fullmenu li:hover,
   .navigation_container .rm-fullmenu li:focus {
-    overflow: visible; }
+    overflow: visible; } }
 
 /*# sourceMappingURL=responsivemenu.css.map */
