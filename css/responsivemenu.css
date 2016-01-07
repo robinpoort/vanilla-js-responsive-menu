@@ -1,13 +1,3 @@
-.js-enabled:not(.rm-no-responsive-menu) .rm-closed {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0; }
-
 .rm-sticky {
   position: fixed;
   top: 0;
@@ -30,40 +20,82 @@
   right: 0;
   z-index: 9; }
 
-/* Extend the accessible hide class to the closed class */
-/* Only when JS is enabled since we add the closed class in the markup */
-/* And we want the menu to be open when JS is disabled/broken */
 /* hide the buttons when closed so they wont show up in tabindex */
 button.rm-closed {
   display: none; }
 
-/* The menu itself */
-.navigation_container li {
-  position: relative; }
-  .navigation_container li.active > ul, .navigation_container li.current > ul {
-    display: block; }
-.navigation_container.rm-initiated ul {
-  display: block; }
-  .navigation_container.rm-initiated ul .rm-focused {
-    overflow: visible; }
-@media (min-width: 600px) {
-  .navigation_container .rm-closed li,
-  .navigation_container .rm-fullmenu li {
-    overflow: hidden; }
-  .navigation_container .rm-closed ul,
-  .navigation_container .rm-fullmenu ul {
+/* CAccessible hide items that have the closed class */
+ul.rm-closed {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
+
+/* When JS is disabled */
+.no-js .navigation_container li {
+  /* initially hide all li>ul so we get a small list when JS is disabled */
+  /* And show them on active/current items */ }
+  .no-js .navigation_container li ul {
     position: absolute;
-    left: 0;
-    top: 100%;
-    z-index: 9; }
-    .navigation_container .rm-closed ul ul,
-    .navigation_container .rm-fullmenu ul ul {
-      left: 100%;
-      top: 0; }
-  .navigation_container .rm-closed li:hover,
-  .navigation_container .rm-closed li:focus,
-  .navigation_container .rm-fullmenu li:hover,
-  .navigation_container .rm-fullmenu li:focus {
-    overflow: visible; } }
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    /* On desktop */ }
+    @media (min-width: 600px) {
+      .no-js .navigation_container li ul {
+        overflow: visible;
+        clip: auto;
+        height: auto;
+        width: auto;
+        margin: auto; } }
+  .no-js .navigation_container li.active > ul, .no-js .navigation_container li.current > ul {
+    overflow: visible;
+    clip: auto;
+    height: auto;
+    width: auto;
+    margin: auto; }
+
+/* When JS is enabled */
+.js .navigation_container {
+  /* We can use display none because we set display block again with JS immediately after initiating the menu */
+  display: none;
+  /* Display menu when initiated */
+  /* Display menu on desktop */ }
+  .js .navigation_container.rm-initiated {
+    display: block; }
+  @media (min-width: 600px) {
+    .js .navigation_container {
+      display: block; } }
+  .js .navigation_container .rm-focused {
+    overflow: visible; }
+
+/* When JS is either disabled or enabled */
+.navigation_container li {
+  position: relative;
+  /* On desktop */ }
+  @media (min-width: 600px) {
+    .navigation_container li {
+      overflow: hidden;
+      /* Children */
+      /* Position li>li>ul */
+      /* And show on hover */ }
+      .navigation_container li ul {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 9; }
+      .navigation_container li ul ul {
+        left: 100%;
+        top: 0; }
+      .navigation_container li:hover, .navigation_container li:focus {
+        overflow: visible; } }
 
 /*# sourceMappingURL=responsivemenu.css.map */

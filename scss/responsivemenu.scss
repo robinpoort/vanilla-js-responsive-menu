@@ -1,5 +1,12 @@
+// Variables
+$menu-name: navigation_container;
+$menu-width: 600px;
+$closed-class: rm-closed;
+$no-js-class: no-js;
+$js-class: js;
+
 // Accessible hide
-%accessible-hide {
+@mixin accessible-hide {
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
@@ -8,6 +15,15 @@
   margin: -1px;
   padding: 0;
   border: 0;
+}
+
+// Accessible show
+@mixin accessible-show {
+  overflow: visible;
+  clip: auto;
+  height: auto;
+  width: auto;
+  margin: auto;
 }
 
 // Sticky
@@ -39,71 +55,91 @@
   z-index: 9;
 }
 
-/* Extend the accessible hide class to the closed class */
-/* Only when JS is enabled since we add the closed class in the markup */
-/* And we want the menu to be open when JS is disabled/broken */
-.js-enabled:not(.rm-no-responsive-menu) {
-  .rm-closed {
-    @extend %accessible-hide;
-  }
-}
-
 /* hide the buttons when closed so they wont show up in tabindex */
-button.rm-closed {
+button.#{$closed-class} {
   display: none;
 }
 
-/* The menu itself */
-.navigation_container {
+/* CAccessible hide items that have the closed class */
+ul.#{$closed-class} {
+  @include accessible-hide;
+}
 
+/* When JS is disabled */
+.#{$no-js-class} {
+  .#{$menu-name} {
+    li {
+      /* initially hide all li>ul so we get a small list when JS is disabled */
+      ul {
+        @include accessible-hide;
+
+        /* On desktop */
+        @media (min-width: $menu-width) {
+          @include accessible-show;
+        }
+      }
+
+      /* And show them on active/current items */
+      &.active,
+      &.current {
+        & > ul {
+          @include accessible-show;
+        }
+      }
+    }
+  }
+}
+
+/* When JS is enabled */
+.#{$js-class} {
+  .#{$menu-name} {
+
+    /* We can use display none because we set display block again with JS immediately after initiating the menu */
+    display: none;
+
+    /* Display menu when initiated */
+    &.rm-initiated {
+      display: block;
+    }
+
+    /* Display menu on desktop */
+    @media (min-width: $menu-width) {
+      display: block;
+    }
+
+    // Display
+    .rm-focused {
+      overflow: visible;
+    }
+  }
+}
+
+/* When JS is either disabled or enabled */
+.#{$menu-name} {
   li {
     position: relative;
 
-    // And show them on active/current items
-    &.active,
-    &.current {
-      & > ul {
-        display: block;
-      }
-    }
-  }
+    /* On desktop */
+    @media (min-width: $menu-width) {
+      overflow: hidden;
 
-  // Show li ul on small screens when JS is enabled
-  &.rm-initiated {
-    ul {
-      display: block;
-
-      .rm-focused {
-        overflow: visible;
-      }
-    }
-  }
-
-  @media (min-width:600px) {
-    .rm-closed, // For JS disabled/broken browsers
-    .rm-fullmenu { // For all the other ones
-
-      li {
-          overflow: hidden;
-      }
-
-      // Hide li ul when JS is enabled and screen is big
+      /* Children */
       ul {
         position: absolute;
         left: 0;
         top: 100%;
         z-index: 9;
-
-        // Position li>li>ul
-        ul {
-          left: 100%;
-          top: 0;
-        }
       }
 
-      // And show on hover
-      li:hover,
-      li:focus {
+      /* Position li>li>ul */
+      ul ul {
+        left: 100%;
+        top: 0;
+      }
+
+      /* And show on hover */
+      &:hover,
+      &:focus {
         overflow: visible;
       }
     }

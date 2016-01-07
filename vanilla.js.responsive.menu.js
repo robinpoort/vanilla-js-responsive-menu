@@ -366,7 +366,7 @@
     exports.init = function ( options ) {
         // feature test
         if ( !supports ) {
-            document.body.className += ' ' + settings.noresponsivemenuclass;
+            document.documentElement.className += ' ' + settings.noresponsivemenuclass;
             return;
         }
         settings = extend( defaults, options || {} ); // Merge user options with defaults
