@@ -1,9 +1,9 @@
 // Variables
-$menu-name: navigation_container;
-$menu-width: 600px;
-$closed-class: rm-closed;
-$no-js-class: no-js;
-$js-class: js;
+$menu-name: navigation_container !default;
+$menu-width: 600px !default;
+$closed-class: rm-closed !default;
+$no-js-class: no-js !default;
+$js-class: js !default;
 
 // Accessible hide
 @mixin accessible-hide {
