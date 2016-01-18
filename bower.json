@@ -1,5 +1,5 @@
 {
-  "name": "responsive-menu",
+  "name": "vanilla-js-responsive-menu",
   "description": "Vanilla JS responsive and accessible menu",
   "main": [
     "scss/responsivemenu.scss"
