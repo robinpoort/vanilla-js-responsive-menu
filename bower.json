@@ -1,0 +1,25 @@
+{
+  "name": "responsive-menu",
+  "description": "Vanilla JS responsive and accessible menu",
+  "main": [
+    "scss/responsivemenu.scss"
+  ],
+  "dependencies": {
+    "apollo.js": "~1.7.0"
+  },
+  "keywords": [
+    "Responsive",
+    "Menu",
+    "Navigation",
+    "Accessible",
+    "vanilla JS"
+  ],
+  "authors": [
+    "Robin Poort "
+  ],
+  "license": "MIT",
+  "ignore": [
+    "bower_components",
+    "demo"
+  ]
+}
