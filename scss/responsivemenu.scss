@@ -1,5 +1,6 @@
 // Variables
-$vjsm-menu-name: navigation_container !default;
+$vjsm-menu-wrapper: navigation_container !default;
+$vjsm-menu: ul !default;
 $vjsm-menu-width: 600px !default;
 $vjsm-closed-class: rm-closed !default;
 $vjsm-no-js-class: no-js !default;
@@ -60,14 +61,14 @@ button.#{$vjsm-closed-class} {
   display: none;
 }
 
-/* CAccessible hide items that have the closed class */
-ul.#{$vjsm-closed-class} {
+/* Accessible hide items that have the closed class */
+#{$vjsm-menu}.#{$vjsm-closed-class} {
   @include accessible-hide;
 }
 
 /* When JS is disabled */
 .#{$vjsm-no-js-class} {
-  .#{$vjsm-menu-name} {
+  .#{$vjsm-menu-wrapper} {
     li {
       /* initially hide all li>ul so we get a small list when JS is disabled */
       ul {
@@ -92,7 +93,7 @@ ul.#{$vjsm-closed-class} {
 
 /* When JS is enabled */
 .#{$vjsm-js-class} {
-  .#{$vjsm-menu-name} {
+  .#{$vjsm-menu-wrapper} {
 
     /* We can use display none because we set display block again with JS immediately after initiating the menu */
     display: none;
@@ -115,7 +116,7 @@ ul.#{$vjsm-closed-class} {
 }
 
 /* When JS is either disabled or enabled */
-.#{$vjsm-menu-name} {
+.#{$vjsm-menu-wrapper} {
   li {
     position: relative;
 

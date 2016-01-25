@@ -1,87 +1,101 @@
-/*
-Error: Undefined variable: "$menu-width".
-        on line 123 of responsivemenu.scss
+.rm-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; }
 
-118: .#{$vjsm-menu-name} {
-119:   li {
-120:     position: relative;
-121: 
-122:     /* On desktop *\/
-123:     @media (min-width: $menu-width) {
-124:       overflow: hidden;
-125: 
-126:       /* Children *\/
-127:       ul {
-128:         position: absolute;
+.rm-bodyoverflowhidden {
+  position: relative;
+  overflow: hidden; }
 
-Backtrace:
-responsivemenu.scss:123
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/script/tree/node.rb:50:in `perform'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:540:in `block in run_interp_no_strip'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:538:in `map'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:538:in `run_interp_no_strip'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:545:in `run_interp'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:510:in `visit_media'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `block in with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:115:in `with_frame'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `map'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `block in with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:115:in `with_frame'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `map'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `block in with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:115:in `with_frame'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/stack.rb:79:in `with_base'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `map'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/root_node.rb:36:in `css_tree'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/engine.rb:378:in `_render_with_sourcemap'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/engine.rb:295:in `render_with_sourcemap'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:209:in `each'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/plugin.rb:82:in `update_stylesheets'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/exec/sass_scss.rb:361:in `watch_or_update'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/exec/sass_scss.rb:51:in `process_result'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/exec/base.rb:52:in `parse'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/lib/sass/exec/base.rb:19:in `parse!'
-/Users/robin/.rvm/gems/ruby-2.2.1/gems/sass-3.4.20/bin/scss:13:in `<top (required)>'
-/Users/robin/.rvm/gems/ruby-2.2.1/bin/scss:23:in `load'
-/Users/robin/.rvm/gems/ruby-2.2.1/bin/scss:23:in `<main>'
-/Users/robin/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
-/Users/robin/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined variable: \"$menu-width\".\A         on line 123 of responsivemenu.scss\A \A 118: .#{$vjsm-menu-name} {\A 119:   li {\A 120:     position: relative;\A 121: \A 122:     /* On desktop */\A 123:     @media (min-width: $menu-width) {\A 124:       overflow: hidden;\A 125: \A 126:       /* Children */\A 127:       ul {\A 128:         position: absolute;"; }
+.rm-menuoverflowauto {
+  max-height: 100%;
+  width: 100%;
+  overflow: auto; }
+
+.rm-absolutemenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 9; }
+
+/* hide the buttons when closed so they wont show up in tabindex */
+button.rm-closed {
+  display: none; }
+
+/* Accessible hide items that have the closed class */
+ul.rm-closed {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
+
+/* When JS is disabled */
+.no-js .navigation_container li {
+  /* initially hide all li>ul so we get a small list when JS is disabled */
+  /* And show them on active/current items */ }
+  .no-js .navigation_container li ul {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    /* On desktop */ }
+    @media (min-width: 600px) {
+      .no-js .navigation_container li ul {
+        overflow: visible;
+        clip: auto;
+        height: auto;
+        width: auto;
+        margin: auto; } }
+  .no-js .navigation_container li.active > ul, .no-js .navigation_container li.current > ul {
+    overflow: visible;
+    clip: auto;
+    height: auto;
+    width: auto;
+    margin: auto; }
+
+/* When JS is enabled */
+.js .navigation_container {
+  /* We can use display none because we set display block again with JS immediately after initiating the menu */
+  display: none;
+  /* Display menu when initiated */
+  /* Display menu on desktop */ }
+  .js .navigation_container.rm-initiated {
+    display: block; }
+  @media (min-width: 600px) {
+    .js .navigation_container {
+      display: block; } }
+  .js .navigation_container .rm-focused {
+    overflow: visible; }
+
+/* When JS is either disabled or enabled */
+.navigation_container li {
+  position: relative;
+  /* On desktop */ }
+  @media (min-width: 600px) {
+    .navigation_container li {
+      overflow: hidden;
+      /* Children */
+      /* Position li>li>ul */
+      /* And show on hover */ }
+      .navigation_container li ul {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 9; }
+      .navigation_container li ul ul {
+        left: 100%;
+        top: 0; }
+      .navigation_container li:hover, .navigation_container li:focus {
+        overflow: visible; } }
+
+/*# sourceMappingURL=responsivemenu.css.map */

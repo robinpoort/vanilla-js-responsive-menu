@@ -48,6 +48,9 @@
         hideclass: 'rm-closed',
         openclass: 'rm-opened',
         focusedclass: 'rm-focused',
+        animateopenclass: 'is-opening',
+        animatecloseclass: 'is-closing',
+        animateduration: 600, // (Animated with CSS so set to same duration as CSS value)
         width: 600,
         parentclass: 'rm-parent',
         fullmenuclass: 'rm-fullmenu',
@@ -142,7 +145,7 @@
         return nodes
     }
 
-    // Initialize
+    // Responsive menu
     function initialize(settings) {
 
         // Define what the actual menu object is
@@ -212,6 +215,7 @@
 
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
+                apollo.removeClass(togglebutton, settings.toggleclosedclass);
                 var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
                 if ( subtoggles.length ) {
                     forEach(subtoggles, function(value, prop) {
@@ -311,14 +315,33 @@
         // Clicking the toggle button
         togglebutton.onclick = function() {
 
-            // Add classes accordingly
+            // Show the menu
             if ( apollo.hasClass(menu, settings.hideclass) ) {
+
+                // Show menu immediately so it can be animated
                 apollo.removeClass(menu, settings.hideclass);
                 apollo.addClass(menu, settings.openclass);
+
+                // Set and remove animate class after duration
+                apollo.addClass(menu, settings.animateopenclass);
+                setTimeout(function() { apollo.removeClass(menu, settings.animateopenclass); }, settings.animateduration);
+
+                // Set toggled class to toggle button
                 apollo.addClass(togglebutton, settings.toggleclosedclass);
-            } else if ( apollo.hasClass(menu, settings.openclass) ) {
-                apollo.removeClass(menu, settings.openclass);
-                apollo.addClass(menu, settings.hideclass);
+            }
+
+            // Hide the menu
+            else if ( apollo.hasClass(menu, settings.openclass) ) {
+
+                // Properly set animating classes
+                apollo.addClass(menu, settings.animatecloseclass);
+                setTimeout(function() { apollo.removeClass(menu, settings.animatecloseclass); }, settings.animateduration);
+
+                // Hide menu after animation is done (Animated with CSS so set to same duration as CSS value)
+                setTimeout(function() { apollo.removeClass(menu, settings.openclass); }, settings.animateduration);
+                setTimeout(function() { apollo.addClass(menu, settings.hideclass); }, settings.animateduration);
+
+                // Remove toggled class to toggle button
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
             }
 
