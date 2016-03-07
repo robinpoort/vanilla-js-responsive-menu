@@ -30,6 +30,8 @@
     var supports = !!document.querySelector && !!root.addEventListener; // Feature test
     var settings; // Plugin settings
     var menu; // The actual menu item
+    var hasChildren = false;
+    var subtoggles = false;
 
     // Default settings
     var defaults = {
@@ -158,6 +160,13 @@
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
 
+        // See if menu has children
+        var parents = menu.querySelectorAll('li ul');
+        if ( parents.length ) {
+            hasChildren = true;
+            subtoggles = document.getElementsByClassName(settings.subtoggleclass);
+        }
+
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
         apollo.addClass(toggle_element, [settings.toggleclass]);
@@ -170,17 +179,18 @@
         togglebutton.setAttribute('type', 'button');
 
         // Subtoggles and parent classes
-        var parents = menu.querySelectorAll('li ul');
-        for (var i = 0; i < parents.length; i++) {
-            var subtoggle_element = document.createElement(settings.subtoggletype);
-            apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
-            var parent = parents[i].parentNode;
-            parent.insertBefore(subtoggle_element, parent.firstChild);
-            subtoggle_element.innerHTML = settings.subtogglecontent;
-            subtoggle_element.setAttribute('aria-hidden', 'true');
-            subtoggle_element.setAttribute('aria-pressed', 'false');
-            subtoggle_element.setAttribute('type', 'button');
-            apollo.addClass(parents[i].parentNode, settings.parentclass);
+        if ( hasChildren ) {
+            for (var i = 0; i < parents.length; i++) {
+                var subtoggle_element = document.createElement(settings.subtoggletype);
+                apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
+                var parent = parents[i].parentNode;
+                parent.insertBefore(subtoggle_element, parent.firstChild);
+                subtoggle_element.innerHTML = settings.subtogglecontent;
+                subtoggle_element.setAttribute('aria-hidden', 'true');
+                subtoggle_element.setAttribute('aria-pressed', 'false');
+                subtoggle_element.setAttribute('type', 'button');
+                apollo.addClass(parents[i].parentNode, settings.parentclass);
+            }
         }
 
         // Adding classes
@@ -194,8 +204,7 @@
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, settings.hideclass);
-                var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                if ( subtoggles.length ) {
+                if ( hasChildren ) {
                     forEach(subtoggles, function (value, prop) {
                         apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                         apollo.removeClass(subtoggles[prop], settings.hideclass);
@@ -216,8 +225,7 @@
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
-                var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                if ( subtoggles.length ) {
+                if (hasChildren) {
                     forEach(subtoggles, function(value, prop) {
                         apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                         apollo.addClass(subtoggles[prop], settings.hideclass);
@@ -352,13 +360,10 @@
         };
 
         // Clicking the sub toggles button
-        var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-
-        // Return if subtoggle is not found
-        if (subtoggles.length) {
-
+        if ( hasChildren ) {
             forEach(subtoggles, function(value, prop) {
 
+                // Variables
                 var subtoggle = subtoggles[prop];
                 var submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
 

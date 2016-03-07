@@ -5,6 +5,9 @@ $vjsm-menu-width: 600px !default;
 $vjsm-closed-class: rm-closed !default;
 $vjsm-no-js-class: no-js !default;
 $vjsm-js-class: js !default;
+$vjsm-children-zindex: 1 !default;
+$vjsm-absolutemneu-zindex: 1 !default;
+$vjsm-multi-level: false !default;
 
 // Accessible hide
 @mixin accessible-hide {
@@ -53,11 +56,11 @@ $vjsm-js-class: js !default;
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 9;
+  z-index: $vjsm-absolutemneu-zindex;
 }
 
-/* hide the buttons when closed so they wont show up in tabindex */
-button.#{$vjsm-closed-class} {
+/* hide close buttons when closed so they wont show up in tabindex */
+.#{$vjsm-closed-class} {
   display: none;
 }
 
@@ -66,83 +69,92 @@ button.#{$vjsm-closed-class} {
   @include accessible-hide;
 }
 
-/* When JS is disabled */
-.#{$vjsm-no-js-class} {
-  .#{$vjsm-menu-wrapper} {
-    li {
-      /* initially hide all li>ul so we get a small list when JS is disabled */
-      ul {
-        @include accessible-hide;
+/**
+  * When JS is disabled
+  *
+  * 1. initially hide all li>ul so we get a small list when JS is disabled
+  * 2. Show on "desktop"
+  * 3. Show them on current/active items
+  */
 
-        /* On desktop */
-        @media (min-width: $vjsm-menu-width) {
-          @include accessible-show;
+@if $vjsm-multi-level == true {
+  .#{$vjsm-no-js-class} {
+    .#{$vjsm-menu-wrapper} {
+      li {
+        ul {
+          @include accessible-hide; /* 1 */
+          @media (min-width: $vjsm-menu-width) {
+            @include accessible-show; /* 2 */
+          }
         }
-      }
 
-      /* And show them on active/current items */
-      &.active,
-      &.current {
-        & > ul {
-          @include accessible-show;
+        &.active,
+        &.current {
+          & > ul {
+            @include accessible-show; /* 3 */
+          }
         }
       }
     }
   }
 }
 
-/* When JS is enabled */
+/**
+ * When JS is enabled
+ *
+ * 1. We can use display none because we set display block again with JS immediately after initiating the menu
+ * 2. Display menu when initiated
+ * 3. Display menu on "desktop"
+ * 4. Display focused items
+ */
+
 .#{$vjsm-js-class} {
   .#{$vjsm-menu-wrapper} {
+    display: none; /* 1 */
 
-    /* We can use display none because we set display block again with JS immediately after initiating the menu */
-    display: none;
-
-    /* Display menu when initiated */
     &.rm-initiated {
-      display: block;
+      display: block; /* 2 */
     }
 
-    /* Display menu on desktop */
     @media (min-width: $vjsm-menu-width) {
-      display: block;
+      display: block; /* 3 */
     }
 
-    // Display
     .rm-focused {
-      overflow: visible;
+      overflow: visible; /* 4 */
     }
   }
 }
 
-/* When JS is either disabled or enabled */
-.#{$vjsm-menu-wrapper} {
-  li {
-    position: relative;
+/**
+ * When JS is either disabled or enabled
+ *
+ * 1. Relative to position li > ul items
+ * 2. Hide overflowing content so we can display on tabbing
+ * 3. Display on hover / focus
+ * 4. Children should have position absolute to hide them
+ */
 
-    /* On desktop */
-    @media (min-width: $vjsm-menu-width) {
-      overflow: hidden;
+@if $vjsm-multi-level == true {
+  .#{$vjsm-menu-wrapper} {
+    li {
+      position: relative; /* 1 */
 
-      /* Children */
+      @media (min-width: $vjsm-menu-width) {
+        overflow: hidden; /* 2 */
+
+        &:hover,
+        &:focus {
+          overflow: visible; /* 3 */
+        }
+      }
+
       ul {
-        position: absolute;
-        left: 0;
-        top: 100%;
-        z-index: 9;
-      }
-
-      /* Position li>li>ul */
-      ul ul {
-        left: 100%;
-        top: 0;
-      }
-
-      /* And show on hover */
-      &:hover,
-      &:focus {
-        overflow: visible;
+        @media (min-width: $vjsm-menu-width) {
+          position: absolute; /* 4 */
+        }
       }
     }
   }
 }
+
