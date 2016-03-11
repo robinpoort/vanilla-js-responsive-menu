@@ -14,6 +14,12 @@ Features
 * Accessible friendly
 * compressed 4kb
 * Regular menu on older browsers / when JS is disable/broken
+* 
+
+Demo
+====
+
+* http://www.cssscript.com/demo/responsive-multilevel-navigation-menu-with-vanilla-javascript/
 
 Known issues
 ============
