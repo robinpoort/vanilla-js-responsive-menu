@@ -181,30 +181,32 @@ $vjsm-absolute: false !default;
 
   @if $vjsm-horizontal-css-behavior == true {
     .#{$vjsm-menu-wrapper} {
-      position: $vjsm-horizontal-css-behavior-position;
-      z-index: $vjsm-horizontal-css-behavior-zindex;
-
-      li {
-        ul {
-          position: $vjsm-horizontal-css-behavior-ul-position;
-          left: $vjsm-horizontal-css-behavior-ul-left;
-          top: $vjsm-horizontal-css-behavior-ul-top;
-          z-index: $vjsm-horizontal-css-behavior-ul-zindex;
-          width: $vjsm-horizontal-css-behavior-ul-width;
-        }
+      @media (min-width: 600px) {
+        position: $vjsm-horizontal-css-behavior-position;
+        z-index: $vjsm-horizontal-css-behavior-zindex;
 
         li {
-          position: $vjsm-horizontal-css-behavior-ul-li-position;
-          float: $vjsm-horizontal-css-behavior-ul-li-float;
-        }
+          ul {
+            position: $vjsm-horizontal-css-behavior-ul-position;
+            left: $vjsm-horizontal-css-behavior-ul-left;
+            top: $vjsm-horizontal-css-behavior-ul-top;
+            z-index: $vjsm-horizontal-css-behavior-ul-zindex;
+            width: $vjsm-horizontal-css-behavior-ul-width;
+          }
 
-        &:hover > ul {
-          left: $vjsm-horizontal-css-behavior-ul-left-hover;
-        }
+          li {
+            position: $vjsm-horizontal-css-behavior-ul-li-position;
+            float: $vjsm-horizontal-css-behavior-ul-li-float;
+          }
 
-        li:hover > ul {
-          left: $vjsm-horizontal-css-behavior-li-ul-left;
-          top: $vjsm-horizontal-css-behavior-li-ul-top;
+          &:hover > ul {
+            left: $vjsm-horizontal-css-behavior-ul-left-hover;
+          }
+
+          li:hover > ul {
+            left: $vjsm-horizontal-css-behavior-li-ul-left;
+            top: $vjsm-horizontal-css-behavior-li-ul-top;
+          }
         }
       }
     }

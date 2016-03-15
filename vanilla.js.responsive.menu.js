@@ -52,7 +52,7 @@
         focusedclass: 'rm-focused',
         animateopenclass: 'is-opening',
         animatecloseclass: 'is-closing',
-        animateduration: 600, // (Animated with CSS so set to same duration as CSS value)
+        animateduration: 0, // (Animated with CSS so set to same duration as CSS value)
         width: 600,
         parentclass: 'rm-parent',
         fullmenuclass: 'rm-fullmenu',
