@@ -1,11 +1,16 @@
 body {
-  background: #eee;
+  background: #ecf0f1;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   font-size: 16px;
-  line-height: 1.5em;
-  color: #333; }
+  line-height: 24px;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+* {
+  box-sizing: border-box; }
 
 .site {
   margin: 0 auto;
@@ -35,14 +40,16 @@ body {
   float: right; }
 
 .navigation_container {
-  background: #0072B3;
-  color: #fff; }
+  background: #34495e;
+  color: #fff;
+  height: 40px; }
   .navigation_container ul {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
     padding: 0;
-    list-style: none; }
+    list-style: none;
+    height: 40px; }
   .navigation_container ul:before,
   .navigation_container ul:after {
     display: table;
@@ -56,21 +63,24 @@ body {
   .navigation_container .rm-fullmenu li.parent > a:after {
     content: " \25b6"; }
   .navigation_container li {
-    padding: 0; }
+    padding: 0;
+    height: 40px; }
     @media (min-width: 600px) {
       .navigation_container li {
         float: left; } }
     .navigation_container li.focused, .navigation_container li:hover a,
     .navigation_container li a:hover,
     .navigation_container li a:focus {
-      background: #005280; }
+      background: #2c3e50; }
   .navigation_container .rm-opened li {
     float: none; }
   .navigation_container a {
     display: block;
     color: #fff;
-    padding: 10px;
-    text-decoration: none; }
+    padding: 8px 16px;
+    line-height: 24px;
+    text-decoration: none;
+    height: 40px; }
     .navigation_container a:after {
       font-size: 12px;
       vertical-align: middle;
@@ -82,24 +92,41 @@ body {
     background: #fff;
     color: #333;
     cursor: default; }
-  .navigation_container .rm-closed li ul,
-  .navigation_container .rm-fullmenu li ul {
-    background: #005280;
-    padding: 10px;
-    width: 150px;
-    border-top: none; }
-  .navigation_container .rm-closed li li,
-  .navigation_container .rm-fullmenu li li {
-    float: none; }
-    .navigation_container .rm-closed li li.focused > a, .navigation_container .rm-closed li li:hover > a,
-    .navigation_container .rm-closed li li a:hover,
-    .navigation_container .rm-closed li li a:focus,
-    .navigation_container .rm-fullmenu li li.focused > a,
-    .navigation_container .rm-fullmenu li li:hover > a,
-    .navigation_container .rm-fullmenu li li a:hover,
-    .navigation_container .rm-fullmenu li li a:focus {
-      text-decoration: none;
-      background: white;
-      color: #0072B3; }
+  .navigation_container .rm-closed li,
+  .navigation_container .rm-fullmenu li {
+    overflow: visible; }
+    .navigation_container .rm-closed li ul,
+    .navigation_container .rm-fullmenu li ul {
+      height: auto;
+      background: #2c3e50;
+      padding: 0;
+      width: 180px;
+      border-top: none;
+      transition: transform 0.1s cubic-bezier(0.195, 0.4, 0.45, 0.785);
+      transform: scaleY(0);
+      transform-origin: 0 0; }
+    .navigation_container .rm-closed li:hover > ul,
+    .navigation_container .rm-fullmenu li:hover > ul {
+      display: block;
+      transform: scaleY(1); }
+    .navigation_container .rm-closed li:hover li ul,
+    .navigation_container .rm-fullmenu li:hover li ul {
+      transform: scaleX(0); }
+    .navigation_container .rm-closed li:hover li:hover > ul,
+    .navigation_container .rm-fullmenu li:hover li:hover > ul {
+      transform: scaleX(1); }
+    .navigation_container .rm-closed li li,
+    .navigation_container .rm-fullmenu li li {
+      float: none; }
+      .navigation_container .rm-closed li li.focused > a, .navigation_container .rm-closed li li:hover > a,
+      .navigation_container .rm-closed li li a:hover,
+      .navigation_container .rm-closed li li a:focus,
+      .navigation_container .rm-fullmenu li li.focused > a,
+      .navigation_container .rm-fullmenu li li:hover > a,
+      .navigation_container .rm-fullmenu li li a:hover,
+      .navigation_container .rm-fullmenu li li a:focus {
+        text-decoration: none;
+        background: #233140;
+        color: white; }
 
 /*# sourceMappingURL=demo.css.map */

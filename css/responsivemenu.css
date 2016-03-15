@@ -1,30 +1,8 @@
-.rm-sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0; }
-
-.rm-bodyoverflowhidden {
-  position: relative;
-  overflow: hidden; }
-
-.rm-menuoverflowauto {
-  max-height: 100%;
-  width: 100%;
-  overflow: auto; }
-
-.rm-absolutemenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 1; }
-
 /* hide close buttons when closed so they wont show up in tabindex */
-button.rm-closed {
+.rm-closed {
   display: none; }
 
-/* Accessible hide items that have the closed class */
+/* Accessible hide the menu itself */
 ul.rm-closed {
   position: absolute;
   overflow: hidden;
@@ -34,39 +12,6 @@ ul.rm-closed {
   margin: -1px;
   padding: 0;
   border: 0; }
-
-/**
-  * When JS is disabled
-  *
-  * 1. initially hide all li>ul so we get a small list when JS is disabled
-  * 2. Show on "desktop"
-  * 3. Show them on current/active items
-  */
-.no-js .navigation_container li ul {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  /* 1 */ }
-  @media (min-width: 600px) {
-    .no-js .navigation_container li ul {
-      overflow: visible;
-      clip: auto;
-      height: auto;
-      width: auto;
-      margin: auto;
-      /* 2 */ } }
-.no-js .navigation_container li.active > ul, .no-js .navigation_container li.current > ul {
-  overflow: visible;
-  clip: auto;
-  height: auto;
-  width: auto;
-  margin: auto;
-  /* 3 */ }
 
 /**
  * When JS is enabled
@@ -89,28 +34,5 @@ ul.rm-closed {
   .js .navigation_container .rm-focused {
     overflow: visible;
     /* 4 */ }
-
-/**
- * When JS is either disabled or enabled
- *
- * 1. Relative to position li > ul items
- * 2. Hide overflowing content so we can display on tabbing
- * 3. Display on hover / focus
- * 4. Children should have position absolute to hide them
- */
-.navigation_container li {
-  position: relative;
-  /* 1 */ }
-  @media (min-width: 600px) {
-    .navigation_container li {
-      overflow: hidden;
-      /* 2 */ }
-      .navigation_container li:hover, .navigation_container li:focus {
-        overflow: visible;
-        /* 3 */ } }
-  @media (min-width: 600px) {
-    .navigation_container li ul {
-      position: absolute;
-      /* 4 */ } }
 
 /*# sourceMappingURL=responsivemenu.css.map */

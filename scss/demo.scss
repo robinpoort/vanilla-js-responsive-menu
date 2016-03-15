@@ -1,11 +1,17 @@
 body {
-  background: #eee;
+  background: #ecf0f1;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   font-size: 16px;
-  line-height: 1.5em;
-  color: #333;
+  line-height: 24px;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .site {
@@ -41,8 +47,9 @@ body {
 }
 
 .navigation_container {
-  background: #0072B3;
+  background: #34495e;
   color: #fff;
+  height: 40px;
 
   ul {
     width: 100%;
@@ -50,6 +57,7 @@ body {
     margin: 0 auto;
     padding: 0;
     list-style: none;
+    height: 40px;
   }
 
   ul:before,
@@ -80,6 +88,7 @@ body {
 
   li {
     padding: 0;
+    height: 40px;
 
     @media (min-width: 600px) {
       float: left;
@@ -89,7 +98,7 @@ body {
     &:hover a,
     a:hover,
     a:focus {
-      background: darken(#0072B3, 10%);
+      background: #2c3e50;
     }
   }
 
@@ -100,8 +109,10 @@ body {
   a {
     display: block;
     color: #fff;
-    padding: 10px;
+    padding: 8px 16px;
+    line-height: 24px;
     text-decoration: none;
+    height: 40px;
 
     &:after {
       font-size: 12px;
@@ -123,12 +134,36 @@ body {
   .rm-fullmenu { // For all the other ones
 
     li {
+      overflow: visible;
 
       ul {
-        background: darken(#0072B3, 10%);
-        padding: 10px;
-        width: 150px;
+        height: auto;
+        background: #2c3e50;
+        padding: 0;
+        width: 180px;
         border-top: none;
+        transition: transform 0.1s cubic-bezier(0.195, 0.4, 0.45, 0.785);
+        transform: scaleY(0);
+        transform-origin: 0 0;
+      }
+
+      &:hover {
+        & > ul {
+          display: block;
+          transform: scaleY(1);
+        }
+
+        li {
+          ul {
+            transform: scaleX(0);
+          }
+
+          &:hover {
+            & > ul {
+              transform: scaleX(1);
+            }
+          }
+        }
       }
 
       li {
@@ -139,8 +174,8 @@ body {
         a:hover,
         a:focus {
           text-decoration: none;
-          background: white;
-          color: #0072B3;
+          background: darken(#2c3e50, 5%);
+          color: white;
         }
       }
     }

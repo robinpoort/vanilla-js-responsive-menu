@@ -6,8 +6,23 @@ $vjsm-closed-class: rm-closed !default;
 $vjsm-no-js-class: no-js !default;
 $vjsm-js-class: js !default;
 $vjsm-children-zindex: 1 !default;
-$vjsm-absolutemneu-zindex: 1 !default;
+$vjsm-absolutemenu-zindex: 1 !default;
 $vjsm-multi-level: false !default;
+$vjsm-horizontal-css-behavior: true !default;
+$vjsm-horizontal-css-behavior-position: relative !default;
+$vjsm-horizontal-css-behavior-zindex: 1 !default;
+$vjsm-horizontal-css-behavior-ul-position: absolute !default;
+$vjsm-horizontal-css-behavior-ul-zindex: -1 !default;
+$vjsm-horizontal-css-behavior-ul-left: -9999px !default;
+$vjsm-horizontal-css-behavior-ul-left-hover: 0 !default;
+$vjsm-horizontal-css-behavior-ul-top: 100% !default;
+$vjsm-horizontal-css-behavior-ul-width: 100% !default;
+$vjsm-horizontal-css-behavior-ul-li-float: left !default;
+$vjsm-horizontal-css-behavior-ul-li-position: relative !default;
+$vjsm-horizontal-css-behavior-li-ul-left: 100% !default;
+$vjsm-horizontal-css-behavior-li-ul-top: 0 !default;
+$vjsm-sticky: false !default;
+$vjsm-absolute: false !default;
 
 // Accessible hide
 @mixin accessible-hide {
@@ -30,33 +45,38 @@ $vjsm-multi-level: false !default;
   margin: auto;
 }
 
-// Sticky
-.rm-sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+@if $vjsm-sticky == true {
+  /* Sticky menu */
+  .rm-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  // Overflow
+  .rm-bodyoverflowhidden {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rm-menuoverflowauto {
+    max-height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
 }
 
-// Overflow
-.rm-bodyoverflowhidden {
-  position: relative;
-  overflow: hidden;
-}
 
-.rm-menuoverflowauto {
-  max-height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-
-// Absolute menu
-.rm-absolutemenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: $vjsm-absolutemneu-zindex;
+@if $vjsm-absolute == true {
+  /* Absolute menu */
+  .rm-absolutemenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: $vjsm-absolutemenu-zindex;
+  }
 }
 
 /* hide close buttons when closed so they wont show up in tabindex */
@@ -64,20 +84,22 @@ $vjsm-multi-level: false !default;
   display: none;
 }
 
-/* Accessible hide items that have the closed class */
+
+/* Accessible hide the menu itself */
 #{$vjsm-menu}.#{$vjsm-closed-class} {
   @include accessible-hide;
 }
 
-/**
-  * When JS is disabled
-  *
-  * 1. initially hide all li>ul so we get a small list when JS is disabled
-  * 2. Show on "desktop"
-  * 3. Show them on current/active items
-  */
 
 @if $vjsm-multi-level == true {
+  /**
+    * When JS is disabled
+    *
+    * 1. initially hide all li>ul so we get a small list when JS is disabled
+    * 2. Show on "desktop"
+    * 3. Show them on current/active items
+    */
+
   .#{$vjsm-no-js-class} {
     .#{$vjsm-menu-wrapper} {
       li {
@@ -126,16 +148,16 @@ $vjsm-multi-level: false !default;
   }
 }
 
-/**
- * When JS is either disabled or enabled
- *
- * 1. Relative to position li > ul items
- * 2. Hide overflowing content so we can display on tabbing
- * 3. Display on hover / focus
- * 4. Children should have position absolute to hide them
- */
-
 @if $vjsm-multi-level == true {
+  /**
+   * When JS is either disabled or enabled
+   *
+   * 1. Relative to position li > ul items
+   * 2. Hide overflowing content so we can display on tabbing
+   * 3. Display on hover / focus
+   * 4. Children should have position absolute to hide them
+   */
+
   .#{$vjsm-menu-wrapper} {
     li {
       position: relative; /* 1 */
@@ -156,5 +178,35 @@ $vjsm-multi-level: false !default;
       }
     }
   }
-}
 
+  @if $vjsm-horizontal-css-behavior == true {
+    .#{$vjsm-menu-wrapper} {
+      position: $vjsm-horizontal-css-behavior-position;
+      z-index: $vjsm-horizontal-css-behavior-zindex;
+
+      li {
+        ul {
+          position: $vjsm-horizontal-css-behavior-ul-position;
+          left: $vjsm-horizontal-css-behavior-ul-left;
+          top: $vjsm-horizontal-css-behavior-ul-top;
+          z-index: $vjsm-horizontal-css-behavior-ul-zindex;
+          width: $vjsm-horizontal-css-behavior-ul-width;
+        }
+
+        li {
+          position: $vjsm-horizontal-css-behavior-ul-li-position;
+          float: $vjsm-horizontal-css-behavior-ul-li-float;
+        }
+
+        &:hover > ul {
+          left: $vjsm-horizontal-css-behavior-ul-left-hover;
+        }
+
+        li:hover > ul {
+          left: $vjsm-horizontal-css-behavior-li-ul-left;
+          top: $vjsm-horizontal-css-behavior-li-ul-top;
+        }
+      }
+    }
+  }
+}
