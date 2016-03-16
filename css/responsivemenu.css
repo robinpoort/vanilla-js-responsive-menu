@@ -35,4 +35,11 @@ ul.rm-closed {
     overflow: visible;
     /* 4 */ }
 
+.test {
+  outline: 2px solid red;
+  outline-offset: -1px; }
+
+.rm-focused-menu {
+  outline: 2px solid blue; }
+
 /*# sourceMappingURL=responsivemenu.css.map */

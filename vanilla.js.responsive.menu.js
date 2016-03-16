@@ -296,28 +296,57 @@
         // Accessible focus menu
         var menulinks = menu.getElementsByTagName('a');
         for (var i = 0; i < menulinks.length; i++) {
-            menulinks[i].onblur = function() {
-                var focusedItems = document.getElementsByClassName('rm-focused');
-                for (var f = 0; f < focusedItems.length; f++) {
-                    apollo.removeClass(focusedItems[f], settings.focusedclass);
-                }
-            };
+
+
             menulinks[i].onfocus = function() {
-                // Remove the class
-                var siblings = this.parentNode.parentNode.querySelectorAll('li');
-                if (siblings.length) {
-                    for (var f = 0; f < siblings.length; f++) {
-                        apollo.removeClass(siblings[f], settings.focusedclass);
-                    }
-                }
-                // Add the class
-                var parent = getParents(this, "LI", menu);
-                if (parent.length) {
-                    for (var f = 0; f < parent.length; f++) {
-                        apollo.addClass(parent[f], settings.focusedclass);
-                    }
-                }
+                apollo.addClass(settings.wrapper, 'rm-focused-menu');
             };
+
+            menulinks[i].onblur = function() {
+                apollo.removeClass(settings.wrapper, 'rm-focused-menu');
+            };
+
+
+            //menulinks[0].getElementsByTagName('a')[0].onblur = function() {
+            //
+            //
+            //
+            //    var siblings = this.parentNode.querySelectorAll('li');
+            //    if (siblings.length) {
+            //        for (var f = 0; f < siblings.length; f++) {
+            //            apollo.removeClass(settings.wrapper, 'rm-focused-menu');
+            //        }
+            //    }
+            //
+            //
+            //    //var focusedItems = document.getElementsByClassName('rm-focused');
+            //    //for (var f = 0; f < focusedItems.length; f++) {
+            //    //    apollo.removeClass(focusedItems[f], settings.focusedclass);
+            //    //}
+            //};
+            //menulinks[i].getElementsByTagName('a')[0].onfocus = function() {
+            //
+            //    console.log(document.activeElement);
+            //
+            //    if ( !apollo.hasClass(settings.wrapper, 'rm-focused-menu') ) {
+            //        apollo.addClass(settings.wrapper, 'rm-focused-menu');
+            //    }
+            //
+            //    //// Remove the class
+            //    //var siblings = this.parentNode.parentNode.querySelectorAll('li');
+            //    //if (siblings.length) {
+            //    //    for (var f = 0; f < siblings.length; f++) {
+            //    //        apollo.removeClass(siblings[f], settings.focusedclass);
+            //    //    }
+            //    //}
+            //    //// Add the class
+            //    //var parent = getParents(this, "LI", menu);
+            //    //if (parent.length) {
+            //    //    for (var f = 0; f < parent.length; f++) {
+            //    //        apollo.addClass(parent[f], settings.focusedclass);
+            //    //    }
+            //    //}
+            //};
         }
 
         // Clicking the toggle button
@@ -384,6 +413,118 @@
                 }
             });
         }
+
+
+
+
+
+
+
+        document.onkeydown = checkKey;
+
+        function checkKey(e) {
+
+            if ( apollo.hasClass(settings.wrapper, 'rm-focused-menu') ) {
+                e = e || window.event;
+
+                // Up arrow
+                if (e.keyCode == '38') {
+                    if (document.activeElement.parentNode.parentNode.previousElementSibling.getAttribute('aria-haspopup')) {
+                        e.preventDefault();
+
+                        if (document.activeElement.parentNode.previousElementSibling) {
+                            document.activeElement.parentNode.previousElementSibling.getElementsByTagName('a')[0].focus();
+                        } else {
+                            var elements = document.activeElement.parentNode.parentNode.getElementsByTagName('li');
+                            var last_element = elements[elements.length - 1];
+                            last_element.getElementsByTagName('a')[0].focus();
+                        }
+                    }
+                }
+
+                // down arrow
+                else if (e.keyCode == '40') {
+                    if (document.activeElement.getAttribute('aria-haspopup')) {
+                        e.preventDefault();
+                        apollo.addClass(document.activeElement.parentNode, 'rm-focused');
+                        document.activeElement.parentNode.getElementsByTagName('li')[0].getElementsByTagName('a')[0].focus();
+                    }
+                    else if (document.activeElement.parentNode.parentNode.previousElementSibling.getAttribute('aria-haspopup')) {
+                        e.preventDefault();
+
+                        if (document.activeElement.parentNode.nextElementSibling) {
+                            document.activeElement.parentNode.nextElementSibling.getElementsByTagName('a')[0].focus();
+                        } else {
+                            document.activeElement.parentNode.parentNode.getElementsByTagName('a')[0].focus();
+                        }
+                    }
+                }
+
+                // left arrow
+                else if (e.keyCode == '37') {
+                    e.preventDefault();
+                    if (document.activeElement.parentNode.parentNode.getAttribute('role') == 'menubar') {
+                        apollo.removeClass(document.activeElement.parentNode, 'rm-focused');
+                        document.activeElement.parentNode.previousElementSibling.getElementsByTagName('a')[0].focus();
+                    } else {
+                        var prevEl = settings.wrapper.getElementsByClassName('rm-focused')[0].previousElementSibling;
+                        apollo.removeClass(settings.wrapper.getElementsByClassName('rm-focused')[0],'rm-focused');
+                        apollo.addClass(prevEl, 'rm-focused');
+                        settings.wrapper.getElementsByClassName('rm-focused')[0].getElementsByTagName('a')[0].focus();
+                    }
+                }
+
+                // right arrow
+                else if (e.keyCode == '39') {
+                    e.preventDefault();
+
+                    // First level items
+                    if (document.activeElement.parentNode.parentNode.getAttribute('role') == 'menubar') {
+                        apollo.removeClass(document.activeElement.parentNode, 'rm-focused');
+                        document.activeElement.parentNode.nextElementSibling.getElementsByTagName('a')[0].focus();
+                    }
+                    // Other levels
+                    else {
+                        var nextEl = settings.wrapper.getElementsByClassName('rm-focused')[0].nextElementSibling;
+                        apollo.removeClass(settings.wrapper.getElementsByClassName('rm-focused')[0],'rm-focused');
+                        apollo.addClass(nextEl, 'rm-focused');
+                        settings.wrapper.getElementsByClassName('rm-focused')[0].getElementsByTagName('a')[0].focus();
+                    }
+                }
+
+                // Esc
+                else if (e.keyCode == '27') {
+                    if (document.activeElement.parentNode.parentNode.previousElementSibling.getAttribute('role') == 'menuitem') {
+                        e.preventDefault();
+                        apollo.removeClass(document.activeElement.parentNode.parentNode.parentNode, 'rm-focused');
+                        document.activeElement.parentNode.parentNode.parentNode.getElementsByTagName('a')[0].focus();
+                    }
+                    if (document.activeElement.getAttribute('aria-haspopup') && apollo.hasClass(document.activeElement.parentNode, 'rm-focused')) {
+                        apollo.removeClass(document.activeElement.parentNode, 'rm-focused');
+                    }
+                }
+
+                // Space
+                else if (e.keyCode == '32') {
+                    e.preventDefault();
+                    if (document.activeElement.getAttribute('aria-haspopup') && !apollo.hasClass(document.activeElement.parentNode, 'rm-focused')) {
+                        apollo.addClass(document.activeElement.parentNode, 'rm-focused');
+                    } else {
+                        apollo.removeClass(document.activeElement.parentNode, 'rm-focused');
+                    }
+                }
+
+                // Enter
+                else if (e.keyCode == '13') {
+                    if (document.activeElement.getAttribute('aria-haspopup') && !apollo.hasClass(document.activeElement.parentNode, 'rm-focused')) {
+                        e.preventDefault();
+                        apollo.addClass(document.activeElement.parentNode, 'rm-focused');
+                    }
+                }
+            }
+        }
+
+
     }
 
     /**
