@@ -1,7 +1,7 @@
 Vanilla JS Responsive Menu
 ==========================
 
-A vanilla JS responsive menu plugin.
+An accessible vanilla JS responsive menu plugin.
 
 Dependencies
 ------------
@@ -14,17 +14,17 @@ Features
 * Accessible friendly
 * compressed 4kb
 * Regular menu on older browsers / when JS is disable/broken
-* 
 
 Demo
 ====
 
 * http://www.cssscript.com/demo/responsive-multilevel-navigation-menu-with-vanilla-javascript/
 
-Known issues
-============
+Acknowledgements
+================
 
 * Only one menu per page
+* IE9+ responsive menu
 * On IE6/7 you only get the first layer of menu because pure suckerfisch css menu doesn't work. Add custom JS if you want this to work as well.
 
 Use
@@ -39,10 +39,33 @@ To make sure that menu items don't show for a split second on mobile sized scree
 
 Basic markup:
 
-```
+```html
 <div class="navigation_container">
     <ul class="rm-closed">
         <li><a href="#">Item</a></li>
+    </ul>
+</div>
+```
+
+
+Add accessibility:
+
+Make sure to add the following accessibility features
+
+```html
+<div class="navigation_container" role="navigation" aria-label="Main menu">
+    <ul class="rm-closed" role="menubar">
+        <li role="presentation">
+          <a role="menuitem" href="#" title="Item">Item</a>
+        </li>
+        <li role="presentation">
+          <a role="menuitem" aria-haspopup="true" href="#" title="Item">Item</a>
+          <ul role="menu">
+              <li role="presentation">
+                  <a role="menuitem" href="#" title="Sub item">Sub item</a>
+              </li>
+          </ul>
+        </li>
     </ul>
 </div>
 ```
