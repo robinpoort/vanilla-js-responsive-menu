@@ -157,6 +157,7 @@ body {
         }
       }
 
+      &.rm-focused,
       &:hover {
         & > ul {
           display: block;
@@ -172,6 +173,7 @@ body {
             }
           }
 
+          &.rm-focused,
           &:hover {
             & > ul {
               @media (min-width:600px) {
@@ -185,7 +187,7 @@ body {
       li {
         float: none;
 
-        &.focused > a,
+        &.rm-focused > a,
         &:hover > a,
         a:hover,
         a:focus {
@@ -198,8 +200,6 @@ body {
   }
 }
 
-
-
 /**
  * When JS is enabled
  *
@@ -210,17 +210,25 @@ body {
  */
 .js .navigation_container {
   display: none;
-  /* 1 */ }
+  /* 1 */
+}
+
 .js .navigation_container.rm-initiated {
   display: block;
-  /* 2 */ }
+  /* 2 */
+}
+
 @media (min-width: 600px) {
   .js .navigation_container {
     display: block;
-    /* 3 */ } }
+    /* 3 */
+  }
+}
+
 .js .navigation_container .rm-focused {
   overflow: visible;
-  /* 4 */ }
+  /* 4 */
+}
 
 /**
  * When JS is either disabled or enabled
@@ -232,22 +240,32 @@ body {
  */
 .navigation_container li {
   position: relative;
-  /* 1 */ }
+  /* 1 */
+}
+
 @media (min-width: 600px) {
   .navigation_container li {
     overflow: hidden;
-    /* 2 */ }
+    /* 2 */
+  }
   .navigation_container li:hover, .navigation_container li:focus {
     overflow: visible;
-    /* 3 */ } }
+    /* 3 */
+  }
+}
+
 @media (min-width: 600px) {
   .navigation_container li ul {
     position: absolute;
-    /* 4 */ } }
+    /* 4 */
+  }
+}
 
 .navigation_container {
   position: relative;
-  z-index: 1; }
+  z-index: 1;
+}
+
 .navigation_container li ul {
   @media (min-width: 600px) {
     position: absolute;
@@ -257,13 +275,21 @@ body {
     width: 100%;
   }
 }
+
 .navigation_container li li {
   position: relative;
-  float: left; }
+  float: left;
+}
+
+.navigation_container .rm-focused > ul,
 .navigation_container li:hover > ul {
-  left: 0; }
+  left: 0;
+}
+
+.navigation_container li .rm-focused > ul,
 .navigation_container li li:hover > ul {
   left: 100%;
-  top: 0; }
+  top: 0;
+}
 
 /*# sourceMappingURL=responsivemenu.css.map */
