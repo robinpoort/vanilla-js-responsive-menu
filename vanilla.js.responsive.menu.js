@@ -61,7 +61,8 @@
         menuoverflowautoclass: 'rm-menuoverflowauto',
         stickyclass: 'rm-sticky',
         stickyinitiatedclass: 'rm-sticky-initiated',
-        noresponsivemenuclass: 'rm-no-responsive-menu'
+        noresponsivemenuclass: 'rm-no-responsive-menu',
+        mobileindicatorid: 'rm-mobile-indicator'
     };
 
     // Methods
@@ -136,6 +137,25 @@
         return settings;
     };
 
+    /**
+     * Run when window resize is done (after x ms)
+     */
+    var waitForFinalEvent = (function () {
+        var timers = {};
+        return function (callback, ms, uniqueId) {
+            if (!uniqueId) {
+                uniqueId = "Don't call this twice without a uniqueId";
+            }
+            if (timers[uniqueId]) {
+                clearTimeout (timers[uniqueId]);
+            }
+            timers[uniqueId] = setTimeout(callback, ms);
+        };
+    })();
+
+    /**
+     * Get parents
+     */
     function getParents(element, tag, stop) {
         var nodes = [];
         while (element.parentNode && element.parentNode != stop) {
@@ -145,6 +165,25 @@
             }
         }
         return nodes
+    }
+
+    /**
+     * Get style
+     */
+    function getStyle(el,styleProp)
+    {
+        var x = document.getElementById(el);
+
+        if (window.getComputedStyle)
+        {
+            var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
+        }
+        else if (x.currentStyle)
+        {
+            var y = x.currentStyle[styleProp];
+        }
+
+        return y;
     }
 
     // Responsive menu
@@ -166,6 +205,12 @@
             hasChildren = true;
             subtoggles = document.getElementsByClassName(settings.subtoggleclass);
         }
+
+        // Create mobile width indicator
+        var mobileindicator = document.createElement('div');
+        document.body.appendChild(mobileindicator);
+        mobileindicator.id = settings.mobileindicatorid;
+        var mobileindicatorZindex = 0;
 
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
@@ -196,11 +241,10 @@
         // Adding classes
         function classes() {
 
-            // Check current wrapper width
-            var windowwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
 
             // If wrapper is small and if the menu is not already opened
-            if ( windowwidth < settings.width && !apollo.hasClass(menu, settings.openclass) ) {
+            if ( mobileindicatorZindex == 0 && !apollo.hasClass(menu, settings.openclass) ) {
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, settings.hideclass);
@@ -220,7 +264,7 @@
                     apollo.addClass(menu, settings.absolutemenuclass);
                 }
 
-            } else if ( windowwidth >= settings.width ) {
+            } else if ( mobileindicatorZindex == 1 ) {
 
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
@@ -285,12 +329,24 @@
         }
 
         // Initial load
-        classes();
-        stickyMenu();
-
-        window.addEventListener('resize', function() {
+        window.addEventListener('load', function() {
             classes();
             stickyMenu();
+        }, true);
+
+        // On resize
+        window.addEventListener('resize', function() {
+
+            // Run immediately
+            classes();
+            stickyMenu();
+
+            // Run again after 150 ms for safari OSX when scrollbars are visible and you're resizing to a smaller window
+            waitForFinalEvent(function(){
+                classes();
+                stickyMenu();
+            }, 200);
+
         }, true);
 
         // Accessible focus menu
