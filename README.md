@@ -4,7 +4,7 @@ Vanilla JS Responsive Menu
 A vanilla JS responsive menu plugin. Mobile first, accessible, customizable
 
 ####Demo
-* http://robinpoort.github.io/vanilla-js-responsive-menu/
+* https://robinpoort.github.io/vanilla-js-responsive-menu/
 
 Dependencies
 ------------
