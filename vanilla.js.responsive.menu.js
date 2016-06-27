@@ -214,7 +214,7 @@
 
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
-        apollo.addClass(toggle_element, [settings.toggleclass]);
+        apollo.addClass(toggle_element, [settings.toggleclass, settings.hideclass]);
         if ( settings.before_element == '' ) { settings.before_element = settings.wrapper.firstChild }
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
         var togglebutton = document.getElementsByClassName(settings.toggleclass)[0];
