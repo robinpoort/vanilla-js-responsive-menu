@@ -13,6 +13,21 @@ ul.rm-closed {
   padding: 0;
   border: 0; }
 
+/* Mobile indicator styling */
+#rm-mobile-indicator {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  z-index: 0; }
+  @media (min-width: 600px) {
+    #rm-mobile-indicator {
+      z-index: 1; } }
+
 /**
  * When JS is enabled
  *

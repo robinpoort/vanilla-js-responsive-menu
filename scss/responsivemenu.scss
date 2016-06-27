@@ -1,5 +1,6 @@
 // Variables
 $vjsm-menu-wrapper: navigation_container !default;
+$vjsm-mobile-indicator: rm-mobile-indicator !default;
 $vjsm-menu: ul !default;
 $vjsm-menu-width: 600px !default;
 $vjsm-closed-class: rm-closed !default;
@@ -88,6 +89,17 @@ $vjsm-absolute: false !default;
 /* Accessible hide the menu itself */
 #{$vjsm-menu}.#{$vjsm-closed-class} {
   @include accessible-hide;
+}
+
+
+/* Mobile indicator styling */
+##{$vjsm-mobile-indicator} {
+  @include accessible-hide;
+  z-index: 0;
+
+  @media (min-width: $vjsm-menu-width) {
+    z-index: 1;
+  }
 }
 
 
