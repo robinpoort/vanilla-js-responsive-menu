@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-* {
+*, *:before, *:after {
   box-sizing: border-box; }
 
 .site {
@@ -19,7 +19,7 @@ body {
 
 .rm-togglebutton,
 .rm-subtoggle {
-  margin: 10px;
+  margin: 5px;
   padding: 5px 10px;
   border: 1px solid black;
   outline: none;
@@ -41,10 +41,8 @@ body {
 
 .navigation_container {
   background: #34495e;
-  color: #fff; }
-  @media (min-width: 600px) {
-    .navigation_container {
-      height: 40px; } }
+  color: #fff;
+  min-height: 40px; }
   .navigation_container ul {
     width: 100%;
     max-width: 960px;
@@ -70,9 +68,7 @@ body {
     padding: 0; }
     @media (min-width: 600px) {
       .navigation_container li {
-        height: 40px; } }
-    @media (min-width: 600px) {
-      .navigation_container li {
+        height: 40px;
         float: left; } }
     .navigation_container li.focused, .navigation_container li:hover a,
     .navigation_container li a:hover,

@@ -4,9 +4,7 @@
   "main": [
     "scss/responsivemenu.scss"
   ],
-  "dependencies": {
-    "apollo.js": "~1.7.0"
-  },
+  "dependencies": {},
   "keywords": [
     "Responsive",
     "Menu",
