@@ -110,28 +110,34 @@ body {
           transition: transform 0.1s cubic-bezier(0.195, 0.4, 0.45, 0.785);
           transform: scaleY(0);
           transform-origin: 0 0; } }
-    .navigation_container .rm-closed li:hover > ul,
+    .navigation_container .rm-closed li.rm-focused > ul, .navigation_container .rm-closed li:hover > ul,
+    .navigation_container .rm-fullmenu li.rm-focused > ul,
     .navigation_container .rm-fullmenu li:hover > ul {
       display: block; }
       @media (min-width: 600px) {
-        .navigation_container .rm-closed li:hover > ul,
+        .navigation_container .rm-closed li.rm-focused > ul, .navigation_container .rm-closed li:hover > ul,
+        .navigation_container .rm-fullmenu li.rm-focused > ul,
         .navigation_container .rm-fullmenu li:hover > ul {
           transform: scaleY(1); } }
     @media (min-width: 600px) {
-      .navigation_container .rm-closed li:hover li ul,
+      .navigation_container .rm-closed li.rm-focused li ul, .navigation_container .rm-closed li:hover li ul,
+      .navigation_container .rm-fullmenu li.rm-focused li ul,
       .navigation_container .rm-fullmenu li:hover li ul {
         transform: scaleX(0); } }
     @media (min-width: 600px) {
-      .navigation_container .rm-closed li:hover li:hover > ul,
+      .navigation_container .rm-closed li.rm-focused li.rm-focused > ul, .navigation_container .rm-closed li.rm-focused li:hover > ul, .navigation_container .rm-closed li:hover li.rm-focused > ul, .navigation_container .rm-closed li:hover li:hover > ul,
+      .navigation_container .rm-fullmenu li.rm-focused li.rm-focused > ul,
+      .navigation_container .rm-fullmenu li.rm-focused li:hover > ul,
+      .navigation_container .rm-fullmenu li:hover li.rm-focused > ul,
       .navigation_container .rm-fullmenu li:hover li:hover > ul {
         transform: scaleX(1); } }
     .navigation_container .rm-closed li li,
     .navigation_container .rm-fullmenu li li {
       float: none; }
-      .navigation_container .rm-closed li li.focused > a, .navigation_container .rm-closed li li:hover > a,
+      .navigation_container .rm-closed li li.rm-focused > a, .navigation_container .rm-closed li li:hover > a,
       .navigation_container .rm-closed li li a:hover,
       .navigation_container .rm-closed li li a:focus,
-      .navigation_container .rm-fullmenu li li.focused > a,
+      .navigation_container .rm-fullmenu li li.rm-focused > a,
       .navigation_container .rm-fullmenu li li:hover > a,
       .navigation_container .rm-fullmenu li li a:hover,
       .navigation_container .rm-fullmenu li li a:focus {
@@ -203,9 +209,11 @@ body {
   position: relative;
   float: left; }
 
+.navigation_container .rm-focused > ul,
 .navigation_container li:hover > ul {
   left: 0; }
 
+.navigation_container li .rm-focused > ul,
 .navigation_container li li:hover > ul {
   left: 100%;
   top: 0; }
