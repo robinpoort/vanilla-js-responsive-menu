@@ -90,7 +90,36 @@
     responsivemenu.init({
         wrapper: document.querySelector('.navigation_container'),
         togglecontent: 'menu',
-        sticky: 0
+        sticky: 0,
+//        animateduration: 1000,
+//        subanimateduration: 1000,
+        onAfterInit: function() {
+            console.log('after init');
+        },
+        onBeforeToggleOpen: function() {
+            console.log('before toggle open');
+        },
+        onAfterToggleOpen: function() {
+            console.log('after toggle open');
+        },
+        onBeforeToggleClose: function() {
+            console.log('before toggle close');
+        },
+        onAfterToggleClose: function() {
+            console.log('after toggle close');
+        },
+        onBeforeSubToggleOpen: function() {
+            console.log('before sub toggle open');
+        },
+        onAfterSubToggleOpen: function() {
+            console.log('after sub toggle open');
+        },
+        onBeforeSubToggleClose: function() {
+            console.log('before sub toggle close');
+        },
+        onAfterSubToggleClose: function() {
+            console.log('after sub toggle close');
+        }
     });
 </script>
 </body>
