@@ -57,7 +57,6 @@
         subanimateopenclass: 'is-opening',
         subanimatecloseclass: 'is-closing',
         subanimateduration: 0, // (Animated with CSS so set to same duration as CSS value)
-        width: 600,
         parentclass: 'rm-parent',
         fullmenuclass: 'rm-fullmenu',
         absolutemenuclass: 'rm-absolutemenu',
