@@ -49,6 +49,7 @@
         absolute: 0,
         hideclass: 'rm-closed',
         openclass: 'rm-opened',
+        openbodyclass: 'has-opened-menu',
         focusedclass: 'rm-focused',
         animateopenclass: 'is-opening',
         animatecloseclass: 'is-closing',
@@ -258,6 +259,7 @@
                 // Hide the menu
                 apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
                 apollo.addClass(menu, settings.hideclass);
+                apollo.removeClass(document.body, settings.openbodyclass);
 
                 // Make the menu absolute positioned
                 if ( settings.absolute == 1 ) {
@@ -279,6 +281,7 @@
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
                 apollo.addClass(menu, settings.fullmenuclass);
+                apollo.removeClass(document.body, settings.openbodyclass);
 
                 // Undo absolute positioning
                 if ( settings.absolute == 1 && apollo.hasClass(menu, settings.absolutemenuclass) ) {
@@ -386,6 +389,9 @@
                 apollo.removeClass(menu, settings.hideclass);
                 apollo.addClass(menu, settings.openclass);
 
+                // Add class to body element you could use for styling
+                apollo.addClass(document.body, settings.openbodyclass);
+
                 // Set and remove animate class after duration
                 apollo.addClass(menu, settings.animateopenclass);
                 setTimeout(function() { apollo.removeClass(menu, settings.animateopenclass); }, settings.animateduration);
@@ -404,6 +410,9 @@
                 // Hide menu after animation is done (Animated with CSS so set to same duration as CSS value)
                 setTimeout(function() { apollo.removeClass(menu, settings.openclass); }, settings.animateduration);
                 setTimeout(function() { apollo.addClass(menu, settings.hideclass); }, settings.animateduration);
+
+                // Remove class from body element you could use for styling
+                apollo.removeClass(document.body, settings.openbodyclass);
 
                 // Remove toggled class to toggle button
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
