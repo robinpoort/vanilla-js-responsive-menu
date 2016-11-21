@@ -66,6 +66,9 @@
         stickyinitiatedclass: 'rm-sticky-initiated',
         noresponsivemenuclass: 'rm-no-responsive-menu',
         mobileindicatorid: 'rm-mobile-indicator',
+        parentlevelclass: 'rm-parent-level-',
+        listlevelclass: 'rm-list-level-',
+        levelclass: 'rm-level-',
         onAfterInit: function() {},
         onBeforeToggleOpen: function() {},
         onAfterToggleOpen: function() {},
@@ -198,7 +201,38 @@
         return y;
     }
 
-    // Responsive menu
+    /**
+     * Set attribute(s)
+     * Check if attribute exists and if not set it
+     */
+    function setAttr(elements, attribute, val) {
+        // Make element an array if not already
+        if ( elements.length === undefined ) {
+            elements = [elements];
+        }
+        // Run through items
+        forEach(elements, function(value, prop) {
+            var element = elements[prop];
+            if ( !element.getAttribute(attribute) ) {
+                element.setAttribute(attribute, val);
+            }
+        });
+    }
+
+    /**
+     * Add level class
+     */
+    function addLevel(parent, level) {
+        var listItems = parent.children;
+        forEach(listItems, function(value, prop) {
+            var listItem = listItems[prop];
+            apollo.addClass(listItem, settings.levelclass + level);
+        });
+    }
+
+    /*
+     * Responsive menu
+     */
     function initialize(settings) {
 
         // Define what the actual menu object is
@@ -208,15 +242,9 @@
             menu = settings.menu;
         }
 
-        // Add a class when JS is initiated
-        apollo.addClass(settings.wrapper, settings.initiated_class);
-
-        // Function to run after init
-        settings.onAfterInit();
-
         // See if menu has children
-        var parents = menu.querySelectorAll('li ul');
-        if ( parents.length ) {
+        var subParents = menu.querySelectorAll('li ul');
+        if ( subParents.length ) {
             hasChildren = true;
             subtoggles = document.getElementsByClassName(settings.subtoggleclass);
         }
@@ -238,22 +266,47 @@
         togglebutton.setAttribute('aria-pressed', 'false');
         togglebutton.setAttribute('type', 'button');
 
-        // Subtoggles and parent classes
+        // Setting aria to main elements if not existing
+        setAttr(settings.wrapper, 'role', 'menubar');
+        setAttr(settings.wrapper, 'aria-label', 'Menu');
+        setAttr(menu, 'role', 'menubar');
+
+        // Adding class and aria to first level items
+        addLevel(menu, 1);
+        setAttr(menu.children, 'role', 'menuitem');
+
+        // Create subtoggles and add classes
+        // Add classes to parent list-items, parent lists and their children
         if ( hasChildren ) {
-            for (var i = 0; i < parents.length; i++) {
+            for (var i = 0; i < subParents.length; i++) {
+                var list = subParents[i];
                 var subtoggle_element = document.createElement(settings.subtoggletype);
                 apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
-                var parent = parents[i].parentNode;
-                parent.insertBefore(subtoggle_element, parent.firstChild);
+                var listParent = list.parentNode;
+                listParent.insertBefore(subtoggle_element, parent.firstChild);
                 subtoggle_element.innerHTML = settings.subtogglecontent;
                 subtoggle_element.setAttribute('aria-hidden', 'true');
                 subtoggle_element.setAttribute('aria-pressed', 'false');
                 subtoggle_element.setAttribute('type', 'button');
-                apollo.addClass(parents[i].parentNode, settings.parentclass);
+                apollo.addClass(listParent, settings.parentclass);
+                setAttr(listParent, 'aria-haspopup', 'true');
+                setAttr(list, 'role', 'menu');
+                setAttr(list, 'aria-hidden', 'true');
+                var listLevel = getParents(subParents[i], "UL", settings.wrapper).length + 1;
+                apollo.addClass(listParent, settings.parentlevelclass + listLevel);
+                apollo.addClass(list, settings.listlevelclass + listLevel);
+                addLevel(list, listLevel);
+                setAttr(list.children, 'role', 'menuitem');
             }
         }
 
-        // Adding classes
+        // Add a class when JS is initiated
+        apollo.addClass(settings.wrapper, settings.initiated_class);
+
+        // Function to run after init
+        settings.onAfterInit();
+
+        // Adding responsive classes
         function classes() {
 
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
@@ -366,7 +419,7 @@
 
         }, true);
 
-        // Accessible focus menu
+        // Accessible menu
         var menulinks = menu.getElementsByTagName('a');
         for (var i = 0; i < menulinks.length; i++) {
             menulinks[i].onblur = function() {
@@ -390,6 +443,12 @@
                         apollo.addClass(parent[f], settings.focusedclass);
                     }
                 }
+            };
+            menulinks[i].onmouseover = function() {
+                // TODO: toggle aria-hidden
+            };
+            menulinks[i].onmouseout = function() {
+                // TODO: toggle aria-hidden
             };
         }
 
