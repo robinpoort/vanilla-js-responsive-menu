@@ -14,47 +14,47 @@
     <div class="navigation_container" role="navigation" aria-label="Main menu">
         <ul class="navigation" role="menubar">
             <li class="active" role="presentation">
-                <a role="menuitem" class="test" href="#" title="Home">Home</a>
+                <a role="menuitem" class="test" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Home">Home</a>
             </li>
             <li role="presentation">
-                <a role="menuitem" href="#" title="Item 2">Item 2</a>
+                <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Item 2">Item 2</a>
             </li>
             <li role="presentation">
-                <a role="menuitem" aria-haspopup="true" href="#" title="Item 3">Item 3</a>
+                <a role="menuitem" aria-haspopup="true" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Item 3">Item 3</a>
                 <ul role="menu">
                     <li role="presentation">
-                        <a role="menuitem" href="#" title="Test">Test</a>
+                        <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test">Test</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" href="#" title="A long one">A long one</a>
+                        <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="A long one">A long one</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" href="#" title="Test">Test</a>
+                        <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test">Test</a>
                     </li>
                 </ul>
             </li>
             <li role="presentation">
-                <a role="menuitem" aria-haspopup="true" href="#" title="Item 4 menu">Item 4</a>
+                <a role="menuitem" aria-haspopup="true" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Item 4 menu">Item 4</a>
                 <ul role="menu">
                     <li role="presentation">
-                        <a role="menuitem" href="#" title="Test">Test</a>
+                        <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test">Test</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" aria-haspopup="true" href="#" title="A long one">A long one</a>
+                        <a role="menuitem" aria-haspopup="true" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="A long one">A long one</a>
                         <ul role="menu">
                             <li role="presentation">
-                                <a role="menuitem" href="#" title="Test1">Test1</a>
+                                <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test1">Test1</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" href="#" title="Test2">Test2</a>
+                                <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test2">Test2</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" href="#" title="Test3">Test3</a>
+                                <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test3">Test3</a>
                             </li>
                         </ul>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" href="#" title="Test">Test</a>
+                        <a role="menuitem" href="https://github.com/robinpoort/vanilla-js-responsive-menu" title="Test">Test</a>
                     </li>
                 </ul>
             </li>
@@ -90,7 +90,36 @@
     responsivemenu.init({
         wrapper: document.querySelector('.navigation_container'),
         togglecontent: 'menu',
-        sticky: 0
+        sticky: 0,
+//        animateduration: 1000,
+//        subanimateduration: 1000,
+        onAfterInit: function() {
+            console.log('after init');
+        },
+        onBeforeToggleOpen: function() {
+            console.log('before toggle open');
+        },
+        onAfterToggleOpen: function() {
+            console.log('after toggle open');
+        },
+        onBeforeToggleClose: function() {
+            console.log('before toggle close');
+        },
+        onAfterToggleClose: function() {
+            console.log('after toggle close');
+        },
+        onBeforeSubToggleOpen: function() {
+            console.log('before sub toggle open');
+        },
+        onAfterSubToggleOpen: function() {
+            console.log('after sub toggle open');
+        },
+        onBeforeSubToggleClose: function() {
+            console.log('before sub toggle close');
+        },
+        onAfterSubToggleClose: function() {
+            console.log('after sub toggle close');
+        }
     });
 </script>
 </body>

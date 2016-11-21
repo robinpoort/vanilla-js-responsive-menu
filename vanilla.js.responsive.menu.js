@@ -49,11 +49,14 @@
         absolute: 0,
         hideclass: 'rm-closed',
         openclass: 'rm-opened',
+        openbodyclass: 'has-opened-menu',
         focusedclass: 'rm-focused',
         animateopenclass: 'is-opening',
         animatecloseclass: 'is-closing',
         animateduration: 0, // (Animated with CSS so set to same duration as CSS value)
-        width: 600,
+        subanimateopenclass: 'is-opening',
+        subanimatecloseclass: 'is-closing',
+        subanimateduration: 0, // (Animated with CSS so set to same duration as CSS value)
         parentclass: 'rm-parent',
         fullmenuclass: 'rm-fullmenu',
         absolutemenuclass: 'rm-absolutemenu',
@@ -62,7 +65,16 @@
         stickyclass: 'rm-sticky',
         stickyinitiatedclass: 'rm-sticky-initiated',
         noresponsivemenuclass: 'rm-no-responsive-menu',
-        mobileindicatorid: 'rm-mobile-indicator'
+        mobileindicatorid: 'rm-mobile-indicator',
+        onAfterInit: function() {},
+        onBeforeToggleOpen: function() {},
+        onAfterToggleOpen: function() {},
+        onBeforeToggleClose: function() {},
+        onAfterToggleClose: function() {},
+        onBeforeSubToggleOpen: function() {},
+        onAfterSubToggleOpen: function() {},
+        onBeforeSubToggleClose: function() {},
+        onAfterSubToggleClose: function() {}
     };
 
     // Methods
@@ -199,6 +211,9 @@
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
 
+        // Function to run after init
+        settings.onAfterInit();
+
         // See if menu has children
         var parents = menu.querySelectorAll('li ul');
         if ( parents.length ) {
@@ -208,7 +223,7 @@
 
         // Create mobile width indicator
         var mobileindicator = document.createElement('div');
-        document.body.appendChild(mobileindicator);
+        settings.wrapper.appendChild(mobileindicator);
         mobileindicator.id = settings.mobileindicatorid;
         var mobileindicatorZindex = 0;
 
@@ -258,6 +273,7 @@
                 // Hide the menu
                 apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
                 apollo.addClass(menu, settings.hideclass);
+                apollo.removeClass(document.body, settings.openbodyclass);
 
                 // Make the menu absolute positioned
                 if ( settings.absolute == 1 ) {
@@ -279,6 +295,7 @@
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
                 apollo.addClass(menu, settings.fullmenuclass);
+                apollo.removeClass(document.body, settings.openbodyclass);
 
                 // Undo absolute positioning
                 if ( settings.absolute == 1 && apollo.hasClass(menu, settings.absolutemenuclass) ) {
@@ -382,31 +399,61 @@
             // Show the menu
             if ( apollo.hasClass(menu, settings.hideclass) ) {
 
-                // Show menu immediately so it can be animated
+                // Function to run before toggling
+                settings.onBeforeToggleOpen();
+
+                // Show the menu
                 apollo.removeClass(menu, settings.hideclass);
                 apollo.addClass(menu, settings.openclass);
 
-                // Set and remove animate class after duration
-                apollo.addClass(menu, settings.animateopenclass);
-                setTimeout(function() { apollo.removeClass(menu, settings.animateopenclass); }, settings.animateduration);
+                // Add class to body element you could use for styling
+                apollo.addClass(document.body, settings.openbodyclass);
 
                 // Set toggled class to toggle button
                 apollo.addClass(togglebutton, settings.toggleclosedclass);
+
+                // Set and remove animate class after duration
+                apollo.addClass(menu, settings.animateopenclass);
+                setTimeout(function() {
+
+                    // Remove animation class
+                    apollo.removeClass(menu, settings.animateopenclass);
+
+                    // Function to run after toggling
+                    settings.onAfterToggleOpen();
+
+                }, settings.animateduration);
             }
 
             // Hide the menu
             else if ( apollo.hasClass(menu, settings.openclass) ) {
 
+                // Function to run before toggling
+                settings.onBeforeToggleClose();
+
                 // Properly set animating classes
                 apollo.addClass(menu, settings.animatecloseclass);
-                setTimeout(function() { apollo.removeClass(menu, settings.animatecloseclass); }, settings.animateduration);
-
-                // Hide menu after animation is done (Animated with CSS so set to same duration as CSS value)
-                setTimeout(function() { apollo.removeClass(menu, settings.openclass); }, settings.animateduration);
-                setTimeout(function() { apollo.addClass(menu, settings.hideclass); }, settings.animateduration);
 
                 // Remove toggled class to toggle button
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
+
+                // When animation is done
+                setTimeout(function() {
+
+                    // Remove animate class
+                    apollo.removeClass(menu, settings.animatecloseclass);
+
+                    // Hide the menu
+                    apollo.removeClass(menu, settings.openclass);
+                    apollo.addClass(menu, settings.hideclass);
+
+                    // Remove class from body element you could use for styling
+                    apollo.removeClass(document.body, settings.openbodyclass);
+
+                    // Function to run after toggling
+                    settings.onAfterToggleClose();
+
+                }, settings.animateduration);
             }
 
             // Check if the menu still fits
@@ -426,13 +473,57 @@
                 // Click buttons and show submenu
                 subtoggle.onclick = function() {
 
-                    // Add classes accordingly
+                    // Open
                     if ( apollo.hasClass(submenu, settings.hideclass) ) {
-                        apollo.removeClass(submenu, settings.hideclass);
+
+                        // Function to run before toggling
+                        settings.onBeforeSubToggleOpen();
+
+                        // Properly set animating classes
+                        apollo.addClass(menu, settings.subanimateopenclass);
+
+                        // Add class to subtoggle button
                         apollo.addClass(subtoggle, settings.toggleclosedclass);
-                    } else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
-                        apollo.addClass(submenu, settings.hideclass);
+
+                        // Show sub menu
+                        apollo.removeClass(submenu, settings.hideclass);
+
+                        setTimeout(function() {
+
+                            // Remove animate class
+                            apollo.removeClass(menu, settings.subanimateopenclass);
+
+                            // Function to run before toggling
+                            settings.onAfterSubToggleOpen();
+
+                        }, settings.subanimateduration);
+                    }
+
+                    // Close
+                    else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
+
+                        // Function to run before toggling
+                        settings.onBeforeSubToggleClose();
+
+                        // Properly set animating classes
+                        apollo.addClass(menu, settings.subanimatecloseclass);
+
+                        // Remove class from subtoggle button
                         apollo.removeClass(subtoggle, settings.toggleclosedclass);
+
+                        setTimeout(function() {
+
+                            // Remove animate class
+                            apollo.removeClass(menu, settings.subanimatecloseclass);
+
+                            // Set classes
+                            apollo.addClass(submenu, settings.hideclass);
+
+                            // Function to run before toggling
+                            settings.onAfterSubToggleClose();
+
+                        }, settings.subanimateduration);
+
                     }
 
                     // Check if the menu still fits
