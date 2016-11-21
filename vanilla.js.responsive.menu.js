@@ -223,7 +223,7 @@
 
         // Create mobile width indicator
         var mobileindicator = document.createElement('div');
-        document.body.appendChild(mobileindicator);
+        settings.wrapper.appendChild(mobileindicator);
         mobileindicator.id = settings.mobileindicatorid;
         var mobileindicatorZindex = 0;
 
