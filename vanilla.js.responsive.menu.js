@@ -1,8 +1,7 @@
 /**
- *
  * Responsive menu v1.0.0
- * A vanilla JS responsive menu plugin, by Robin Poort - Timble
- * http://robinpoort.com - http://www.timble.net
+ * A vanilla JS responsive menu plugin, by Robin Poort
+ * http://robinpoort.com
  *
  * Browser support: IE9+ (IE8 doesn't need a responsive menu since it's not responsive)
  *
@@ -10,7 +9,6 @@
  * Plugin boilerplate by | http://gomakethings.com/mit/
  *
  * Free to use under the MIT License.
- *
  */
 
 (function (root, factory) {
@@ -297,6 +295,10 @@
                 apollo.addClass(list, settings.listlevelclass + listLevel);
                 addLevel(list, listLevel);
                 setAttr(list.children, 'role', 'menuitem');
+                var children = list.children;
+                forEach(children, function(value,prop) {
+                    setAttr(children[prop].children, 'tabindex', '-1');
+                });
             }
         }
 
@@ -443,12 +445,6 @@
                         apollo.addClass(parent[f], settings.focusedclass);
                     }
                 }
-            };
-            menulinks[i].onmouseover = function() {
-                // TODO: toggle aria-hidden
-            };
-            menulinks[i].onmouseout = function() {
-                // TODO: toggle aria-hidden
             };
         }
 
