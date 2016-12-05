@@ -66,7 +66,7 @@
         mobileindicatorid: 'rm-mobile-indicator',
         parentlevelclass: 'rm-parent-level-',
         listlevelclass: 'rm-list-level-',
-        levelclass: 'rm-level-',
+        levelclass: 'rm-item-level-',
         onAfterInit: function() {},
         onBeforeToggleOpen: function() {},
         onAfterToggleOpen: function() {},
@@ -180,20 +180,22 @@
         return nodes
     }
 
+
     /**
      * Get style
      */
     function getStyle(el,styleProp)
     {
         var x = document.getElementById(el);
+        var y;
 
         if (window.getComputedStyle)
         {
-            var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
+            y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
         }
         else if (x.currentStyle)
         {
-            var y = x.currentStyle[styleProp];
+            y = x.currentStyle[styleProp];
         }
 
         return y;
@@ -211,7 +213,7 @@
         // Run through items
         forEach(elements, function(value, prop) {
             var element = elements[prop];
-            if ( !element.getAttribute(attribute) ) {
+            if ( element.getAttribute(attribute) !== val ) {
                 element.setAttribute(attribute, val);
             }
         });
@@ -227,6 +229,25 @@
             apollo.addClass(listItem, settings.levelclass + level);
         });
     }
+
+
+    /**
+     * Show children
+     */
+
+    function showChildren(element) {
+        var listItem = element.parentNode;
+        var submenu = listItem.querySelector('ul');
+        if ( submenu !== null ) {
+            setAttr(submenu, 'aria-hidden', 'false');
+            var subItems = submenu.children;
+            forEach(subItems, function(value, prop) {
+                var subLink = subItems[prop].getElementsByTagName('A')[0];
+                setAttr(subLink, 'tabindex', '0');
+            });
+        }
+    }
+
 
     /*
      * Responsive menu
@@ -297,7 +318,10 @@
                 setAttr(list.children, 'role', 'menuitem');
                 var children = list.children;
                 forEach(children, function(value,prop) {
-                    setAttr(children[prop].children, 'tabindex', '-1');
+                    var child = children[prop];
+                    if (child.type && child.type === 'a') {
+                        setAttr(children[prop].children, 'tabindex', '-1');
+                    }
                 });
             }
         }
@@ -430,7 +454,10 @@
                     apollo.removeClass(focusedItems[f], settings.focusedclass);
                 }
             };
+
             menulinks[i].onfocus = function() {
+                showChildren(this);
+
                 // Remove the class
                 var siblings = this.parentNode.parentNode.querySelectorAll('li');
                 if (siblings.length) {
@@ -445,6 +472,7 @@
                         apollo.addClass(parent[f], settings.focusedclass);
                     }
                 }
+
             };
         }
 
@@ -528,7 +556,7 @@
                 // Click buttons and show submenu
                 subtoggle.onclick = function() {
 
-                    // Open
+                    // Open the menu
                     if ( apollo.hasClass(submenu, settings.hideclass) ) {
 
                         // Function to run before toggling
@@ -554,7 +582,7 @@
                         }, settings.subanimateduration);
                     }
 
-                    // Close
+                    // Close the menu
                     else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
 
                         // Function to run before toggling
