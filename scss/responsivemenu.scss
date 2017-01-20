@@ -1,8 +1,10 @@
 // Variables
 $vjsm-menu-wrapper: navigation_container !default;
 $vjsm-mobile-indicator: rm-mobile-indicator !default;
+$vjsm-mobile-submenu-indicator: rm-mobile-submenu-indicator !default;
 $vjsm-menu: ul !default;
 $vjsm-menu-width: 600px !default;
+$vjsm-submenu-width: $vjsm-menu-width !default;
 $vjsm-closed-class: rm-closed !default;
 $vjsm-no-js-class: no-js !default;
 $vjsm-js-class: js !default;
@@ -92,13 +94,26 @@ $vjsm-absolute: false !default;
 }
 
 
-/* Mobile indicator styling */
+/* Mobile mainmenu indicator styling */
 ##{$vjsm-mobile-indicator} {
   @include accessible-hide;
   z-index: 0;
 
   @media (min-width: $vjsm-menu-width) {
     z-index: 1;
+  }
+}
+
+
+/* Mobile submenu indicator styling */
+@if $vjsm-multi-level == true {
+  ##{$vjsm-mobile-submenu-indicator} {
+    @include accessible-hide;
+    z-index: 0;
+
+    @media (min-width: $vjsm-submenu-width) {
+      z-index: 1;
+    }
   }
 }
 
@@ -117,7 +132,7 @@ $vjsm-absolute: false !default;
       li {
         ul {
           @include accessible-hide; /* 1 */
-          @media (min-width: $vjsm-menu-width) {
+          @media (min-width: $vjsm-submenu-width) {
             @include accessible-show; /* 2 */
           }
         }
@@ -184,7 +199,7 @@ $vjsm-absolute: false !default;
       }
 
       ul {
-        @media (min-width: $vjsm-menu-width) {
+        @media (min-width: $vjsm-submenu-width) {
           position: absolute; /* 4 */
         }
       }
@@ -193,10 +208,12 @@ $vjsm-absolute: false !default;
 
   @if $vjsm-horizontal-css-behavior == true {
     .#{$vjsm-menu-wrapper} {
-      @media (min-width: 600px) {
+      @media (min-width: $vjsm-menu-width) {
         position: $vjsm-horizontal-css-behavior-position;
         z-index: $vjsm-horizontal-css-behavior-zindex;
+      }
 
+      @media (min-width: $vjsm-submenu-width) {
         li {
           ul {
             position: $vjsm-horizontal-css-behavior-ul-position;

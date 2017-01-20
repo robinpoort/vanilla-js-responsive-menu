@@ -66,6 +66,7 @@
         stickyinitiatedclass: 'rm-sticky-initiated',
         noresponsivemenuclass: 'rm-no-responsive-menu',
         mobileindicatorid: 'rm-mobile-indicator',
+        mobilesubmenuindicatorid: 'rm-mobile-submenu-indicator',
         onAfterInit: function() {},
         onBeforeToggleOpen: function() {},
         onAfterToggleOpen: function() {},
@@ -219,6 +220,12 @@
         if ( parents.length ) {
             hasChildren = true;
             subtoggles = document.getElementsByClassName(settings.subtoggleclass);
+
+            // Create mobile submenu width indicator
+            var mobilesubmenuindicator = document.createElement('div');
+            settings.wrapper.appendChild(mobilesubmenuindicator);
+            mobilesubmenuindicator.id = settings.mobilesubmenuindicatorid;
+            var mobilesubindicatorZindex = 0;
         }
 
         // Create mobile width indicator
@@ -257,18 +264,13 @@
         function classes() {
 
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
+            mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
 
             // If wrapper is small and if the menu is not already opened
             if ( mobileindicatorZindex == 0 && !apollo.hasClass(menu, settings.openclass) ) {
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, settings.hideclass);
-                if ( hasChildren ) {
-                    forEach(subtoggles, function (value, prop) {
-                        apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                        apollo.removeClass(subtoggles[prop], settings.hideclass);
-                    });
-                }
 
                 // Hide the menu
                 apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
@@ -285,12 +287,6 @@
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
-                if (hasChildren) {
-                    forEach(subtoggles, function(value, prop) {
-                        apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                        apollo.addClass(subtoggles[prop], settings.hideclass);
-                    });
-                }
 
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
@@ -301,6 +297,20 @@
                 if ( settings.absolute == 1 && apollo.hasClass(menu, settings.absolutemenuclass) ) {
                     apollo.removeClass(menu, settings.absolutemenuclass);
                 }
+            }
+
+            if ( hasChildren && mobilesubmenuindicator == 0 ) {
+                forEach(subtoggles, function (value, prop) {
+                    if ( !apollo.hasClass(subtoggles[prop], settings.toggleclosedclass) ) {
+                        apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                        apollo.removeClass(subtoggles[prop], settings.hideclass);
+                    }
+                });
+            } else if (hasChildren && mobilesubmenuindicator == 1) {
+                forEach(subtoggles, function(value, prop) {
+                    apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                    apollo.addClass(subtoggles[prop], settings.hideclass);
+                });
             }
         }
 

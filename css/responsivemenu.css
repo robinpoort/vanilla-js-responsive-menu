@@ -13,7 +13,7 @@ ul.rm-closed {
   padding: 0;
   border: 0; }
 
-/* Mobile indicator styling */
+/* Mobile mainmenu indicator styling */
 #rm-mobile-indicator {
   position: absolute;
   overflow: hidden;
@@ -28,6 +28,7 @@ ul.rm-closed {
     #rm-mobile-indicator {
       z-index: 1; } }
 
+/* Mobile submenu indicator styling */
 /**
  * When JS is enabled
  *
