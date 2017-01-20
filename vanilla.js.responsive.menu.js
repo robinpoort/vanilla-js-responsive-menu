@@ -1,6 +1,6 @@
 /**
  *
- * Responsive menu v1.0.0
+ * Responsive menu v1.1.5
  * A vanilla JS responsive menu plugin, by Robin Poort - Timble
  * http://robinpoort.com - http://www.timble.net
  *
