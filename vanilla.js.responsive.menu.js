@@ -264,7 +264,10 @@
         function classes() {
 
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
-            mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
+
+            if ( parents.length ) {
+                mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
+            }
 
             // If wrapper is small and if the menu is not already opened
             if ( mobileindicatorZindex == 0 && !apollo.hasClass(menu, settings.openclass) ) {
