@@ -241,3 +241,12 @@ $vjsm-absolute: false !default;
     }
   }
 }
+
+##{$vjsm-mobile-submenu-indicator} {
+  @include accessible-hide;
+  z-index: 0;
+
+  @media (min-width: $vjsm-submenu-width) {
+    z-index: 1;
+  }
+}

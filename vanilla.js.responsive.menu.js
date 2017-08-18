@@ -202,12 +202,7 @@
     // Responsive menu
     function initialize(settings) {
 
-        // Define what the actual menu object is
-        if ( settings.menu == '' ) {
-            menu = settings.wrapper.getElementsByTagName('ul')[0];
-        } else {
-            menu = settings.menu;
-        }
+        menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
@@ -239,7 +234,7 @@
         apollo.addClass(toggle_element, [settings.toggleclass, settings.hideclass]);
         if ( settings.before_element == '' ) { settings.before_element = settings.wrapper.firstChild }
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
-        var togglebutton = document.getElementsByClassName(settings.toggleclass)[0];
+        var togglebutton = settings.wrapper.getElementsByClassName(settings.toggleclass)[0];
         togglebutton.innerHTML = settings.togglecontent;
         togglebutton.setAttribute('aria-hidden', 'true');
         togglebutton.setAttribute('aria-pressed', 'false');
@@ -263,7 +258,12 @@
         // Adding classes
         function classes() {
 
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
+            mobilesubindicatorZindex = getStyle(settings.mobilesubmenuindicatorid, "z-index");
+
+            console.log(mobileindicatorZindex, mobilesubindicatorZindex);
 
             if ( parents.length ) {
                 mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
@@ -302,14 +302,14 @@
                 }
             }
 
-            if ( hasChildren && mobilesubmenuindicator == 0 ) {
+            if ( hasChildren && mobilesubindicatorZindex == 0 ) {
                 forEach(subtoggles, function (value, prop) {
                     if ( !apollo.hasClass(subtoggles[prop], settings.toggleclosedclass) ) {
                         apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                         apollo.removeClass(subtoggles[prop], settings.hideclass);
                     }
                 });
-            } else if (hasChildren && mobilesubmenuindicator == 1) {
+            } else if (hasChildren && mobilesubindicatorZindex == 1) {
                 forEach(subtoggles, function(value, prop) {
                     apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                     apollo.addClass(subtoggles[prop], settings.hideclass);
@@ -319,6 +319,8 @@
 
         // Sticky menu body height
         function stickyMenu() {
+
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
             if ( settings.sticky == 1 ) {
 
@@ -371,7 +373,7 @@
             classes();
             stickyMenu();
 
-            // Run again after 150 ms for safari OSX when scrollbars are visible and you're resizing to a smaller window
+            // Run again after 200 ms for safari OSX when scrollbars are visible and you're resizing to a smaller window
             waitForFinalEvent(function(){
                 classes();
                 stickyMenu();
@@ -409,6 +411,8 @@
         // Clicking the toggle button
         togglebutton.onclick = function() {
 
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             // Show the menu
             if ( apollo.hasClass(menu, settings.hideclass) ) {
 
@@ -440,6 +444,8 @@
 
             // Hide the menu
             else if ( apollo.hasClass(menu, settings.openclass) ) {
+
+                menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
                 // Function to run before toggling
                 settings.onBeforeToggleClose();
@@ -477,6 +483,9 @@
 
         // Clicking the sub toggles button
         if ( hasChildren ) {
+
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             forEach(subtoggles, function(value, prop) {
 
                 // Variables

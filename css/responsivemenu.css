@@ -51,4 +51,18 @@ ul.rm-closed {
     overflow: visible;
     /* 4 */ }
 
+#rm-mobile-submenu-indicator {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  z-index: 0; }
+  @media (min-width: 600px) {
+    #rm-mobile-submenu-indicator {
+      z-index: 1; } }
+
 /*# sourceMappingURL=responsivemenu.css.map */
