@@ -261,9 +261,6 @@
             menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
-            mobilesubindicatorZindex = getStyle(settings.mobilesubmenuindicatorid, "z-index");
-
-            console.log(mobileindicatorZindex, mobilesubindicatorZindex);
 
             if ( parents.length ) {
                 mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
@@ -302,14 +299,14 @@
                 }
             }
 
-            if ( hasChildren && mobilesubindicatorZindex == 0 ) {
+            if ( hasChildren && mobilesubmenuindicator == 0 ) {
                 forEach(subtoggles, function (value, prop) {
                     if ( !apollo.hasClass(subtoggles[prop], settings.toggleclosedclass) ) {
                         apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                         apollo.removeClass(subtoggles[prop], settings.hideclass);
                     }
                 });
-            } else if (hasChildren && mobilesubindicatorZindex == 1) {
+            } else if (hasChildren && mobilesubmenuindicator == 1) {
                 forEach(subtoggles, function(value, prop) {
                     apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
                     apollo.addClass(subtoggles[prop], settings.hideclass);
