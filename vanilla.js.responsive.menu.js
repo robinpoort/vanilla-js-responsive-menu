@@ -1,6 +1,6 @@
 /**
  *
- * Responsive menu v1.0.0
+ * Responsive menu v1.1.8
  * A vanilla JS responsive menu plugin, by Robin Poort - Timble
  * http://robinpoort.com - http://www.timble.net
  *
@@ -66,6 +66,7 @@
         stickyinitiatedclass: 'rm-sticky-initiated',
         noresponsivemenuclass: 'rm-no-responsive-menu',
         mobileindicatorid: 'rm-mobile-indicator',
+        mobilesubmenuindicatorid: 'rm-mobile-submenu-indicator',
         onAfterInit: function() {},
         onBeforeToggleOpen: function() {},
         onAfterToggleOpen: function() {},
@@ -201,12 +202,7 @@
     // Responsive menu
     function initialize(settings) {
 
-        // Define what the actual menu object is
-        if ( settings.menu == '' ) {
-            menu = settings.wrapper.getElementsByTagName('ul')[0];
-        } else {
-            menu = settings.menu;
-        }
+        menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
@@ -219,11 +215,17 @@
         if ( parents.length ) {
             hasChildren = true;
             subtoggles = document.getElementsByClassName(settings.subtoggleclass);
+
+            // Create mobile submenu width indicator
+            var mobilesubmenuindicator = document.createElement('div');
+            settings.wrapper.appendChild(mobilesubmenuindicator);
+            mobilesubmenuindicator.id = settings.mobilesubmenuindicatorid;
+            var mobilesubindicatorZindex = 0;
         }
 
         // Create mobile width indicator
         var mobileindicator = document.createElement('div');
-        document.body.appendChild(mobileindicator);
+        settings.wrapper.appendChild(mobileindicator);
         mobileindicator.id = settings.mobileindicatorid;
         var mobileindicatorZindex = 0;
 
@@ -256,19 +258,19 @@
         // Adding classes
         function classes() {
 
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
+
+            if ( parents.length ) {
+                mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
+            }
 
             // If wrapper is small and if the menu is not already opened
             if ( mobileindicatorZindex == 0 && !apollo.hasClass(menu, settings.openclass) ) {
 
                 // Show the toggle button(s)
                 apollo.removeClass(togglebutton, settings.hideclass);
-                if ( hasChildren ) {
-                    forEach(subtoggles, function (value, prop) {
-                        apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                        apollo.removeClass(subtoggles[prop], settings.hideclass);
-                    });
-                }
 
                 // Hide the menu
                 apollo.removeClass(menu, [settings.openclass, settings.fullmenuclass]);
@@ -285,12 +287,6 @@
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
-                if (hasChildren) {
-                    forEach(subtoggles, function(value, prop) {
-                        apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                        apollo.addClass(subtoggles[prop], settings.hideclass);
-                    });
-                }
 
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
@@ -302,10 +298,26 @@
                     apollo.removeClass(menu, settings.absolutemenuclass);
                 }
             }
+
+            if ( hasChildren && mobilesubmenuindicator == 0 ) {
+                forEach(subtoggles, function (value, prop) {
+                    if ( !apollo.hasClass(subtoggles[prop], settings.toggleclosedclass) ) {
+                        apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                        apollo.removeClass(subtoggles[prop], settings.hideclass);
+                    }
+                });
+            } else if (hasChildren && mobilesubmenuindicator == 1) {
+                forEach(subtoggles, function(value, prop) {
+                    apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
+                    apollo.addClass(subtoggles[prop], settings.hideclass);
+                });
+            }
         }
 
         // Sticky menu body height
         function stickyMenu() {
+
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
             if ( settings.sticky == 1 ) {
 
@@ -358,7 +370,7 @@
             classes();
             stickyMenu();
 
-            // Run again after 150 ms for safari OSX when scrollbars are visible and you're resizing to a smaller window
+            // Run again after 200 ms for safari OSX when scrollbars are visible and you're resizing to a smaller window
             waitForFinalEvent(function(){
                 classes();
                 stickyMenu();
@@ -396,6 +408,8 @@
         // Clicking the toggle button
         togglebutton.onclick = function() {
 
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             // Show the menu
             if ( apollo.hasClass(menu, settings.hideclass) ) {
 
@@ -427,6 +441,8 @@
 
             // Hide the menu
             else if ( apollo.hasClass(menu, settings.openclass) ) {
+
+                menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
 
                 // Function to run before toggling
                 settings.onBeforeToggleClose();
@@ -464,6 +480,9 @@
 
         // Clicking the sub toggles button
         if ( hasChildren ) {
+
+            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+
             forEach(subtoggles, function(value, prop) {
 
                 // Variables

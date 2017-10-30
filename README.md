@@ -3,7 +3,7 @@ Vanilla JS Responsive Menu
 
 A vanilla JS responsive menu plugin. Mobile first, accessible, customizable
 
-####Demo
+#### Demo
 * https://robinpoort.github.io/vanilla-js-responsive-menu/
 
 Dependencies
@@ -66,194 +66,194 @@ Place following on the bottom of your document:
 Options
 =======
 
-###menu
+### menu
 
 The 'hiding' container. Either your `<ul>` or some surrounding element
 
 default: First found `<ul>` within the wrapper
 
-###initiated_class
+### initiated_class
 
 The class to attach to the wrapper when menu is initiated
 
 default: 'rm-initiated'
 
-###before_element
+### before_element
 
 The element where the toggle button will be put before
 
 default: The first child of the wrapper element
 
-###toggletype
+### toggletype
 
 HTML element of the main toggle button
 
 default: 'button'
 
-###toggleclass
+### toggleclass
 
 The class of the main toggle button
 
 default: 'rm-togglebutton'
 
-###togglecontent
+### togglecontent
 
 The value / text / html on the main toggle button
 
 default: 'menu'
 
-###subtoggletype
+### subtoggletype
 
 HTML element of the sub toggle buttons
 
 default: 'button'
 
-###subtoggleclass
+### subtoggleclass
 
 The class of the sub toggle buttons
 
 default: 'rm-subtoggle'
 
-###subtogglecontent
+### subtogglecontent
 
 The value / text / html on the sub toggle buttons
 
 default: '+'
 
-###sticky
+### sticky
 
 Use a sticky menu?
 
 default: 0
 
-###absolute
+### absolute
 
 Make the toggling menu absolute positioned
 
 default: 0
 
-###hideclass
+### hideclass
 
 The class to add to elements that need to be hidden. Hiding happens with CSS
 
 default: 'rm-closed'
 
-###openclass
+### openclass
 
 The class to add to elements that need to be displayed. Displaying happens with CSS
 
 default: 'rm-opened'
 
-###openbodyclass
+### openbodyclass
 
 Class that gets toggled to the `<body>` element when using the main toggle
 
 default: 'has-opened-menu'
 
-###focusedclass
+### focusedclass
 
 The class used for accessibility
 
 default: 'rm-focused'
 
-###animateopenclass
+### animateopenclass
 
 Class that gets added when opening the menu. All animations should be done manually by using CSS
 
 default: 'is-opening'
 
-###animatecloseclass
+### animatecloseclass
 
 Class that gets added when closing the menu. All animations should be done manually by using CSS
 
 default: 'is-closing'
 
-###animateduration
+### animateduration
 
 Duration of the main toggle. Should be the same as CSS animation / transition
 
 default: 0
 
-###subanimateopenclass
+### subanimateopenclass
 
 Class that gets added when opening sub menu items. All animations should be done manually by using CSS
 
 default: 'is-opening'
 
-###subanimatecloseclass
+### subanimatecloseclass
 
 Class that gets added when closing sub menu items. All animations should be done manually by using CSS
 
 default: 'is-closing'
 
-###subanimateduration
+### subanimateduration
 
 Duration of the main toggle. Should be the same as CSS animation / transition
 
 default: 0
 
-###parentclass
+### parentclass
 
 Class that gets added to parent `<li>` items
 
 default: 'rm-parent'
 
-###fullmenuclass
+### fullmenuclass
 
 Class that gets added when the menu is not the mobile menu but the collapsed full width menu (desktop)
 
 default: 'rm-fullmenu'
 
-###absolutemenuclass
+### absolutemenuclass
 
 Absolute menu class (only used when 'absolute' setting is being used)
 
 default: 'rm-absolutemenu'
 
-###bodyoverflowhiddenclass
+### bodyoverflowhiddenclass
 
 Class to add to body when menu is overflowing (only used when 'fixed' setting is being used)
 
 default: 'rm-bodyoverflowhidden'
 
-###menuoverflowautoclass
+### menuoverflowautoclass
 
 Class to add to the wrapper viewportheight is larger than menuheight (only used when 'fixed' setting is being used)
 
 default: 'rm-menuoverflowauto'
 
-###stickyclass
+### stickyclass
 
 Fixed menu class (only used when 'fixed' setting is being used)
 
 default: 'rm-sticky'
 
-###stickyinitiatedclass
+### stickyinitiatedclass
 
 Sticky initiated class (only used when 'fixed' setting is being used)
 
 default: 'rm-sticky-initiated'
 
-###noresponsivemenuclass
+### noresponsivemenuclass
 
 Class added to the body when feature test fails. This can be used to ceate additional styling / javascript
 
 default: 'rm-no-responsive-menu'
 
-###mobileindicatorid
+### mobileindicatorid
 
 The id of the element that indicates wether the menu is mobile or not
 
 default: 'rm-mobile-indicator'
 
-##Events
+## Events
 
-###onAfterInit: function() {}
-###onBeforeToggleOpen: function() {}
-###onAfterToggleOpen: function() {}
-###onBeforeToggleClose: function() {}
-###onAfterToggleClose: function() {}
-###onBeforeSubToggleOpen: function() {}
-###onAfterSubToggleOpen: function() {}
-###onBeforeSubToggleClose: function() {}
-###onAfterSubToggleClose: function() {}
+### onAfterInit: function() {}
+### onBeforeToggleOpen: function() {}
+### onAfterToggleOpen: function() {}
+### onBeforeToggleClose: function() {}
+### onAfterToggleClose: function() {}
+### onBeforeSubToggleOpen: function() {}
+### onAfterSubToggleOpen: function() {}
+### onBeforeSubToggleClose: function() {}
+### onAfterSubToggleClose: function() {}
