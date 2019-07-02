@@ -202,7 +202,7 @@
     // Responsive menu
     function initialize(settings) {
 
-        menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+        menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
@@ -258,7 +258,7 @@
         // Adding classes
         function classes() {
 
-            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+            menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
             mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
 
@@ -317,7 +317,7 @@
         // Sticky menu body height
         function stickyMenu() {
 
-            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+            menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
             if ( settings.sticky == 1 ) {
 
@@ -408,7 +408,7 @@
         // Clicking the toggle button
         togglebutton.onclick = function() {
 
-            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+            menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
             // Show the menu
             if ( apollo.hasClass(menu, settings.hideclass) ) {
@@ -442,7 +442,7 @@
             // Hide the menu
             else if ( apollo.hasClass(menu, settings.openclass) ) {
 
-                menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+                menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
                 // Function to run before toggling
                 settings.onBeforeToggleClose();
@@ -481,7 +481,7 @@
         // Clicking the sub toggles button
         if ( hasChildren ) {
 
-            menu = settings.wrapper.getElementsByTagName('ul')[0] || settings.menu;
+            menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
             forEach(subtoggles, function(value, prop) {
 
