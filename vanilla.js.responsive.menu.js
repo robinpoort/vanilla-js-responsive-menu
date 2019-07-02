@@ -234,7 +234,7 @@
         apollo.addClass(toggle_element, [settings.toggleclass, settings.hideclass]);
         if ( settings.before_element == '' ) { settings.before_element = settings.wrapper.firstChild }
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
-        var togglebutton = document.getElementsByClassName(settings.toggleclass)[0];
+        var togglebutton = toggle_element;
         togglebutton.innerHTML = settings.togglecontent;
         togglebutton.setAttribute('aria-hidden', 'true');
         togglebutton.setAttribute('aria-pressed', 'false');
