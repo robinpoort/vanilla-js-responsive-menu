@@ -37,6 +37,7 @@
     var defaults = {
         menu: '',
         initiated_class: 'rm-initiated',
+        loaded_class: 'rm-loaded',
         before_element: '',
         toggletype: 'button',
         toggleclass: 'rm-togglebutton',
@@ -68,6 +69,7 @@
         mobileindicatorid: 'rm-mobile-indicator',
         mobilesubmenuindicatorid: 'rm-mobile-submenu-indicator',
         onAfterInit: function() {},
+        onAfterLoad: function() {},
         onBeforeToggleOpen: function() {},
         onAfterToggleOpen: function() {},
         onBeforeToggleClose: function() {},
@@ -361,6 +363,13 @@
         window.addEventListener('load', function() {
             classes();
             stickyMenu();
+
+            // Add a class after load
+            apollo.addClass(settings.wrapper, settings.loaded_class);
+
+            // Function to run after load
+            settings.onAfterLoad();
+
         }, true);
 
         // On resize

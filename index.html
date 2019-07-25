@@ -141,10 +141,13 @@
         wrapper: document.querySelector('.navigation_container1'),
         togglecontent: 'menu',
         sticky: 0,
-//        animateduration: 1000,
-//        subanimateduration: 1000,
+//      animateduration: 1000,
+//      subanimateduration: 1000,
         onAfterInit: function() {
             console.log('after init');
+        },
+        onAfterLoad: function() {
+            console.log('after load');
         },
         onBeforeToggleOpen: function() {
             console.log('before toggle open');
