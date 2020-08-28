@@ -201,10 +201,23 @@
         return y;
     }
 
+    function returnId(menu, togglebutton, id) {
+        if (id === undefined) {
+            id = 0;
+        }
+        if (document.getElementById('vjsrm:'+id) !== null) {
+            id = id + 1;
+            returnId(menu, togglebutton, id)
+        } else {
+            menu.id = 'vjsrm:'+id;
+            togglebutton.setAttribute('aria-controls', 'vjsrm:'+id);
+        }
+    }
+
     // Responsive menu
     function initialize(settings) {
 
-        menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
+        menu = settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
         // Add a class when JS is initiated
         apollo.addClass(settings.wrapper, settings.initiated_class);
@@ -238,9 +251,12 @@
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
         var togglebutton = toggle_element;
         togglebutton.innerHTML = settings.togglecontent;
-        togglebutton.setAttribute('aria-hidden', 'true');
+        togglebutton.setAttribute('aria-expanded', 'false');
         togglebutton.setAttribute('aria-pressed', 'false');
         togglebutton.setAttribute('type', 'button');
+
+        // Add id's for aria
+        returnId(menu, togglebutton);
 
         // Subtoggles and parent classes
         if ( hasChildren ) {
@@ -250,7 +266,7 @@
                 var parent = parents[i].parentNode;
                 parent.insertBefore(subtoggle_element, parent.firstChild);
                 subtoggle_element.innerHTML = settings.subtogglecontent;
-                subtoggle_element.setAttribute('aria-hidden', 'true');
+                subtoggle_element.setAttribute('aria-expanded', 'true');
                 subtoggle_element.setAttribute('aria-pressed', 'false');
                 subtoggle_element.setAttribute('type', 'button');
                 apollo.addClass(parents[i].parentNode, settings.parentclass);
@@ -289,6 +305,8 @@
                 // Hide the toggle button(s)
                 apollo.addClass(togglebutton, settings.hideclass);
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
+                togglebutton.setAttribute('aria-expanded', 'false');
+                togglebutton.setAttribute('aria-pressed', 'false');
 
                 // Show the menu and remove all classes
                 apollo.removeClass(menu, [settings.openclass, settings.hideclass]);
@@ -434,6 +452,8 @@
 
                 // Set toggled class to toggle button
                 apollo.addClass(togglebutton, settings.toggleclosedclass);
+                togglebutton.setAttribute('aria-expanded', 'true');
+                togglebutton.setAttribute('aria-pressed', 'true');
 
                 // Set and remove animate class after duration
                 apollo.addClass(menu, settings.animateopenclass);
@@ -461,6 +481,8 @@
 
                 // Remove toggled class to toggle button
                 apollo.removeClass(togglebutton, settings.toggleclosedclass);
+                togglebutton.setAttribute('aria-expanded', 'false');
+                togglebutton.setAttribute('aria-pressed', 'false');
 
                 // When animation is done
                 setTimeout(function() {
@@ -512,6 +534,8 @@
 
                         // Add class to subtoggle button
                         apollo.addClass(subtoggle, settings.toggleclosedclass);
+                        subtoggle.setAttribute('aria-expanded', 'true');
+                        subtoggle.setAttribute('aria-pressed', 'true');
 
                         // Show sub menu
                         apollo.removeClass(submenu, settings.hideclass);
@@ -538,6 +562,8 @@
 
                         // Remove class from subtoggle button
                         apollo.removeClass(subtoggle, settings.toggleclosedclass);
+                        subtoggle.setAttribute('aria-expanded', 'false');
+                        subtoggle.setAttribute('aria-pressed', 'false');
 
                         setTimeout(function() {
 
