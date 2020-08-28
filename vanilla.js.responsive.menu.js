@@ -266,7 +266,7 @@
                 var parent = parents[i].parentNode;
                 parent.insertBefore(subtoggle_element, parent.firstChild);
                 subtoggle_element.innerHTML = settings.subtogglecontent;
-                subtoggle_element.setAttribute('aria-expanded', 'true');
+                subtoggle_element.setAttribute('aria-expanded', 'false');
                 subtoggle_element.setAttribute('aria-pressed', 'false');
                 subtoggle_element.setAttribute('type', 'button');
                 apollo.addClass(parents[i].parentNode, settings.parentclass);
