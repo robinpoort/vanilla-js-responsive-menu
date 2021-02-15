@@ -65,11 +65,13 @@ body {
   .navigation_container .rm-fullmenu li.parent > a:after {
     content: " \25b6"; }
   .navigation_container li {
-    padding: 0; }
+    padding: 0;
+    clear: both; }
     @media (min-width: 600px) {
       .navigation_container li {
         height: 40px;
-        float: left; } }
+        float: left;
+        clear: none; } }
     .navigation_container li.focused, .navigation_container li:hover a,
     .navigation_container li a:hover,
     .navigation_container li a:focus {
