@@ -91,10 +91,12 @@ body {
 
   li {
     padding: 0;
+    clear: both;
 
     @media (min-width:600px) {
       height: 40px;
       float: left;
+      clear: none;
     }
 
     &.focused,

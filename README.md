@@ -21,7 +21,6 @@ Features
 Acknowledgements
 ================
 
-* Only one menu per page
 * On IE6/7 you only get the first layer of menu because pure suckerfisch css menu doesn't work. Add custom JS if you want this to work as well.
 
 Use
