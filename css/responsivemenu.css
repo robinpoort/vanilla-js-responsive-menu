@@ -1,6 +1,7 @@
 /* hide close buttons when closed so they wont show up in tabindex */
 .rm-closed {
-  display: none; }
+  display: none;
+}
 
 /* Accessible hide the menu itself */
 ul.rm-closed {
@@ -11,7 +12,8 @@ ul.rm-closed {
   width: 1px;
   margin: -1px;
   padding: 0;
-  border: 0; }
+  border: 0;
+}
 
 /* Mobile mainmenu indicator styling */
 #rm-mobile-indicator {
@@ -23,10 +25,13 @@ ul.rm-closed {
   margin: -1px;
   padding: 0;
   border: 0;
-  z-index: 0; }
-  @media (min-width: 600px) {
-    #rm-mobile-indicator {
-      z-index: 1; } }
+  z-index: 0;
+}
+@media (min-width: 600px) {
+  #rm-mobile-indicator {
+    z-index: 1;
+  }
+}
 
 /* Mobile submenu indicator styling */
 /**
@@ -38,18 +43,19 @@ ul.rm-closed {
  * 4. Display focused items
  */
 .js .navigation_container {
-  display: none;
-  /* 1 */ }
-  .js .navigation_container.rm-initiated {
-    display: block;
-    /* 2 */ }
-  @media (min-width: 600px) {
-    .js .navigation_container {
-      display: block;
-      /* 3 */ } }
-  .js .navigation_container .rm-focused {
-    overflow: visible;
-    /* 4 */ }
+  display: none; /* 1 */
+}
+.js .navigation_container.rm-initiated {
+  display: block; /* 2 */
+}
+@media (min-width: 600px) {
+  .js .navigation_container {
+    display: block; /* 3 */
+  }
+}
+.js .navigation_container .rm-focused {
+  overflow: visible; /* 4 */
+}
 
 #rm-mobile-submenu-indicator {
   position: absolute;
@@ -60,9 +66,16 @@ ul.rm-closed {
   margin: -1px;
   padding: 0;
   border: 0;
-  z-index: 0; }
-  @media (min-width: 600px) {
-    #rm-mobile-submenu-indicator {
-      z-index: 1; } }
+  z-index: 0;
+}
+@media (min-width: 600px) {
+  #rm-mobile-submenu-indicator {
+    z-index: 1;
+  }
+}
+
+.navigation_container li ul {
+  display: none;
+}
 
 /*# sourceMappingURL=responsivemenu.css.map */

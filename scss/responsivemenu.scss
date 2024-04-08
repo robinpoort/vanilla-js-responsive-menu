@@ -26,6 +26,7 @@ $vjsm-horizontal-css-behavior-li-ul-left: 100% !default;
 $vjsm-horizontal-css-behavior-li-ul-top: 0 !default;
 $vjsm-sticky: false !default;
 $vjsm-absolute: false !default;
+$vjsm-arrow-navigation: true !default;
 
 // Accessible hide
 @mixin accessible-hide {
@@ -248,5 +249,16 @@ $vjsm-absolute: false !default;
 
   @media (min-width: $vjsm-submenu-width) {
     z-index: 1;
+  }
+}
+
+
+
+
+@if $vjsm-arrow-navigation == true {
+  .#{$vjsm-menu-wrapper} {
+    li ul {
+      display: none;
+    }
   }
 }

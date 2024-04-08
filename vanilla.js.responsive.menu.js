@@ -25,15 +25,16 @@
     'use strict';
 
     // Variables
-    var exports = {}; // Object for public APIs
-    var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-    var settings; // Plugin settings
-    var menu; // The actual menu item
-    var hasChildren = false;
-    var subtoggles = false;
+    const exports = {}; // Object for public APIs
+    const supports = !!document.querySelector && !!root.addEventListener; // Feature test
+    let settings; // Plugin settings
+    let menu; // The actual menu item
+    let mobilesubmenuindicator;
+    let hasChildren = false;
+    let subtoggles = false;
 
     // Default settings
-    var defaults = {
+    const defaults = {
         menu: '',
         initiated_class: 'rm-initiated',
         loaded_class: 'rm-loaded',
@@ -89,15 +90,15 @@
      * @param {Function} callback Callback function for each iteration
      * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
      */
-    var forEach = function (collection, callback, scope) {
+    const forEach = function (collection, callback, scope) {
         if (Object.prototype.toString.call(collection) === '[object Object]') {
-            for (var prop in collection) {
+            for (const prop in collection) {
                 if (Object.prototype.hasOwnProperty.call(collection, prop)) {
                     callback.call(scope, collection[prop], prop, collection);
                 }
             }
         } else {
-            for (var i = 0, len = collection.length; i < len; i++) {
+            for (let i = 0, len = collection.length; i < len; i++) {
                 callback.call(scope, collection[i], i, collection);
             }
         }
@@ -110,8 +111,8 @@
      * @param {Object} options User options
      * @returns {Object} Merged values of defaults and options
      */
-    var extend = function ( defaults, options ) {
-        var extended = {};
+    const extend = function ( defaults, options ) {
+        const extended = {};
         forEach(defaults, function (value, prop) {
             extended[prop] = defaults[prop];
         });
@@ -120,44 +121,12 @@
         });
         return extended;
     };
-
-    /**
-     * Remove whitespace from a string
-     * @private
-     * @param {String} string
-     * @returns {String}
-     */
-    var trim = function ( string ) {
-        return string.replace(/^\s+|\s+$/g, '');
-    };
-
-    /**
-     * Convert data-options attribute into an object of key/value pairs
-     * @private
-     * @param {String} options Link-specific options as a data attribute string
-     * @returns {Object}
-     */
-    var getDataOptions = function ( options ) {
-        var settings = {};
-        // Create a key/value pair for each setting
-        if ( options ) {
-            options = options.split(';');
-            options.forEach( function(option) {
-                option = trim(option);
-                if ( option !== '' ) {
-                    option = option.split(':');
-                    settings[option[0]] = trim(option[1]);
-                }
-            });
-        }
-        return settings;
-    };
-
+    
     /**
      * Run when window resize is done (after x ms)
      */
-    var waitForFinalEvent = (function () {
-        var timers = {};
+    const waitForFinalEvent = (function () {
+        const timers = {};
         return function (callback, ms, uniqueId) {
             if (!uniqueId) {
                 uniqueId = "Don't call this twice without a uniqueId";
@@ -173,8 +142,8 @@
      * Get parents
      */
     function getParents(element, tag, stop) {
-        var nodes = [];
-        while (element.parentNode && element.parentNode != stop) {
+        const nodes = [];
+        while (element.parentNode && element.parentNode !== stop) {
             element = element.parentNode;
             if (element.tagName === tag) {
                 nodes.push(element);
@@ -188,15 +157,15 @@
      */
     function getStyle(el,styleProp)
     {
-        var x = document.getElementById(el);
+        const x = document.getElementById(el);
 
         if (window.getComputedStyle)
         {
-            var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
+            const y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
         }
         else if (x.currentStyle)
         {
-            var y = x.currentStyle[styleProp];
+            const y = x.currentStyle[styleProp];
         }
 
         return y;
@@ -217,7 +186,7 @@
 
     // Responsive menu
     function initialize(settings) {
-
+        
         menu = settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
         // Add a class when JS is initiated
@@ -227,30 +196,29 @@
         settings.onAfterInit();
 
         // See if menu has children
-        var parents = menu.querySelectorAll('li ul');
+        const parents = menu.querySelectorAll('li ul');
         if ( parents.length ) {
             hasChildren = true;
             subtoggles = document.getElementsByClassName(settings.subtoggleclass);
 
             // Create mobile submenu width indicator
-            var mobilesubmenuindicator = document.createElement('div');
+            mobilesubmenuindicator = document.createElement('div');
             settings.wrapper.appendChild(mobilesubmenuindicator);
             mobilesubmenuindicator.id = settings.mobilesubmenuindicatorid;
-            var mobilesubindicatorZindex = 0;
         }
 
         // Create mobile width indicator
-        var mobileindicator = document.createElement('div');
+        const mobileindicator = document.createElement('div');
         settings.wrapper.appendChild(mobileindicator);
         mobileindicator.id = settings.mobileindicatorid;
-        var mobileindicatorZindex = 0;
+        let mobileindicatorZindex = 0;
 
         // Creating the main toggle button
-        var toggle_element = document.createElement(settings.toggletype);
+        const toggle_element = document.createElement(settings.toggletype);
         toggle_element.classList.add(settings.toggleclass, settings.hideclass);
         if ( settings.before_element === '' ) { settings.before_element = settings.wrapper.firstChild }
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
-        var togglebutton = toggle_element;
+        const togglebutton = toggle_element;
         togglebutton.innerHTML = settings.togglecontent;
         togglebutton.setAttribute('aria-expanded', 'false');
         togglebutton.setAttribute('aria-pressed', 'false');
@@ -261,10 +229,10 @@
 
         // Subtoggles and parent classes
         if ( hasChildren ) {
-            for (var i = 0; i < parents.length; i++) {
-                var subtoggle_element = document.createElement(settings.subtoggletype);
+            for (let i = 0; i < parents.length; i++) {
+                const subtoggle_element = document.createElement(settings.subtoggletype);
                 subtoggle_element.classList.add(settings.subtoggleclass, settings.hideclass);
-                var parent = parents[i].parentNode;
+                const parent = parents[i].parentNode;
                 parent.insertBefore(subtoggle_element, parent.firstChild);
                 subtoggle_element.innerHTML = settings.subtogglecontent;
                 subtoggle_element.setAttribute('aria-expanded', 'false');
@@ -343,8 +311,8 @@
             if ( settings.sticky ) {
 
                 // The current menu and viewport heights
-                var menuheight = settings.wrapper.offsetHeight;
-                var viewportheight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                const menuheight = settings.wrapper.offsetHeight;
+                const viewportheight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
                 // Add the overflow class but only if there is space
                 if ( viewportheight <= menuheight && !document.body.classList.contains(settings.bodyoverflowhiddenclass) ) {
@@ -368,7 +336,7 @@
                     if ( !menu.classList.contains(settings.openclass) && !document.body.classList.contains(settings.stickyinitiatedclass) ) {
 
                         // Calculate the height
-                        var paddingtop = menuheight.toString() + 'px';
+                        const paddingtop = menuheight.toString() + 'px';
 
                         // Set the padding on the body
                         document.body.setAttribute('style', 'padding-top:' + paddingtop);
@@ -407,30 +375,32 @@
         }, true);
 
         // Accessible focus menu
-        var menulinks = menu.getElementsByTagName('a');
-        for (var i = 0; i < menulinks.length; i++) {
-            menulinks[i].onblur = function() {
-                var focusedItems = document.getElementsByClassName('rm-focused');
-                for (var f = 0; f < focusedItems.length; f++) {
-                    focusedItems[f].classList.remove(settings.focusedclass);
-                }
-            };
-            menulinks[i].onfocus = function() {
-                // Remove the class
-                var siblings = this.parentNode.parentNode.querySelectorAll('li');
-                if (siblings.length) {
-                    for (var f = 0; f < siblings.length; f++) {
-                        siblings[f].classList.remove(settings.focusedclass);
+        if ( !settings.arrowNavigation ) {
+            const menulinks = menu.getElementsByTagName('a');
+            for (let i = 0; i < menulinks.length; i++) {
+                menulinks[i].onblur = function () {
+                    const focusedItems = document.getElementsByClassName('rm-focused');
+                    for (let f = 0; f < focusedItems.length; f++) {
+                        focusedItems[f].classList.remove(settings.focusedclass);
                     }
-                }
-                // Add the class
-                var parent = getParents(this, "LI", menu);
-                if (parent.length) {
-                    for (var f = 0; f < parent.length; f++) {
-                        parent[f].classList.add(settings.focusedclass);
+                };
+                menulinks[i].onfocus = function () {
+                    // Remove the class
+                    const siblings = this.parentNode.parentNode.querySelectorAll('li');
+                    if (siblings.length) {
+                        for (let f = 0; f < siblings.length; f++) {
+                            siblings[f].classList.remove(settings.focusedclass);
+                        }
                     }
-                }
-            };
+                    // Add the class
+                    const parent = getParents(this, "LI", menu);
+                    if (parent.length) {
+                        for (let f = 0; f < parent.length; f++) {
+                            parent[f].classList.add(settings.focusedclass);
+                        }
+                    }
+                };
+            }
         }
 
         // Clicking the toggle button
@@ -518,8 +488,8 @@
             forEach(subtoggles, function(value, prop) {
 
                 // Variables
-                var subtoggle = subtoggles[prop];
-                var submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
+                const subtoggle = subtoggles[prop];
+                const submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
 
                 // Click buttons and show submenu
                 subtoggle.onclick = function() {
