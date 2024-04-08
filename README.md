@@ -6,22 +6,12 @@ A vanilla JS responsive menu plugin. Mobile first, accessible, customizable
 #### Demo
 * https://robinpoort.github.io/vanilla-js-responsive-menu/
 
-Dependencies
-------------
-Apollo JS | https://github.com/toddmotto/apollo
-Load apollo first
-
 Features
 ========
 
 * Accessible friendly
 * compressed 4kb
 * Regular menu on older browsers or when JS is disabled / broken
-
-Acknowledgements
-================
-
-* On IE6/7 you only get the first layer of menu because pure suckerfisch css menu doesn't work. Add custom JS if you want this to work as well.
 
 Use
 ===
@@ -123,13 +113,13 @@ default: '+'
 
 Use a sticky menu?
 
-default: 0
+default: false
 
 ### absolute
 
 Make the toggling menu absolute positioned
 
-default: 0
+default: false
 
 ### hideclass
 

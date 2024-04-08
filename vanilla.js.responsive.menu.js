@@ -45,8 +45,8 @@
         subtoggletype: 'button',
         subtoggleclass: 'rm-subtoggle',
         subtogglecontent: '+',
-        sticky: 0,
-        absolute: 0,
+        sticky: false,
+        absolute: false,
         hideclass: 'rm-closed',
         openclass: 'rm-opened',
         openbodyclass: 'has-opened-menu',
@@ -67,6 +67,8 @@
         noresponsivemenuclass: 'rm-no-responsive-menu',
         mobileindicatorid: 'rm-mobile-indicator',
         mobilesubmenuindicatorid: 'rm-mobile-submenu-indicator',
+        openOnClick: false,
+        arrowNavigation: false,
         onAfterInit: function() {},
         onAfterLoad: function() {},
         onBeforeToggleOpen: function() {},
@@ -174,7 +176,7 @@
         var nodes = [];
         while (element.parentNode && element.parentNode != stop) {
             element = element.parentNode;
-            if (element.tagName == tag) {
+            if (element.tagName === tag) {
                 nodes.push(element);
             }
         }
@@ -246,7 +248,7 @@
         // Creating the main toggle button
         var toggle_element = document.createElement(settings.toggletype);
         toggle_element.classList.add(settings.toggleclass, settings.hideclass);
-        if ( settings.before_element == '' ) { settings.before_element = settings.wrapper.firstChild }
+        if ( settings.before_element === '' ) { settings.before_element = settings.wrapper.firstChild }
         settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
         var togglebutton = toggle_element;
         togglebutton.innerHTML = settings.togglecontent;
@@ -277,14 +279,14 @@
 
             menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
-            mobileindicatorZindex = getStyle(settings.mobileindicatorid, "z-index");
+            mobileindicatorZindex = parseInt(getStyle(settings.mobileindicatorid, "z-index"), 10);
 
             if ( parents.length ) {
-                mobilesubmenuindicator = getStyle(settings.mobilesubmenuindicatorid, "z-index");
+                mobilesubmenuindicator = parseInt(getStyle(settings.mobilesubmenuindicatorid, "z-index"), 10);
             }
 
             // If wrapper is small and if the menu is not already opened
-            if ( mobileindicatorZindex == 0 && !menu.classList.contains(settings.openclass) ) {
+            if ( mobileindicatorZindex === 0 && !menu.classList.contains(settings.openclass) ) {
 
                 // Show the toggle button(s)
                 togglebutton.classList.remove(settings.hideclass);
@@ -295,11 +297,11 @@
                 document.body.classList.remove(settings.openbodyclass);
 
                 // Make the menu absolute positioned
-                if ( settings.absolute == 1 ) {
+                if ( settings.absolute ) {
                     menu.classList.add(settings.absolutemenuclass);
                 }
 
-            } else if ( mobileindicatorZindex == 1 ) {
+            } else if ( mobileindicatorZindex === 1 ) {
 
                 // Hide the toggle button(s)
                 togglebutton.classList.add(settings.hideclass);
@@ -313,19 +315,19 @@
                 document.body.classList.remove(settings.openbodyclass);
 
                 // Undo absolute positioning
-                if ( settings.absolute == 1 && menu.classList.contains(settings.absolutemenuclass) ) {
+                if ( settings.absolute && menu.classList.contains(settings.absolutemenuclass) ) {
                     menu.classList.remove(settings.absolutemenuclass);
                 }
             }
 
-            if ( hasChildren && mobilesubmenuindicator == 0 ) {
+            if ( hasChildren && mobilesubmenuindicator === 0 ) {
                 forEach(subtoggles, function (value, prop) {
                     if ( !subtoggles[prop].classList.contains(settings.toggleclosedclass) ) {
                         subtoggles[prop].parentNode.getElementsByTagName('ul')[0].classList.add(settings.hideclass);
                         subtoggles[prop].classList.remove(settings.hideclass);
                     }
                 });
-            } else if (hasChildren && mobilesubmenuindicator == 1) {
+            } else if (hasChildren && mobilesubmenuindicator === 1) {
                 forEach(subtoggles, function(value, prop) {
                     subtoggles[prop].parentNode.getElementsByTagName('ul')[0].classList.remove(settings.hideclass);
                     subtoggles[prop].classList.add(settings.hideclass);
@@ -338,7 +340,7 @@
 
             menu =  settings.menu || settings.wrapper.getElementsByTagName('ul')[0];
 
-            if ( settings.sticky == 1 ) {
+            if ( settings.sticky ) {
 
                 // The current menu and viewport heights
                 var menuheight = settings.wrapper.offsetHeight;
