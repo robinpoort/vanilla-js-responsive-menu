@@ -34,6 +34,7 @@ ul.rm-closed {
 }
 
 /* Mobile submenu indicator styling */
+/* Default styling */
 /**
  * When JS is enabled
  *
@@ -72,10 +73,6 @@ ul.rm-closed {
   #rm-mobile-submenu-indicator {
     z-index: 1;
   }
-}
-
-.navigation_container li ul {
-  display: none;
 }
 
 /*# sourceMappingURL=responsivemenu.css.map */
