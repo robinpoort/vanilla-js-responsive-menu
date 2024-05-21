@@ -266,27 +266,29 @@
             
             // Loop through parents and add a Class
             parentElements.forEach((parent, i) => {
-                
                 parent.classList.add(settings.parentclass);
-                // Get the parent link
-                const parentA = parent.querySelector('a');
-                // Convert the href to an id that is safe to use using a regex
-                const hrefId = parentA.getAttribute('href').replace(/[^a-zA-Z0-9-_]/g, '');
                 
-                if (parentA) {
-                    parentA.nextElementSibling.id = hrefId;
-                    const parentButton = document.createElement('button');
-                    parentButton.innerHTML = parentA.innerHTML;
-                    parentButton.setAttribute('aria-expanded', 'false');
-                    parentButton.setAttribute('type', 'button');
-                    parentButton.setAttribute('aria-controls', parentA.getAttribute('href').replace('#', ''));
-                    parentButton.classList.add('rm-parent-button');
-                    parent.insertBefore(parentButton, parentA);
-                    parentA.remove();
+                // Convert links to buttons
+                if (settings.openOnClick) {
+                    // Get the parent link
+                    const parentA = parent.querySelector('a');
+                    
+                    // Convert the href to an id that is safe to use using a regex
+                    const hrefId = parentA.getAttribute('href').replace(/[^a-zA-Z0-9-_]/g, '');
+                    
+                    if (parentA) {
+                        if (!parentA.nextElementSibling) return;
+                        parentA.nextElementSibling.id = hrefId;
+                        const parentButton = document.createElement('button');
+                        parentButton.innerHTML = parentA.innerHTML;
+                        parentButton.setAttribute('aria-expanded', 'false');
+                        parentButton.setAttribute('type', 'button');
+                        parentButton.setAttribute('aria-controls', parentA.getAttribute('href').replace('#', ''));
+                        parentButton.classList.add('rm-parent-button');
+                        parent.insertBefore(parentButton, parentA);
+                        parentA.remove();
+                    }
                 }
-                // Convert the href to a safe to use id
-                const parentHref = parent.querySelector('button').getAttribute('aria-controls');
-                
             });
             
             document.querySelectorAll(`.${settings.parentclass}`).forEach((parent) => {
@@ -617,6 +619,8 @@
         // Opening a submenu on click
         if (settings.openOnClick) {
             menu.addEventListener('click', function (e) {
+                
+                console.log('click!');
                 
                 // Get the target
                 const target = e.target;

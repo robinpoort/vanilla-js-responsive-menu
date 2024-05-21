@@ -3,15 +3,16 @@ $vjsm-menu-wrapper: navigation_container !default;
 $vjsm-mobile-indicator: rm-mobile-indicator !default;
 $vjsm-mobile-submenu-indicator: rm-mobile-submenu-indicator !default;
 $vjsm-menu: ul !default;
-$vjsm-menu-width: 600px !default;
+$vjsm-menu-width: 40em !default;
 $vjsm-submenu-width: $vjsm-menu-width !default;
 $vjsm-closed-class: rm-closed !default;
 $vjsm-no-js-class: no-js !default;
 $vjsm-js-class: js !default;
 $vjsm-children-zindex: 1 !default;
 $vjsm-absolutemenu-zindex: 1 !default;
-$vjsm-default-styling: false !default;
-$vjsm-multi-level: false !default;
+$vjsm-default-styling: true !default;
+$vjsm-default-styling-background: #fff !default;
+$vjsm-multi-level: true !default;
 $vjsm-horizontal-css-behavior: true !default;
 $vjsm-horizontal-css-behavior-position: relative !default;
 $vjsm-horizontal-css-behavior-zindex: 1 !default;
@@ -20,15 +21,14 @@ $vjsm-horizontal-css-behavior-ul-zindex: -1 !default;
 $vjsm-horizontal-css-behavior-ul-left: -9999px !default;
 $vjsm-horizontal-css-behavior-ul-left-hover: 0 !default;
 $vjsm-horizontal-css-behavior-ul-top: 100% !default;
-$vjsm-horizontal-css-behavior-ul-width: 100% !default;
-$vjsm-horizontal-css-behavior-ul-li-float: left !default;
+$vjsm-horizontal-css-behavior-ul-width: 160px !default;
 $vjsm-horizontal-css-behavior-ul-li-position: relative !default;
 $vjsm-horizontal-css-behavior-li-ul-left: 100% !default;
 $vjsm-horizontal-css-behavior-li-ul-top: 0 !default;
-$vjsm-sticky: false !default;
+$vjsm-sticky: true !default;
+$vjsm-sticky-z-index: 2 !default;
 $vjsm-absolute: false !default;
-$vjsm-arrow-navigation: true !default;
-$vjsm-open-on-click: false !default;
+$vjsm-open-on-hover: true !default;
 
 // Accessible hide
 @mixin accessible-hide {
@@ -51,6 +51,13 @@ $vjsm-open-on-click: false !default;
   margin: auto;
 }
 
+// Property
+@mixin property($property, $value) {
+  @if ($value) {
+    #{$property}: $value;
+  }
+}
+
 @if $vjsm-sticky == true {
   /* Sticky menu */
   .rm-sticky {
@@ -58,6 +65,7 @@ $vjsm-open-on-click: false !default;
     top: 0;
     left: 0;
     right: 0;
+    z-index: $vjsm-sticky-z-index;
   }
 
   // Overflow
@@ -123,13 +131,24 @@ $vjsm-open-on-click: false !default;
 /* Default styling */
 @if $vjsm-default-styling == true {
   .#{$vjsm-menu-wrapper} {
+
+    @include property('background', $vjsm-default-styling-background);
+
     ul {
+      margin: 0;
       padding-left: 0;
       list-style: none;
+
+      li ul {
+        color: #000;
+        background: #fff;
+      }
     }
+
     @media (min-width: $vjsm-menu-width) {
       & > ul {
         display: flex;
+        gap: 1rem;
       }
     }
 
@@ -138,6 +157,20 @@ $vjsm-open-on-click: false !default;
         display: block;
         left: $vjsm-horizontal-css-behavior-ul-left-hover;
       }
+    }
+
+    a,
+    button {
+      color: inherit;
+      font-size: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
     }
   }
 }
@@ -240,13 +273,12 @@ $vjsm-open-on-click: false !default;
 
           li {
             position: $vjsm-horizontal-css-behavior-ul-li-position;
-            float: $vjsm-horizontal-css-behavior-ul-li-float;
           }
         }
       }
     }
 
-    @if $vjsm-open-on-click == false {
+    @if $vjsm-open-on-hover == true {
       .rm-open-on-hover {
         @media (min-width: $vjsm-submenu-width) {
           li {
@@ -285,4 +317,21 @@ $vjsm-open-on-click: false !default;
   @media (min-width: $vjsm-submenu-width) {
     z-index: 1;
   }
+}
+
+
+
+
+
+
+
+
+
+body {
+  background: #eee;
+}
+
+
+*:focus {
+  background: red !important;
 }

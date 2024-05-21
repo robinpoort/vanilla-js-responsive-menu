@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   background: #ecf0f1;
   margin: 0;
@@ -11,7 +10,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *:before, *:after {
+*, *:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -52,225 +52,13 @@ body {
   color: #fff;
   min-height: 40px;
 }
-.navigation_container ul {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
-}
-@media (min-width: 600px) {
-  .navigation_container ul {
-    min-height: 40px;
-  }
-}
-.navigation_container ul:before,
-.navigation_container ul:after {
-  display: table;
-  content: " ";
-}
-.navigation_container ul:after {
-  clear: both;
-}
-.navigation_container .rm-closed li.rm-parent > a:after,
-.navigation_container .rm-fullmenu li.rm-parent > a:after {
-  content: " ▼";
-}
-.navigation_container .rm-closed li.parent > a:after,
-.navigation_container .rm-fullmenu li.parent > a:after {
-  content: " ▶";
-}
-.navigation_container li {
-  padding: 0;
-  clear: both;
-}
-@media (min-width: 600px) {
-  .navigation_container li {
-    height: 40px;
-    float: left;
-    clear: none;
-  }
-}
-.navigation_container li.focused, .navigation_container li:hover a,
-.navigation_container li a:hover,
-.navigation_container li a:focus {
-  background: #2c3e50;
-}
-.navigation_container li ul {
-  background: #2c3e50;
-}
-.navigation_container .rm-opened li {
-  float: none;
-}
-.navigation_container a {
-  display: block;
-  color: #fff;
-  padding: 8px 16px;
-  line-height: 24px;
-  text-decoration: none;
-  height: 40px;
-}
-.navigation_container a:after {
+
+.demo-heading {
   font-size: 12px;
-  vertical-align: middle;
   line-height: 24px;
-  text-decoration: none;
-}
-.navigation_container .active a,
-.navigation_container .active a:hover,
-.navigation_container .active a:focus {
-  background: #fff;
-  color: #333;
-  cursor: default;
-}
-.navigation_container .rm-closed li,
-.navigation_container .rm-fullmenu li {
-  overflow: visible;
-}
-.navigation_container .rm-closed li ul,
-.navigation_container .rm-fullmenu li ul {
-  height: auto;
-  background: #2c3e50;
-  padding: 0;
-  width: 180px;
-  border-top: none;
-}
-@media (min-width: 600px) {
-  .navigation_container.rm-open-on-hover .rm-closed li ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu li ul {
-    transition: transform 0.1s cubic-bezier(0.195, 0.4, 0.45, 0.785);
-    transform: scaleY(0);
-    transform-origin: 0 0;
-  }
-}
-.navigation_container.rm-open-on-hover .rm-closed.rm-focused > ul, .navigation_container.rm-open-on-hover .rm-closed:hover > ul,
-.navigation_container.rm-open-on-hover .rm-fullmenu.rm-focused > ul,
-.navigation_container.rm-open-on-hover .rm-fullmenu:hover > ul {
-  display: block;
-}
-@media (min-width: 600px) {
-  .navigation_container.rm-open-on-hover .rm-closed.rm-focused > ul, .navigation_container.rm-open-on-hover .rm-closed:hover > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu.rm-focused > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu:hover > ul {
-    transform: scaleY(1);
-  }
-}
-@media (min-width: 600px) {
-  .navigation_container.rm-open-on-hover .rm-closed.rm-focused li ul, .navigation_container.rm-open-on-hover .rm-closed:hover li ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu.rm-focused li ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu:hover li ul {
-    transform: scaleX(0);
-  }
-}
-@media (min-width: 600px) {
-  .navigation_container.rm-open-on-hover .rm-closed.rm-focused li.rm-focused > ul, .navigation_container.rm-open-on-hover .rm-closed.rm-focused li:hover > ul, .navigation_container.rm-open-on-hover .rm-closed:hover li.rm-focused > ul, .navigation_container.rm-open-on-hover .rm-closed:hover li:hover > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu.rm-focused li.rm-focused > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu.rm-focused li:hover > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu:hover li.rm-focused > ul,
-  .navigation_container.rm-open-on-hover .rm-fullmenu:hover li:hover > ul {
-    transform: scaleX(1);
-  }
-}
-.navigation_container.rm-open-on-hover .rm-closed li,
-.navigation_container.rm-open-on-hover .rm-fullmenu li {
-  float: none;
-}
-.navigation_container.rm-open-on-hover .rm-closed li.rm-focused > a, .navigation_container.rm-open-on-hover .rm-closed li:hover > a,
-.navigation_container.rm-open-on-hover .rm-closed li a:hover,
-.navigation_container.rm-open-on-hover .rm-closed li a:focus,
-.navigation_container.rm-open-on-hover .rm-fullmenu li.rm-focused > a,
-.navigation_container.rm-open-on-hover .rm-fullmenu li:hover > a,
-.navigation_container.rm-open-on-hover .rm-fullmenu li a:hover,
-.navigation_container.rm-open-on-hover .rm-fullmenu li a:focus {
-  text-decoration: none;
-  background: #233140;
-  color: white;
-}
-
-/**
- * When JS is enabled
- *
- * 1. We can use display none because we set display block again with JS immediately after initiating the menu
- * 2. Display menu when initiated
- * 3. Display menu on "desktop"
- * 4. Display focused items
- */
-.js .navigation_container {
-  display: none;
-  /* 1 */
-}
-
-.js .navigation_container.rm-initiated {
-  display: block;
-  /* 2 */
-}
-
-@media (min-width: 600px) {
-  .js .navigation_container {
-    display: block;
-    /* 3 */
-  }
-}
-.js .navigation_container .rm-focused {
-  overflow: visible;
-  /* 4 */
-}
-
-/**
- * When JS is either disabled or enabled
- *
- * 1. Relative to position li > ul items
- * 2. Hide overflowing content so we can display on tabbing
- * 3. Display on hover / focus
- * 4. Children should have position absolute to hide them
- */
-.navigation_container li {
-  position: relative;
-  /* 1 */
-}
-
-@media (min-width: 600px) {
-  .rm-open-on-hover .navigation_container li {
-    overflow: hidden;
-    /* 2 */
-  }
-  .rm-open-on-hover .navigation_container li:hover, .rm-open-on-hover .navigation_container li:focus {
-    overflow: visible;
-    /* 3 */
-  }
-}
-@media (min-width: 600px) {
-  .navigation_container li ul {
-    position: absolute;
-    /* 4 */
-  }
-}
-.navigation_container {
-  position: relative;
-  z-index: 1;
-}
-
-@media (min-width: 600px) {
-  .navigation_container li ul {
-    position: absolute;
-    left: -9999px;
-    top: 100%;
-    z-index: -1;
-  }
-}
-
-.navigation_container li li {
-  position: relative;
-  float: left;
-}
-
-.rm-open-on-hover .navigation_container .rm-focused > ul,
-.rm-open-on-hover .navigation_container li:hover > ul {
-  left: 0;
-}
-.rm-open-on-hover .navigation_container li .rm-focused > ul,
-.rm-open-on-hover .navigation_container li li:hover > ul {
-  left: 100%;
-  top: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 200px;
 }
 
 /*# sourceMappingURL=demo.css.map */
